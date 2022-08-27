@@ -1,3 +1,4 @@
 {
-    "login_header_select_country": "اختر البلد"
+ "email_hint": "Email", 
+ "password" : "Password"
 }
