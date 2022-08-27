@@ -6,10 +6,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:rewards_app/utils/logger.dart';
 
 void main() async {
-  logInformationMessage("Application Started ... ");
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await Hive.initFlutter();
+  logInformationMessage("Application Started ... ");
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
