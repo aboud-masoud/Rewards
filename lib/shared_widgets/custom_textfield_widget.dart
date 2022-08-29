@@ -30,43 +30,46 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      obscureText: obscureText,
-      enabled: enabled,
-      enableSuggestions: false,
-      autocorrect: false,
-      style: enabled
-          ? const TextStyle(fontSize: 14, color: Color(0xff191C1F))
-          : const TextStyle(
-              fontSize: 14,
-              color: Color(0xff898989),
-            ),
-      controller: controller,
-      keyboardType: keyboardType,
-      cursorColor: const Color(0xff100C31),
-      decoration: InputDecoration(
-        errorText: errorMessage,
-        labelText: hintText,
-        labelStyle: CustomTextStyle()
-            .medium(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xff384048), size: 14),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16),
+      child: TextField(
+        obscureText: obscureText,
+        enabled: enabled,
+        enableSuggestions: false,
+        autocorrect: false,
+        style: enabled
+            ? const TextStyle(fontSize: 14, color: Color(0xff191C1F))
+            : const TextStyle(
+                fontSize: 14,
+                color: Color(0xff898989),
+              ),
+        controller: controller,
+        keyboardType: keyboardType,
+        cursorColor: const Color(0xff100C31),
+        decoration: InputDecoration(
+          errorText: errorMessage,
+          labelText: hintText,
+          labelStyle: CustomTextStyle()
+              .medium(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xff384048), size: 14),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          ),
+          prefixIcon: prefixIcon,
+          filled: true,
+          fillColor: enabled ? const Color(0xffFFFFFF) : const Color(0xffFBFBFB),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
-        ),
-        border: OutlineInputBorder(
-          borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
-        ),
-        prefixIcon: prefixIcon,
-        filled: true,
-        fillColor: enabled ? const Color(0xffFFFFFF) : const Color(0xffFBFBFB),
+        onChanged: (text) {
+          if (onChange != null) {
+            onChange!(text);
+          }
+        },
       ),
-      onChanged: (text) {
-        if (onChange != null) {
-          onChange!(text);
-        }
-      },
     );
   }
 }

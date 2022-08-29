@@ -15,7 +15,10 @@ class LoginScreen extends StatelessWidget {
       child: Column(
         children: [
           const SizedBox(height: 20),
-          Image.asset("assets/images/logo.jpg"),
+          Image.asset(
+            "assets/images/logo.jpg",
+            width: 300,
+          ),
           CustomTextField(
             controller: _bloc.emailController,
             hintText: AppLocalizations.of(context)!.email_hint,
