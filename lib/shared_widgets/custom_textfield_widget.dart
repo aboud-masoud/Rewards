@@ -49,16 +49,15 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           errorText: errorMessage,
           labelText: hintText,
-          labelStyle: CustomTextStyle()
-              .medium(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xff384048), size: 14),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          labelStyle: CustomTextStyle().medium(color: const Color(0xff384048), size: 20),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffE8E8E8)),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffE8E8E8)),
           ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(color: controller.text.isNotEmpty ? const Color(0xffE04E4D) : const Color(0xffE8E8E8)),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(color: Color(0xffE8E8E8)),
           ),
           prefixIcon: prefixIcon,
           filled: true,
