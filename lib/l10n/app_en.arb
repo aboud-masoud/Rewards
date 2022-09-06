@@ -1,4 +1,12 @@
 {
  "email_hint": "Email", 
- "password" : "Password"
+ "password" : "Password",
+  "repassword" : "Password Again",
+
+  "name_hint" : "Full Name",
+  "bottom_tabbar_home" : "Home",
+  "bottom_tabbar_score" : "Score",
+  "bottom_tabbar_rewards" : "Rewards",
+  "bottom_tabbar_profile" : "Profile"
+
 }

@@ -25,6 +25,7 @@ dependencies:
   # firebase_messaging: ^11.4.4
   # local_auth: ^2.1.0
   firebase_auth: ^3.7.0
+  convex_bottom_bar: ^3.0.0
 
 dev_dependencies:
   flutter_test:

@@ -1,8 +1,11 @@
 {
     
     "email_hint": "البريد الالكتروني",
-     "password" : "كلمة المرور"
-
-
-
+    "password" : "كلمة المرور",
+    "repassword" : "كلمة المرور مره اخرى",
+    "name_hint" : "الاسم الكامل",
+    "bottom_tabbar_home" : "الرئيسية",
+    "bottom_tabbar_score" : "نقاطي",
+    "bottom_tabbar_rewards" : "الجوائز",
+    "bottom_tabbar_profile" : "حسابي"
 }

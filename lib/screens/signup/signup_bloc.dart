@@ -2,54 +2,67 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/utils/shared_methods.dart';
 
-enum loginStatusEnum { faild, success, non, inProgress }
+enum signUpStatusEnum { faild, success, non, inProgress }
 
-class LoginBloc {
+class SignUpBloc {
   TextEditingController emailController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
 
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  ValueNotifier<loginStatusEnum> loginStatus = ValueNotifier<loginStatusEnum>(loginStatusEnum.non);
+  ValueNotifier<signUpStatusEnum> signupStatus = ValueNotifier<signUpStatusEnum>(signUpStatusEnum.non);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void validateFields() {
-    loginStatus.value = loginStatusEnum.non;
-
     if (emailController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (fullNameController.text.isEmpty) {
       fieldsValidation.value = false;
     } else if (passwordController.text.isEmpty) {
       fieldsValidation.value = false;
+    } else if (repasswordController.text.isEmpty) {
+      fieldsValidation.value = false;
     } else if (SharedMethods().checkEmailSantax(emailController.text)) {
-      fieldsValidation.value = true;
+      if (passwordController.text == repasswordController.text) {
+        if (passwordController.text.length > 5) {
+          fieldsValidation.value = true;
+        } else {
+          fieldsValidation.value = false;
+        }
+      } else {
+        fieldsValidation.value = false;
+      }
     } else {
       fieldsValidation.value = false;
     }
   }
 
-  Future<bool> signInWithEmailAndPassword() async {
-    loginStatus.value = loginStatusEnum.inProgress;
+  Future<bool> signUp() async {
+    signupStatus.value = signUpStatusEnum.inProgress;
     final User? user;
     try {
-      user = (await _auth.signInWithEmailAndPassword(
+      user = (await _auth.createUserWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       ))
           .user;
 
       if (user != null) {
-        loginStatus.value = loginStatusEnum.success;
+        signupStatus.value = signUpStatusEnum.success;
 
         print(user.email);
         print(user.uid);
         return true;
       } else {
-        loginStatus.value = loginStatusEnum.faild;
+        signupStatus.value = signUpStatusEnum.faild;
         return false;
       }
     } catch (error) {
       print("--" + error.toString());
-      loginStatus.value = loginStatusEnum.faild;
+      signupStatus.value = signUpStatusEnum.faild;
       return false;
     }
   }
