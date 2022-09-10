@@ -56,7 +56,7 @@ class SignUpScreen extends StatelessWidget {
                 valueListenable: _bloc.fieldsValidation,
                 builder: (context, snapshot, child) {
                   return CustomButtonWidget(
-                    title: "Submit",
+                    title: AppLocalizations.of(context)!.submit,
                     enable: snapshot,
                     onPress: () async {
                       await _bloc.signUp().then((value) {
@@ -73,7 +73,8 @@ class SignUpScreen extends StatelessWidget {
                 valueListenable: _bloc.signupStatus,
                 builder: (context, snapshot, child) {
                   if (snapshot == signUpStatusEnum.faild) {
-                    return Text("Error in Email or password", style: CustomTextStyle().regular(color: Colors.red, size: 18));
+                    return Text(AppLocalizations.of(context)!.errorInEmailOrPassword,
+                        style: CustomTextStyle().regular(color: Colors.red, size: 18));
                   } else if (snapshot == signUpStatusEnum.inProgress) {
                     return const CircularProgressIndicator();
                   } else {

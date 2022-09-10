@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/utils/shared_methods.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 enum signUpStatusEnum { faild, success, non, inProgress }
 
@@ -15,6 +16,8 @@ class SignUpBloc {
   ValueNotifier<signUpStatusEnum> signupStatus = ValueNotifier<signUpStatusEnum>(signUpStatusEnum.non);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  final CollectionReference _profiles = FirebaseFirestore.instance.collection('profiles');
 
   void validateFields() {
     if (emailController.text.isEmpty) {
@@ -55,6 +58,9 @@ class SignUpBloc {
 
         print(user.email);
         print(user.uid);
+
+        await _profiles.doc(user.uid).set({"full name": fullNameController.text});
+
         return true;
       } else {
         signupStatus.value = signUpStatusEnum.faild;

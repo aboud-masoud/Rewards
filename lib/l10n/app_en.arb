@@ -11,6 +11,10 @@
   "checkInternetConnection" : "You have to connect to internet before doing this request, please fix it and try again",
   "signinButton" : "SIGN IN",
   "donthaveanaccount" : "Don't have an account? ",
-  "signup" : "Sign Up"
-
+  "signup" : "Sign Up",
+  "login_BiometricMssage_BiometricLoginIsDisabled": "Biometric login is disabled",
+  "errorInEmailOrPassword" : "Error in Email or password",
+  "or" : "OR",
+  "login_biometric" : "Login Biometric",
+  "submit" : "Submit"
 }

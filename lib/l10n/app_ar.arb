@@ -11,7 +11,11 @@
     "checkInternetConnection" : "يجب عليك الاتصال بالانترنت الرجاء التحقق و المحاوله مره اخرى",
     "signinButton" : "تسجيل الدخول",
     "donthaveanaccount" : "ليس لديك حساب ؟ ",
-  "signup" : "تسجيل جديد"
-
+    "signup" : "تسجيل جديد",
+    "login_BiometricMssage_BiometricLoginIsDisabled": "تم تعطيل تسجيل الدخول البيومتري ",
+    "errorInEmailOrPassword" : "خطأ في البريد الإلكتروني أو كلمة المرور",
+    "or" : "أو",
+    "login_biometric": "استخدام البصمه للدخول",
+    "submit" : "ارسال"
 
 }

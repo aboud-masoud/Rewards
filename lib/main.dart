@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   // await Hive.initFlutter();
-  logInformationMessage("Application Started ... ");
+  logDebugMessage(message: "Application Started ... ");
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
