@@ -6,8 +6,11 @@ import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 
+enum signupStatusEnum { language, stammering }
+
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
+  final signupStatusEnum signupStatus;
+  SignUpScreen({required this.signupStatus, Key? key}) : super(key: key);
 
   final _bloc = SignUpBloc();
 

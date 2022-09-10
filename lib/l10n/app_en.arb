@@ -20,5 +20,13 @@
   "amwajCenter" : "Amwaj Center",
   "amwajCentersubtitle" : "Rehabilitation of Hearing & Speech Disorders",
   "welcomeback" : "Welcome back!",
-  "loginmessage" : "Login to continue"
+  "loginmessage" : "Login to continue",
+  "alreadyHaveanAccount" : "Already have an account? ",
+  "loginbutton" : "Sign in",
+  "stammering" : "Stammering",
+  "stammeringdesc" : "Sed a magna semper, porta purus llamcorper ligula. Nam sit amet consectetur sapien",
+  "getstart" : "Get Started",
+  "languageDelay" : "Language Delay",
+  "languageDelaydesc" : "Sed a magna semper, porta purus llamcorper ligula. Nam sit amet consectetur sapien"
+
 }

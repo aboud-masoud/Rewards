@@ -3,7 +3,7 @@ import 'package:local_auth/local_auth.dart';
 import 'package:rewards_app/app.dart';
 import 'package:rewards_app/models/authentication_models.dart';
 import 'package:rewards_app/screens/login/login_bloc.dart';
-import 'package:rewards_app/screens/signup/signup_screen.dart';
+import 'package:rewards_app/screens/signup/signup_faze1.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -145,33 +145,34 @@ class _LoginScreenState extends State<LoginScreen> {
                       }),
                   const SizedBox(height: 30),
                   TextButton(
-                      onPressed: () async {
-                        if (await NetworkInfoService().isConnected()) {
-                          _bloc.biometricStatus = false;
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (ctx) {
-                              return SignUpScreen();
-                            }),
-                          );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!.checkInternetConnection),
-                          ));
-                        }
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!.donthaveanaccount,
-                            style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
-                          ),
-                          Text(
-                            AppLocalizations.of(context)!.signup,
-                            style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
-                          ),
-                        ],
-                      ))
+                    onPressed: () async {
+                      if (await NetworkInfoService().isConnected()) {
+                        _bloc.biometricStatus = false;
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (ctx) {
+                            return const SignupFaze1Screen();
+                          }),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(AppLocalizations.of(context)!.checkInternetConnection),
+                        ));
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.donthaveanaccount,
+                          style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.signup,
+                          style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

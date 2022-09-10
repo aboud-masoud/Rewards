@@ -20,7 +20,16 @@
     "amwajCenter" : "مركز امواج",
     "amwajCentersubtitle" : "تأهيل اضطرابات السمع والنطق",
     "welcomeback" : "اهلا بعودتك !",
-    "loginmessage" : "تسجيل الدخول للمتابعة"
+    "loginmessage" : "تسجيل الدخول للمتابعة",
+    "alreadyHaveanAccount" : "هل لديك حساب؟ ",
+    "loginbutton" : "تسجيل الدخول",
+    "stammering" : "التمتمة",
+    "stammeringdesc" : "عندما يريد العالم أن   ، فهو يتحدّث بلغة يونيكود. تسجّل الآن لحضور المؤتمر الدو",
+    "getstart" : "ابدأ الآن",
+    "languageDelay" : "تأخير النطق",
+    "languageDelaydesc" :  "عندما يريد العالم أن   ، فهو يتحدّث بلغة يونيكود. تسجّل الآن لحضور المؤتمر الدو"
+
+
 
 
 }
