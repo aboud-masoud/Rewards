@@ -16,6 +16,11 @@
     "errorInEmailOrPassword" : "خطأ في البريد الإلكتروني أو كلمة المرور",
     "or" : "أو",
     "login_biometric": "استخدام البصمه للدخول",
-    "submit" : "ارسال"
+    "submit" : "ارسال",
+    "amwajCenter" : "مركز امواج",
+    "amwajCentersubtitle" : "تأهيل اضطرابات السمع والنطق",
+    "welcomeback" : "اهلا بعودتك !",
+    "loginmessage" : "تسجيل الدخول للمتابعة"
+
 
 }

@@ -5,7 +5,6 @@ import 'package:rewards_app/utils/custom_text_style.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  final String? errorMessage;
   final bool enabled;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -19,7 +18,6 @@ class CustomTextField extends StatelessWidget {
   const CustomTextField({
     required this.controller,
     required this.hintText,
-    this.errorMessage,
     this.enabled = true,
     this.obscureText = false,
     this.keyboardType,
@@ -49,22 +47,12 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         cursorColor: const Color(0xff100C31),
         decoration: InputDecoration(
-          errorText: errorMessage,
           labelText: hintText,
-          labelStyle: CustomTextStyle().medium(color: const Color(0xff384048), size: 20),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffe8ebef)),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffe8ebef)),
-          ),
-          border: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffe8ebef)),
-          ),
+          labelStyle: CustomTextStyle().medium(color: const Color(0xffababab), size: 16),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           filled: true,
-          fillColor: enabled ? const Color(0xffFFFFFF) : const Color(0xffFBFBFB),
+          fillColor: const Color(0x00000000),
         ),
         onChanged: (text) {
           if (onChange != null) {

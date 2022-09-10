@@ -16,5 +16,9 @@
   "errorInEmailOrPassword" : "Error in Email or password",
   "or" : "OR",
   "login_biometric" : "Login Biometric",
-  "submit" : "Submit"
+  "submit" : "Submit",
+  "amwajCenter" : "Amwaj Center",
+  "amwajCentersubtitle" : "Rehabilitation of Hearing & Speech Disorders",
+  "welcomeback" : "Welcome back!",
+  "loginmessage" : "Login to continue"
 }

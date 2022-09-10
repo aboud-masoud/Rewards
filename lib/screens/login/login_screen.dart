@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:rewards_app/app.dart';
 import 'package:rewards_app/models/authentication_models.dart';
@@ -8,7 +7,6 @@ import 'package:rewards_app/screens/signup/signup_screen.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:rewards_app/utils/app_constants.dart';
 
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
@@ -52,20 +50,41 @@ class _LoginScreenState extends State<LoginScreen> {
                               valueListenable: languageSelected,
                               builder: (context, snapshot, child) {
                                 return CustomText(
-                                    title: snapshot == "en" ? "العربية" : "English", style: CustomTextStyle().medium());
+                                    title: snapshot == "en" ? "عربي" : "English",
+                                    style: CustomTextStyle().bold(size: 18, color: const Color(0xff419aff)));
                               }))),
                   Image.asset(
-                    "assets/images/logo.jpg",
-                    width: 300,
+                    "assets/images/logo.png",
+                    width: 72,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.amwajCenter,
+                    style: CustomTextStyle().bold(size: 18, color: const Color(0xff3bbc28)),
+                  ),
+                  const SizedBox(height: 5),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.amwajCentersubtitle,
+                    style: CustomTextStyle().bold(size: 12, color: const Color(0xff707070)),
+                  ),
+                  const SizedBox(height: 50),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.welcomeback,
+                    style: CustomTextStyle().bold(size: 24, color: const Color(0xff3bbc28)),
+                  ),
+                  const SizedBox(height: 14),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.loginmessage,
+                    style: CustomTextStyle().bold(size: 16, color: const Color(0xff707070)),
+                  ),
+                  const SizedBox(height: 30),
                   CustomTextField(
                     controller: _bloc.emailController,
                     hintText: AppLocalizations.of(context)!.email_hint,
-                    errorMessage: "",
                     prefixIcon: const Icon(Icons.email),
                     onChange: (value) => _bloc.validateFields(),
                   ),
+                  const SizedBox(height: 12),
                   ValueListenableBuilder<bool>(
                       valueListenable: _bloc.showPasswordLetters,
                       builder: (context, snapshot, child) {
@@ -73,7 +92,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           controller: _bloc.passwordController,
                           hintText: AppLocalizations.of(context)!.password,
                           obscureText: snapshot,
-                          errorMessage: "",
                           prefixIcon: const Icon(Icons.password),
                           suffixIcon: IconButton(
                               icon: Image.asset(
@@ -86,6 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onChange: (value) => _bloc.validateFields(),
                         );
                       }),
+                  const SizedBox(height: 16),
                   ValueListenableBuilder<bool>(
                       valueListenable: _bloc.fieldsValidation,
                       builder: (context, snapshot, child) {
@@ -111,12 +130,13 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? biometricButton(context, snapshot.type)
                             : Container();
                       }),
+                  const SizedBox(height: 20),
                   ValueListenableBuilder<loginStatusEnum>(
                       valueListenable: _bloc.loginStatus,
                       builder: (context, snapshot, child) {
                         if (snapshot == loginStatusEnum.faild) {
                           return Text(AppLocalizations.of(context)!.errorInEmailOrPassword,
-                              style: CustomTextStyle().regular(color: Colors.red, size: 18));
+                              style: CustomTextStyle().regular(color: Colors.red, size: 16));
                         } else if (snapshot == loginStatusEnum.inProgress) {
                           return const CircularProgressIndicator();
                         } else {
@@ -144,11 +164,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Text(
                             AppLocalizations.of(context)!.donthaveanaccount,
-                            style: CustomTextStyle().medium(size: 18, color: const Color(0xff404040)),
+                            style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
                           ),
                           Text(
                             AppLocalizations.of(context)!.signup,
-                            style: CustomTextStyle().medium(size: 18, color: const Color(0xff3bbc28)),
+                            style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
                           ),
                         ],
                       ))
@@ -173,7 +193,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.only(left: 40, right: 40),
                     child: Container(
                       height: 1,
-                      color: Colors.red,
+                      color: const Color(0xff3bbc28),
                     ),
                   ),
                 ],

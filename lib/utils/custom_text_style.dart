@@ -11,7 +11,7 @@ class CustomTextStyle {
   }
 
   TextStyle regularUnderLine({Color? color, double? size}) {
-    return GoogleFonts.questrial(
+    return GoogleFonts.montserrat(
         textStyle: TextStyle(
       color: color,
       fontSize: ResponsiveTextSize().textSize(size),
@@ -21,7 +21,7 @@ class CustomTextStyle {
   }
 
   TextStyle regular({Color? color, double? size}) {
-    return GoogleFonts.questrial(
+    return GoogleFonts.montserrat(
         textStyle: TextStyle(
       color: color,
       decoration: TextDecoration.none,
@@ -31,7 +31,7 @@ class CustomTextStyle {
   }
 
   TextStyle medium({Color? color, double? size}) {
-    return GoogleFonts.questrial(
+    return GoogleFonts.montserrat(
       textStyle: TextStyle(
         color: color,
         decoration: TextDecoration.none,
@@ -42,7 +42,7 @@ class CustomTextStyle {
   }
 
   TextStyle bold({Color? color, double? size}) {
-    return GoogleFonts.questrial(
+    return GoogleFonts.montserrat(
       textStyle: TextStyle(
         color: color,
         decoration: TextDecoration.none,
@@ -53,7 +53,7 @@ class CustomTextStyle {
   }
 
   TextStyle semibold({Color? color, double? size}) {
-    return GoogleFonts.questrial(
+    return GoogleFonts.montserrat(
       textStyle: TextStyle(
         color: color,
         decoration: TextDecoration.none,
