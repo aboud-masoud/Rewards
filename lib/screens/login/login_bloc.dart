@@ -11,6 +11,8 @@ class LoginBloc {
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
   ValueNotifier<loginStatusEnum> loginStatus = ValueNotifier<loginStatusEnum>(loginStatusEnum.non);
 
+  ValueNotifier<bool> showPasswordLetters = ValueNotifier<bool>(false);
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void validateFields() {

@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>276566478127-c2d9hgbg2l7svqe7fl5ucknne3garbpo.apps.googleusercontent.com</string>
+	<string>528026934919-snvm74j6cg2fvdmkmsvk18ei38hptduh.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.276566478127-c2d9hgbg2l7svqe7fl5ucknne3garbpo</string>
+	<string>com.googleusercontent.apps.528026934919-snvm74j6cg2fvdmkmsvk18ei38hptduh</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCnh7WpHsBTw95eo5R2-y4BOjsR9OD6w1Y</string>
+	<string>AIzaSyDse2F1cDEqmheP5U4vBVcE8zWPsgaiNLA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>276566478127</string>
+	<string>528026934919</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.rewardsApp</string>
 	<key>PROJECT_ID</key>
-	<string>rewards-c9024</string>
+	<string>amwaj-rewards</string>
 	<key>STORAGE_BUCKET</key>
-	<string>rewards-c9024.appspot.com</string>
+	<string>amwaj-rewards.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:276566478127:ios:e3c3ddf7c5e84f4b96e5da</string>
+	<string>1:528026934919:ios:62eb9a6a9a2b8d493b2222</string>
 </dict>
 </plist>

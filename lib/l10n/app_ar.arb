@@ -7,5 +7,11 @@
     "bottom_tabbar_home" : "الرئيسية",
     "bottom_tabbar_score" : "نقاطي",
     "bottom_tabbar_rewards" : "الجوائز",
-    "bottom_tabbar_profile" : "حسابي"
+    "bottom_tabbar_profile" : "حسابي",
+    "checkInternetConnection" : "يجب عليك الاتصال بالانترنت الرجاء التحقق و المحاوله مره اخرى",
+    "signinButton" : "تسجيل الدخول",
+    "donthaveanaccount" : "ليس لديك حساب ؟ ",
+  "signup" : "تسجيل جديد"
+
+
 }

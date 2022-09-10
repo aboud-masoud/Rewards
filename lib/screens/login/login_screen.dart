@@ -6,6 +6,7 @@ import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
+import 'package:rewards_app/utils/network_info_service.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -32,28 +33,46 @@ class LoginScreen extends StatelessWidget {
               prefixIcon: const Icon(Icons.email),
               onChange: (value) => _bloc.validateFields(),
             ),
-            CustomTextField(
-              controller: _bloc.passwordController,
-              hintText: AppLocalizations.of(context)!.password,
-              obscureText: true,
-              errorMessage: "",
-              prefixIcon: const Icon(Icons.password),
-              onChange: (value) => _bloc.validateFields(),
-            ),
+            ValueListenableBuilder<bool>(
+                valueListenable: _bloc.showPasswordLetters,
+                builder: (context, snapshot, child) {
+                  return CustomTextField(
+                    controller: _bloc.passwordController,
+                    hintText: AppLocalizations.of(context)!.password,
+                    obscureText: snapshot,
+                    errorMessage: "",
+                    prefixIcon: const Icon(Icons.password),
+                    suffixIcon: IconButton(
+                        icon: Image.asset(
+                          "assets/images/hidePassword.png",
+                          width: 20,
+                        ),
+                        onPressed: () {
+                          _bloc.showPasswordLetters.value = !_bloc.showPasswordLetters.value;
+                        }),
+                    onChange: (value) => _bloc.validateFields(),
+                  );
+                }),
             ValueListenableBuilder<bool>(
                 valueListenable: _bloc.fieldsValidation,
                 builder: (context, snapshot, child) {
                   return CustomButtonWidget(
-                    title: "Submit",
+                    title: AppLocalizations.of(context)!.signinButton,
                     enable: snapshot,
                     onPress: () async {
-                      await _bloc.signInWithEmailAndPassword().then((value) {
-                        if (value) {
-                          Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
-                            return const MainContainer();
-                          }), (route) => false);
-                        }
-                      });
+                      if (await NetworkInfoService().isConnected()) {
+                        await _bloc.signInWithEmailAndPassword().then((value) {
+                          if (value) {
+                            Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
+                              return const MainContainer();
+                            }), (route) => false);
+                          }
+                        });
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(AppLocalizations.of(context)!.checkInternetConnection),
+                        ));
+                      }
                     },
                   );
                 }),
@@ -70,16 +89,31 @@ class LoginScreen extends StatelessWidget {
                 }),
             const SizedBox(height: 30),
             TextButton(
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (ctx) {
-                      return SignUpScreen();
-                    }),
-                  );
+                onPressed: () async {
+                  if (await NetworkInfoService().isConnected()) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (ctx) {
+                        return SignUpScreen();
+                      }),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(AppLocalizations.of(context)!.checkInternetConnection),
+                    ));
+                  }
                 },
-                child: Text(
-                  "Sign Up",
-                  style: CustomTextStyle().medium(size: 18, color: Colors.blueGrey),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.donthaveanaccount,
+                      style: CustomTextStyle().medium(size: 18, color: const Color(0xff404040)),
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.signup,
+                      style: CustomTextStyle().medium(size: 18, color: const Color(0xff3bbc28)),
+                    ),
+                  ],
                 ))
           ],
         ),

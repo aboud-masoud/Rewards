@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
 
   final List<TextInputFormatter>? inputFormatters;
 
@@ -23,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType,
     this.prefixIcon,
+    this.suffixIcon,
     this.inputFormatters,
     this.onChange,
     Key? key,
@@ -51,15 +53,16 @@ class CustomTextField extends StatelessWidget {
           labelText: hintText,
           labelStyle: CustomTextStyle().medium(color: const Color(0xff384048), size: 20),
           enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffE8E8E8)),
+            borderSide: BorderSide(color: Color(0xffe8ebef)),
           ),
           focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffE8E8E8)),
+            borderSide: BorderSide(color: Color(0xffe8ebef)),
           ),
           border: const OutlineInputBorder(
-            borderSide: BorderSide(color: Color(0xffE8E8E8)),
+            borderSide: BorderSide(color: Color(0xffe8ebef)),
           ),
           prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
           filled: true,
           fillColor: enabled ? const Color(0xffFFFFFF) : const Color(0xffFBFBFB),
         ),

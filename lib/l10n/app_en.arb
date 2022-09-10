@@ -7,6 +7,10 @@
   "bottom_tabbar_home" : "Home",
   "bottom_tabbar_score" : "Score",
   "bottom_tabbar_rewards" : "Rewards",
-  "bottom_tabbar_profile" : "Profile"
+  "bottom_tabbar_profile" : "Profile",
+  "checkInternetConnection" : "You have to connect to internet before doing this request, please fix it and try again",
+  "signinButton" : "SIGN IN",
+  "donthaveanaccount" : "Don't have an account? ",
+  "signup" : "Sign Up"
 
 }
