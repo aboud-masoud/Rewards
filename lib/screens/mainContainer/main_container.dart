@@ -1,4 +1,3 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/mainContainer/main_container_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -21,53 +20,76 @@ class _MainContainerState extends State<MainContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-        valueListenable: _bloc.currentTabIndexNotifier,
-        builder: (context, index, child) {
-          return Scaffold(
-            backgroundColor: Colors.blue,
-            body: SafeArea(
-              child: IndexedStack(
-                index: index,
-                children: _bloc.navTabs,
-              ),
-            ),
-            bottomNavigationBar: ConvexAppBar(
-              style: TabStyle.flip,
-              controller: _bloc.controller,
-              backgroundColor: Colors.red,
-              top: -20,
-              height: 55,
+    return Scaffold(
+      // body: SafeArea(
+      //   child: IndexedStack(
+      //     index: index,
+      //     // children: _bloc.navTabs,
+      //   ),
+      // ),
+      bottomNavigationBar: StreamBuilder<SelectedTab?>(
+          initialData: _bloc.getSelectedTabDependOnIndex(_bloc.currentTabIndex),
+          stream: _bloc.currentTabIndexController.stream,
+          builder: (context, snapshot) {
+            return BottomNavigationBar(
+              iconSize: 15,
+              backgroundColor: Colors.white,
+              unselectedItemColor: const Color(0xffababab),
+              selectedItemColor: const Color(0xff419aff),
+              type: BottomNavigationBarType.fixed,
+              currentIndex: _bloc.getSelectedIndexDependOnTab(snapshot.data),
+              onTap: (int index) async {
+                await _bloc.changeTabToIndex(index);
+              },
+              showSelectedLabels: true,
               items: [
-                TabItem(
-                  icon: Icons.home,
-                  title: AppLocalizations.of(context)!.bottom_tabbar_home,
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      const SizedBox(height: 2),
+                      _bloc.getSelectedIndexDependOnTab(snapshot.data) == 0
+                          ? _bloc.tabs[0].imageSelected!
+                          : _bloc.tabs[0].imageNotSelected!,
+                    ],
+                  ),
+                  label: AppLocalizations.of(context)!.home,
                 ),
-                TabItem(
-                  icon: Icons.holiday_village_sharp,
-                  title: AppLocalizations.of(context)!.bottom_tabbar_rewards,
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      const SizedBox(height: 2),
+                      _bloc.getSelectedIndexDependOnTab(snapshot.data) == 1
+                          ? _bloc.tabs[1].imageSelected!
+                          : _bloc.tabs[1].imageNotSelected!,
+                    ],
+                  ),
+                  label: AppLocalizations.of(context)!.profile,
                 ),
-                TabItem(
-                  icon: Icons.receipt,
-                  title: AppLocalizations.of(context)!.bottom_tabbar_score,
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      const SizedBox(height: 2),
+                      _bloc.getSelectedIndexDependOnTab(snapshot.data) == 2
+                          ? _bloc.tabs[2].imageSelected!
+                          : _bloc.tabs[2].imageNotSelected!,
+                    ],
+                  ),
+                  label: AppLocalizations.of(context)!.rewards,
                 ),
-                TabItem(
-                  icon: Icons.person,
-                  title: AppLocalizations.of(context)!.bottom_tabbar_profile,
+                BottomNavigationBarItem(
+                  icon: Column(
+                    children: [
+                      const SizedBox(height: 2),
+                      _bloc.getSelectedIndexDependOnTab(snapshot.data) == 3
+                          ? _bloc.tabs[3].imageSelected!
+                          : _bloc.tabs[3].imageNotSelected!,
+                    ],
+                  ),
+                  label: AppLocalizations.of(context)!.score,
                 ),
               ],
-              initialActiveIndex: 0,
-              onTap: (int index) {
-                _bloc.currentTabIndexNotifier.value = index;
-                // if (index == 1 || index == 2 || index == 3) {
-                //   // Get.to(() => const LoginFirstStepScreen())?.then((value) {
-                //   //   _bloc.currentTabIndexNotifier.value = 0;
-                //   //   controller!.index = 0;
-                //   // });
-                // }
-              },
-            ),
-          );
-        });
+            );
+          }),
+    );
   }
 }

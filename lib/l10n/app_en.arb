@@ -27,6 +27,10 @@
   "stammeringdesc" : "Sed a magna semper, porta purus llamcorper ligula. Nam sit amet consectetur sapien",
   "getstart" : "Get Started",
   "languageDelay" : "Language Delay",
-  "languageDelaydesc" : "Sed a magna semper, porta purus llamcorper ligula. Nam sit amet consectetur sapien"
+  "languageDelaydesc" : "Sed a magna semper, porta purus llamcorper ligula. Nam sit amet consectetur sapien",
+  "home" : "Home",
+  "profile" : "Profile",
+  "rewards" : "Rewards",
+  "score" : "Score"
 
 }

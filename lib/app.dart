@@ -34,7 +34,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         initialData: "en",
-        future: FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
+        future: const FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
         builder: (context, snapshot) {
           languageSelected.value = snapshot.data.toString();
           return MaterialApp(
@@ -53,7 +53,7 @@ class MyAppState extends State<MyApp> {
               Locale('ar', ''), // Arabic
               Locale('en', ''), // English
             ],
-            home: LoginScreen(),
+            home: const LoginScreen(),
           );
         });
   }

@@ -4,6 +4,7 @@ import 'package:rewards_app/screens/signup/signup_bloc.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 
 enum signupStatusEnum { language, stammering }
@@ -18,7 +19,14 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Signup"),
+        title: CustomText(
+          title: AppLocalizations.of(context)!.signup,
+          style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+        ),
+        backgroundColor: const Color(0x00ffffff),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.message_sharp))],
       ),
       body: SingleChildScrollView(
         child: Column(
