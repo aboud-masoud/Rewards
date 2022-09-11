@@ -17,11 +17,11 @@ class MainContainerBloc {
   int previousTabIndex = 0;
   StreamController<SelectedTab?> currentTabIndexController = StreamController<SelectedTab?>.broadcast();
 
-  List<Widget> navTabs = const [
+  List<Widget> navTabs = [
     HomeScreen(),
-    ProfileScreen(),
-    RewardsScreen(),
-    ScoreScreen(),
+    const ProfileScreen(),
+    const RewardsScreen(),
+    const ScoreScreen(),
   ];
 
   final tabs = [

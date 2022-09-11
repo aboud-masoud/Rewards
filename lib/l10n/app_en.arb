@@ -31,6 +31,22 @@
   "home" : "Home",
   "profile" : "Profile",
   "rewards" : "Rewards",
-  "score" : "Score"
+  "score" : "Score",
+  "locationAddress" : "896F+55W - Al Taawun St - Al Khan / Sharjah - United Arab Emirates",
+  "workHours" : "Work Hours",
+  "friday" : "Friday",
+  "saturday" : "Saturday",
+  "sunday" : "Sunday",
+  "monday" : "Monday",
+  "tuesday" : "Tuesday",
+  "wednesday" : "Wednesday",
+  "thursday" : "Thursday",
+  "closed" : "Closed",
+  "followus" : "Follow Us on"
+
+
+
+
+
 
 }
