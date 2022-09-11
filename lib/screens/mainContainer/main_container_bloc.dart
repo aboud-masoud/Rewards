@@ -2,6 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:rewards_app/models/tabs.dart';
+import 'package:rewards_app/screens/mainContainer/home/home_screen.dart';
+import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
+import 'package:rewards_app/screens/mainContainer/rewards/rewards_screen.dart';
+import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
 
 enum SelectedTab { home, profile, rewards, score, none }
 
@@ -12,6 +16,13 @@ class MainContainerBloc {
   int currentTabIndex = 0;
   int previousTabIndex = 0;
   StreamController<SelectedTab?> currentTabIndexController = StreamController<SelectedTab?>.broadcast();
+
+  List<Widget> navTabs = const [
+    HomeScreen(),
+    ProfileScreen(),
+    RewardsScreen(),
+    ScoreScreen(),
+  ];
 
   final tabs = [
     MyTab(
@@ -87,8 +98,8 @@ class MainContainerBloc {
 
   Future changeTabToIndex(int index) {
     if (currentTabIndex != index) {
-      previousTabIndex = this.currentTabIndex;
-      this.currentTabIndex = index;
+      previousTabIndex = currentTabIndex;
+      currentTabIndex = index;
       currentTabIndexController.sink.add(getSelectedTabDependOnIndex(currentTabIndex));
     }
     return Future.value(true);
