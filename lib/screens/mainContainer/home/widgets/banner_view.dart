@@ -1,6 +1,7 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rewards_app/utils/shared_methods.dart';
 
 class HomeBannerView extends StatelessWidget {
   HomeBannerView({Key? key}) : super(key: key);
@@ -38,9 +39,16 @@ class HomeBannerView extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1),
           ),
-          child: Image.network(
-            documentSnapshot["imageURL"],
-            fit: BoxFit.fill,
+          child: InkWell(
+            child: Image.network(
+              documentSnapshot["imageURL"],
+              fit: BoxFit.fill,
+            ),
+            onTap: documentSnapshot["urlToOpen"] != ""
+                ? () {
+                    SharedMethods().openUrl(documentSnapshot["urlToOpen"]);
+                  }
+                : null,
           ),
         ),
       );

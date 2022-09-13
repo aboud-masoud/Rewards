@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
+import 'package:rewards_app/utils/shared_methods.dart';
 
 class FollowView extends StatelessWidget {
   const FollowView({Key? key}) : super(key: key);
@@ -23,21 +24,36 @@ class FollowView extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: Image.asset(
-                "assets/images/facebook.png",
-                height: 25,
+              child: InkWell(
+                child: Image.asset(
+                  "assets/images/facebook.png",
+                  height: 25,
+                ),
+                onTap: () {
+                  SharedMethods().openUrl("https://www.facebook.com/amwaj.ae");
+                },
               ),
             ),
             Expanded(
-              child: Image.asset(
-                "assets/images/instagram.png",
-                height: 25,
+              child: InkWell(
+                child: Image.asset(
+                  "assets/images/instagram.png",
+                  height: 25,
+                ),
+                onTap: () {
+                  SharedMethods().openUrl("https://www.instagram.com/amwaj.ae/");
+                },
               ),
             ),
             Expanded(
-              child: Image.asset(
-                "assets/images/snapchat.png",
-                height: 25,
+              child: InkWell(
+                child: Image.asset(
+                  "assets/images/snapchat.png",
+                  height: 25,
+                ),
+                onTap: () {
+                  SharedMethods().openUrl("https://t.snapchat.com/ZDCNLUCF");
+                },
               ),
             ),
           ],
