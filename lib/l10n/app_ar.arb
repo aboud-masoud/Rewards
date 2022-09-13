@@ -42,7 +42,24 @@
     "wednesday" : "الأربعاء",
     "thursday" : "الخميس",
     "closed" : "مغلق",
-    "followus" : "اتبعنا"
+    "followus" : "اتبعنا",
+    "identityInformation" : "معلومات الهوية",
+    "step" : "خطوة",
+    "caseHistory" : "تاريخ الحالة",
+    "birthandDevelopmentHistory" : "تاريخ الميلاد والتنمية",
+    "communication" : "الاتصالات",
+    "dateofBirth" : "تاريخ الولادة",
+    "nationality" : "جنسية",
+    "gender" : "جنس",
+    "address" : "عنوان",
+    "usedlanguagewiththeclientathome" : "اللغة المستخدمة مع العميل في المنزل",
+    "mobileNumber" : "رقم الهاتف المحمول",
+    "parentsoccupation" : "مهنة الوالدين",
+    "siblingsandhisrank" : "الأشقاء ورتبته",
+    "isthereanykinshipbetweenparents" : "هل هناك قرابة بين الوالدين؟",
+    "youfoundcontactusvia" : "لقد وجدت / اتصل بنا عبر"
+
+
 
 
 }

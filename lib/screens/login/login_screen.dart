@@ -111,6 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return CustomButtonWidget(
                           title: AppLocalizations.of(context)!.signinButton,
                           enable: snapshot,
+                          widthSize: MediaQuery.of(context).size.width,
                           onPress: () async {
                             if (await NetworkInfoService().isConnected()) {
                               await _bloc.signInWithEmailAndPassword(

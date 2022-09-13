@@ -42,7 +42,22 @@
   "wednesday" : "Wednesday",
   "thursday" : "Thursday",
   "closed" : "Closed",
-  "followus" : "Follow Us on"
+  "followus" : "Follow Us on",
+  "identityInformation" : "Identity Information",
+  "step" : "Step",
+  "caseHistory" : "Case History",
+  "birthandDevelopmentHistory" : "Birth and Development History",
+  "communication" : "Communication",
+  "dateofBirth" : "Date of Birth",
+  "nationality" : "Nationality",
+  "gender" : "Gender",
+  "address" : "Address",
+  "usedlanguagewiththeclientathome" : "Used language with the client at home",
+  "mobileNumber" : "Mobile Number",
+  "parentsoccupation" : "Parents’ occupation",
+  "siblingsandhisrank" : "siblings and his rank",
+  "isthereanykinshipbetweenparents" : "Is there any kinship between parents?",
+  "youfoundcontactusvia" : "You found / contact us via"
 
 
 
