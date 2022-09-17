@@ -78,8 +78,10 @@
   "diagnosed" : "Has your child been diagnosed with any of these?",
   "disordersfamily" : "Is there any similar language or speech disorders noted in the family?",
   "enrolledpreviously" : "Had your child enrolled previously in any rehabilitation programs (occupational therapy, physical therapy, behavioral modification…)? And how was his/her progress?", 
-  "next" : "Next"
-
+  "next" : "Next",
+  "cancel" : "Cancel",
+  "camera" : "Camera",
+  "galary" : "Galary"
 
 
 

@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_bloc.dart';
@@ -62,7 +65,6 @@ class ProfileScreen extends StatelessWidget {
                 final DocumentSnapshot documentSnapshot =
                     streamSnapshot.data!.docs.singleWhere((element) => element.id == "vGPSTSnoMafgJ8z8sVKHVZefFxU2");
 
-                print(documentSnapshot);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -76,14 +78,21 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Stack(
                         children: [
-                          CircleAvatar(
-                            radius: 80,
-                            backgroundColor: Colors.white,
-                            child: Padding(
-                              padding: const EdgeInsets.all(4), // Border radius
-                              child: ClipOval(child: Image.asset("assets/images/blank-profile-picture.png")),
-                            ),
-                          ),
+                          ValueListenableBuilder<XFile?>(
+                              valueListenable: _bloc.image,
+                              builder: (context, snapshot, child) {
+                                return CircleAvatar(
+                                  radius: 80,
+                                  backgroundColor: Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4), // Border radius
+                                    child: ClipOval(
+                                        child: snapshot == null
+                                            ? Image.asset("assets/images/blank-profile-picture.png")
+                                            : Image.file(File(snapshot.path))),
+                                  ),
+                                );
+                              }),
                           Positioned(
                             bottom: 0,
                             right: 0,
@@ -107,8 +116,8 @@ class ProfileScreen extends StatelessWidget {
                                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                                     ),
                                     child: IconButton(
-                                      onPressed: () {
-                                        //TODO
+                                      onPressed: () async {
+                                        await showButtomSheet(context);
                                       },
                                       icon: Image.asset(
                                         "assets/images/edit_img_icon.png",
@@ -222,5 +231,81 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<Widget> showButtomSheet(BuildContext context) async {
+    return await showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 0.5,
+                  color: Colors.blueGrey,
+                ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  final img = await _bloc.picker.pickImage(source: ImageSource.camera);
+                  _bloc.image.value = img;
+                },
+                child: Center(
+                  child: CustomText(
+                    title: AppLocalizations.of(context)!.camera,
+                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 0.5,
+                  color: Colors.blueGrey,
+                ),
+              ),
+              TextButton(
+                onPressed: () async {
+                  final img = await _bloc.picker.pickImage(source: ImageSource.gallery);
+                  _bloc.image.value = img;
+                },
+                child: Center(
+                  child: CustomText(
+                    title: AppLocalizations.of(context)!.galary,
+                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 0.5,
+                  color: Colors.blueGrey,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Center(
+                  child: CustomText(
+                    title: AppLocalizations.of(context)!.cancel,
+                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 0.5,
+                  color: Colors.blueGrey,
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          );
+        });
   }
 }
