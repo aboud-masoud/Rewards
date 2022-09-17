@@ -79,7 +79,7 @@ class ProfileScreen extends StatelessWidget {
                       child: Stack(
                         children: [
                           ValueListenableBuilder<XFile?>(
-                              valueListenable: _bloc.image,
+                              valueListenable: _bloc.imageValue,
                               builder: (context, snapshot, child) {
                                 return CircleAvatar(
                                   radius: 80,
@@ -87,9 +87,14 @@ class ProfileScreen extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.all(4), // Border radius
                                     child: ClipOval(
-                                        child: snapshot == null
-                                            ? Image.asset("assets/images/blank-profile-picture.png")
-                                            : Image.file(File(snapshot.path))),
+                                      child: snapshot == null
+                                          ? Image.asset("assets/images/blank-profile-picture.png")
+                                          : Image.file(
+                                              File(snapshot.path),
+                                              height: 90,
+                                              fit: BoxFit.fill,
+                                            ),
+                                    ),
                                   ),
                                 );
                               }),
@@ -249,8 +254,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  final img = await _bloc.picker.pickImage(source: ImageSource.camera);
-                  _bloc.image.value = img;
+                  await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
+                    _bloc.imageValue.value = value;
+                    await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
+                      Navigator.of(context).pop();
+                    });
+                  });
                 },
                 child: Center(
                   child: CustomText(
@@ -268,8 +277,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  final img = await _bloc.picker.pickImage(source: ImageSource.gallery);
-                  _bloc.image.value = img;
+                  _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
+                    _bloc.imageValue.value = value;
+                    await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
+                      Navigator.of(context).pop();
+                    });
+                  });
                 },
                 child: Center(
                   child: CustomText(
