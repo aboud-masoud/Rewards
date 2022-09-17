@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/signup/signup_bloc.dart';
 import 'package:rewards_app/screens/signup/widgets/header_view.dart';
 import 'package:rewards_app/screens/signup/widgets/step1_view.dart';
-import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
-import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';

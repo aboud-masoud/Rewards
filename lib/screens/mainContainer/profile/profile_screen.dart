@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
+import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,7 +22,9 @@ class ProfileScreen extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  //TODO
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                    return ApotmentsScreen();
+                  }));
                 },
                 icon: Image.asset(
                   "assets/images/calendar_profile_icon.png",
@@ -33,7 +37,9 @@ class ProfileScreen extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  //TODO
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                    return EditProfileScreen();
+                  }));
                 },
                 icon: Image.asset(
                   "assets/images/edit_profile_icon.png",
@@ -133,37 +139,37 @@ class ProfileScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    containtView(title: "Client's Full Name*", desc: "Ronnie Hudson Jeremy Wade"),
+                    containtView(title: AppLocalizations.of(context)!.clientFullName, desc: "Ronnie Hudson Jeremy Wade"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "Date of Birth*", desc: "12 SEP 1991"),
+                    containtView(title: AppLocalizations.of(context)!.dateofBirth, desc: "12 SEP 1991"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "Nationality*", desc: "Jordanian"),
+                    containtView(title: AppLocalizations.of(context)!.nationality, desc: "Jordanian"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "Gender*", desc: "Male"),
+                    containtView(title: AppLocalizations.of(context)!.gender, desc: "Male"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "1 st Evaluation Date", desc: "12 SEP 1991"),
+                    containtView(title: AppLocalizations.of(context)!.firstEvaluationDate, desc: "12 SEP 1991"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "1 st Therapeutic Session Date", desc: "12 SEP 1991"),
+                    containtView(title: AppLocalizations.of(context)!.firstTherapeuticDate, desc: "12 SEP 1991"),
                     Padding(
                       padding: const EdgeInsets.all(16),
                       child: Container(height: 1, color: const Color(0xffe8ebef)),
                     ),
-                    containtView(title: "Therapeutic Name", desc: "Mr. Baraa Alshab"),
+                    containtView(title: AppLocalizations.of(context)!.therapeuticName, desc: "Mr. Baraa Alshab"),
                     const SizedBox(height: 24),
                   ],
                 ),

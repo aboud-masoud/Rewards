@@ -77,7 +77,7 @@ class _MainContainerState extends State<MainContainer> {
                           : _bloc.tabs[2].imageNotSelected!,
                     ],
                   ),
-                  label: AppLocalizations.of(context)!.rewards,
+                  label: AppLocalizations.of(context)!.tasks,
                 ),
                 BottomNavigationBarItem(
                   icon: Column(

@@ -57,7 +57,21 @@
   "parentsoccupation" : "Parents’ occupation",
   "siblingsandhisrank" : "siblings and his rank",
   "isthereanykinshipbetweenparents" : "Is there any kinship between parents?",
-  "youfoundcontactusvia" : "You found / contact us via"
+  "youfoundcontactusvia" : "You found / contact us via",
+  "save" : "Save",
+  "editprofile" : "Edit Profile",
+  "clientFullName" : "Client's Full Name*",
+  "firstEvaluationDate" : "1 st Evaluation Date",
+  "firstTherapeuticDate" : "1 st Therapeutic Session Date",
+  "therapeuticName" : "Therapeutic Name",
+  "tasks" : "Tasks",
+  "apotments" : "Appointments",
+  "bookAn" : "Book an",
+  "familyCounselingSession" : "Family Counseling Session",
+  "evaluationSession" : "Evaluation Session",
+  "okay" : "Ok",
+  "apotmentsTitleDialog" : "We received your request successfully!",
+  "apotmentsDescDialog" : "We will contact you on your registered number within 24 hours"
 
 
 

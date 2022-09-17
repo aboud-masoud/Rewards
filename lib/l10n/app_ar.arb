@@ -57,7 +57,23 @@
     "parentsoccupation" : "مهنة الوالدين",
     "siblingsandhisrank" : "الأشقاء ورتبته",
     "isthereanykinshipbetweenparents" : "هل هناك قرابة بين الوالدين؟",
-    "youfoundcontactusvia" : "لقد وجدت / اتصل بنا عبر"
+    "youfoundcontactusvia" : "لقد وجدت / اتصل بنا عبر",
+    "save" : "حفظ",
+    "editprofile" : "تعديل الملف الشخصي",
+    "clientFullName" : "الاسم الكامل للعميل *",
+    "firstEvaluationDate" : "تاريخ التقييم الأول",
+    "firstTherapeuticDate" : "موعد الجلسة العلاجية الأولى",
+    "therapeuticName" : "اسم المعالج",
+    "tasks" : "مهام",
+    "apotments" : "تحديد موعد",
+    "bookAn" : "احجز",
+    "familyCounselingSession" : "جلسة الإرشاد الأسري",
+    "evaluationSession" : "جلسة التقييم",
+    "okay" : "موافق",
+    "apotmentsTitleDialog" : "لقد تلقينا طلبك بنجاح!",
+    "apotmentsDescDialog" : "سنتواصل معك على رقمك المسجل خلال 24 ساعة"
+
+
 
 
 

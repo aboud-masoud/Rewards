@@ -56,7 +56,7 @@ class LoginBloc {
 
       if (user != null) {
         loginStatus.value = loginStatusEnum.success;
-        await _saveValuesInMemory(userName: email, password: password);
+        await _saveValuesInMemory(userName: email, password: password, uid: user.uid);
         print(user.email);
         print(user.uid);
 
@@ -124,7 +124,7 @@ class LoginBloc {
     return false;
   }
 
-  Future<void> _saveValuesInMemory({required String userName, required String password}) async {
+  Future<void> _saveValuesInMemory({required String userName, required String password, required String uid}) async {
     var biometric = await storage.read(key: AppConstants.biometricU);
     if (userName == biometric) {
       await storage.delete(key: AppConstants.biometricU);
@@ -135,6 +135,7 @@ class LoginBloc {
 
     await storage.write(key: AppConstants.biometricU, value: userName);
     await storage.write(key: AppConstants.biometricP, value: password);
+    await storage.write(key: AppConstants.uid, value: uid);
   }
 
   Future refreshAppWithLanguageCode(BuildContext context, String code) async {
