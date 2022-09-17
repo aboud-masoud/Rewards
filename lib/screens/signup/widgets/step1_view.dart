@@ -102,6 +102,14 @@ class Step1View extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomTextField(
+          controller: bloc.emailController,
+          hintText: AppLocalizations.of(context)!.email_hint,
+          keyboardType: TextInputType.emailAddress,
+          prefixIcon: const Icon(Icons.email),
+          onChange: (value) => bloc.validateFields(),
+        ),
+        const SizedBox(height: 16),
+        CustomTextField(
           controller: bloc.passwordController,
           hintText: AppLocalizations.of(context)!.password,
           keyboardType: TextInputType.name,
@@ -118,7 +126,7 @@ class Step1View extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         CustomButtonWidget(
-          title: "Next",
+          title: AppLocalizations.of(context)!.next,
           isButtonRounded: true,
           backgroundColor: const Color(0xff419aff),
           onPress: () {

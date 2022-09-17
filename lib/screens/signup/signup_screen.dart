@@ -3,6 +3,9 @@ import 'package:rewards_app/screens/signup/signup_bloc.dart';
 import 'package:rewards_app/screens/signup/widgets/header_view.dart';
 import 'package:rewards_app/screens/signup/widgets/step1_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/screens/signup/widgets/step2_view.dart';
+import 'package:rewards_app/screens/signup/widgets/step3_view.dart';
+import 'package:rewards_app/screens/signup/widgets/step4_view.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 
@@ -42,23 +45,11 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 68, child: HeaderView(bloc: _bloc)),
                 Expanded(
-                  child: SingleChildScrollView(child: Step1View(bloc: _bloc)),
+                  child: SingleChildScrollView(child: returnCorrectStepView(snapshot, _bloc)),
                 )
               ],
             );
           }),
-
-      // SingleChildScrollView(
-      //   child: Column(
-      //     children: [
-      //       const SizedBox(height: 20),
-      //       CustomTextField(
-      //         controller: _bloc.emailController,
-      //         hintText: AppLocalizations.of(context)!.email_hint,
-      //         keyboardType: TextInputType.emailAddress,
-      //         prefixIcon: const Icon(Icons.email),
-      //         onChange: (value) => _bloc.validateFields(),
-      //       ),
 
       //       ValueListenableBuilder<bool>(
       //           valueListenable: _bloc.fieldsValidation,
@@ -89,9 +80,18 @@ class SignUpScreen extends StatelessWidget {
       //               return Container();
       //             }
       //           }),
-      //     ],
-      //   ),
-      // ),
     );
+  }
+
+  Widget returnCorrectStepView(int index, SignUpBloc bloc) {
+    if (index == 1) {
+      return Step1View(bloc: bloc);
+    } else if (index == 2) {
+      return Step2View(bloc: bloc);
+    } else if (index == 3) {
+      return Step3View(bloc: bloc);
+    } else {
+      return Step4View(bloc: bloc);
+    }
   }
 }

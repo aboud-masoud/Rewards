@@ -71,7 +71,14 @@
   "evaluationSession" : "Evaluation Session",
   "okay" : "Ok",
   "apotmentsTitleDialog" : "We received your request successfully!",
-  "apotmentsDescDialog" : "We will contact you on your registered number within 24 hours"
+  "apotmentsDescDialog" : "We will contact you on your registered number within 24 hours",
+  "complaint" : "What is your complaint? briefly", 
+  "problemFirstNoted" : "When the problem was first noted?",
+  "speechassessment" : "Does the child have a previous language and speech assessment? What was the Result?",
+  "diagnosed" : "Has your child been diagnosed with any of these?",
+  "disordersfamily" : "Is there any similar language or speech disorders noted in the family?",
+  "enrolledpreviously" : "Had your child enrolled previously in any rehabilitation programs (occupational therapy, physical therapy, behavioral modification…)? And how was his/her progress?", 
+  "next" : "Next"
 
 
 

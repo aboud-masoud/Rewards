@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
+import 'package:rewards_app/screens/mainContainer/profile/profile_bloc.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final _bloc = ProfileBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -51,132 +55,151 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: const Color(0xffe8ebef)),
-                borderRadius: const BorderRadius.all(Radius.circular(50)),
-              ),
-              child: Stack(
-                children: [
-                  CircleAvatar(
-                    radius: 80,
-                    backgroundColor: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4), // Border radius
-                      child: ClipOval(child: Image.asset("assets/images/blank-profile-picture.png")),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: Container(
-                      width: 40,
-                      height: 40,
+        child: StreamBuilder(
+            stream: _bloc.profile.snapshots(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+              if (streamSnapshot.hasData) {
+                final DocumentSnapshot documentSnapshot =
+                    streamSnapshot.data!.docs.singleWhere((element) => element.id == "vGPSTSnoMafgJ8z8sVKHVZefFxU2");
+
+                print(documentSnapshot);
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      width: 100,
+                      height: 100,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: const Color(0xffe8ebef)),
-                        borderRadius: const BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(Radius.circular(50)),
                       ),
-                      child: CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.all(4), // Border radius
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: const Color(0xff419aff),
-                              border: Border.all(color: const Color(0xff419aff)),
-                              borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      child: Stack(
+                        children: [
+                          CircleAvatar(
+                            radius: 80,
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4), // Border radius
+                              child: ClipOval(child: Image.asset("assets/images/blank-profile-picture.png")),
                             ),
-                            child: IconButton(
-                              onPressed: () {
-                                //TODO
-                              },
-                              icon: Image.asset(
-                                "assets/images/edit_img_icon.png",
-                                // width: 9,
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(color: const Color(0xffe8ebef)),
+                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                              ),
+                              child: CircleAvatar(
+                                radius: 40,
+                                backgroundColor: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(4), // Border radius
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xff419aff),
+                                      border: Border.all(color: const Color(0xff419aff)),
+                                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                    ),
+                                    child: IconButton(
+                                      onPressed: () {
+                                        //TODO
+                                      },
+                                      icon: Image.asset(
+                                        "assets/images/edit_img_icon.png",
+                                        // width: 9,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 26),
-            Center(
-              child: CustomText(
-                title: "Ronnie Hudson",
-                style: CustomTextStyle().bold(size: 22, color: const Color(0xff3a4da7)),
-              ),
-            ),
-            const SizedBox(height: 4),
-            Center(
-              child: CustomText(
-                title: "tyler.roberts@mail.com",
-                style: CustomTextStyle().medium(size: 11, color: const Color(0xff707070)),
-              ),
-            ),
-            const SizedBox(height: 50),
-            Padding(
-              padding: const EdgeInsets.only(left: 24, right: 24),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xffe8ebef)),
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 24),
-                    containtView(title: AppLocalizations.of(context)!.clientFullName, desc: "Ronnie Hudson Jeremy Wade"),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
+                    const SizedBox(height: 26),
+                    Center(
+                      child: CustomText(
+                        title: documentSnapshot["full name"],
+                        style: CustomTextStyle().bold(size: 22, color: const Color(0xff3a4da7)),
+                      ),
                     ),
-                    containtView(title: AppLocalizations.of(context)!.dateofBirth, desc: "12 SEP 1991"),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
+                    const SizedBox(height: 4),
+                    Center(
+                      child: CustomText(
+                        title: documentSnapshot["email"],
+                        style: CustomTextStyle().medium(size: 11, color: const Color(0xff707070)),
+                      ),
                     ),
-                    containtView(title: AppLocalizations.of(context)!.nationality, desc: "Jordanian"),
+                    const SizedBox(height: 50),
                     Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
-                    ),
-                    containtView(title: AppLocalizations.of(context)!.gender, desc: "Male"),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
-                    ),
-                    containtView(title: AppLocalizations.of(context)!.firstEvaluationDate, desc: "12 SEP 1991"),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
-                    ),
-                    containtView(title: AppLocalizations.of(context)!.firstTherapeuticDate, desc: "12 SEP 1991"),
-                    Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Container(height: 1, color: const Color(0xffe8ebef)),
-                    ),
-                    containtView(title: AppLocalizations.of(context)!.therapeuticName, desc: "Mr. Baraa Alshab"),
-                    const SizedBox(height: 24),
+                      padding: const EdgeInsets.only(left: 24, right: 24),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: const Color(0xffe8ebef)),
+                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 24),
+                            containtView(
+                                title: AppLocalizations.of(context)!.clientFullName, desc: documentSnapshot["full name"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.dateofBirth, desc: documentSnapshot["Date Of Birth"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(title: AppLocalizations.of(context)!.nationality, desc: documentSnapshot["Nationality"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(title: AppLocalizations.of(context)!.gender, desc: documentSnapshot["Gender"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.firstEvaluationDate,
+                                desc: documentSnapshot["1 st Evaluation Date"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.firstTherapeuticDate,
+                                desc: documentSnapshot["1 st Therapeutic Session Date"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.therapeuticName, desc: documentSnapshot["Therapeutic Name"]),
+                            const SizedBox(height: 24),
+                          ],
+                        ),
+                      ),
+                    )
                   ],
-                ),
-              ),
-            )
-          ],
-        ),
+                );
+              } else {
+                return const CircularProgressIndicator();
+              }
+            }),
       ),
     );
   }

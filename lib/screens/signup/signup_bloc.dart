@@ -18,6 +18,12 @@ class SignUpBloc {
   TextEditingController hisrankController = TextEditingController();
   TextEditingController kinshipController = TextEditingController();
   TextEditingController foundCountactController = TextEditingController();
+  TextEditingController complaintController = TextEditingController();
+  TextEditingController problemFirstNotedController = TextEditingController();
+  TextEditingController speechassessmentController = TextEditingController();
+  TextEditingController diagnosedController = TextEditingController();
+  TextEditingController disordersfamilyController = TextEditingController();
+  TextEditingController enrolledController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
   TextEditingController repasswordController = TextEditingController();
@@ -72,7 +78,36 @@ class SignUpBloc {
         print(user.email);
         print(user.uid);
 
-        await _profiles.doc(user.uid).set({"full name": fullNameController.text});
+        await _profiles.doc(user.uid).set({
+          "full name": fullNameController.text,
+          "Date Of Birth": dateOfBirthController.text,
+          "Nationality": nationalityController.text,
+          "Gender": genderController.text,
+          "Address": addressController.text,
+          "Used language with the client at home": usedLanguageController.text,
+          "Mobile Number": mobileNumberController.text,
+          "Parents’ occupation": parentOcupationController.text,
+          "siblings and his rank": hisrankController.text,
+          "Is there any kinship between parents?": kinshipController.text,
+          "You found / contact us via": foundCountactController.text,
+          "What is your complaint? briefly": complaintController.text,
+          "When the problem was first noted?": problemFirstNotedController.text,
+          "Does the child have a previous language and speech assessment? What was the Result?": speechassessmentController.text,
+          "Has your child been diagnosed with any of these?": diagnosedController.text,
+          "Is there any similar language or speech disorders noted in the family?": disordersfamilyController.text,
+          "Had your child enrolled previously in any rehabilitation programs (occupational therapy, physical therapy, behavioral modification…)? And how was his/her progress?":
+              enrolledController.text,
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+          // "": "",
+        });
 
         return true;
       } else {

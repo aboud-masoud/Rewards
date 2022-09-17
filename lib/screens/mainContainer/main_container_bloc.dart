@@ -19,7 +19,7 @@ class MainContainerBloc {
 
   List<Widget> navTabs = [
     HomeScreen(),
-    const ProfileScreen(),
+    ProfileScreen(),
     const RewardsScreen(),
     const ScoreScreen(),
   ];
