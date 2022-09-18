@@ -47,7 +47,7 @@ class SignupFaze1Screen extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (ctx) {
                         return SignUpScreen(
-                          signupStatus: signupStatusEnum.language,
+                          signupStatus: SignupStatusEnum.language,
                         );
                       }),
                     );
@@ -87,7 +87,7 @@ class SignupFaze1Screen extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (ctx) {
                         return SignUpScreen(
-                          signupStatus: signupStatusEnum.stammering,
+                          signupStatus: SignupStatusEnum.stammering,
                         );
                       }),
                     );
