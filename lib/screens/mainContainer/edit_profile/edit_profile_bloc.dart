@@ -52,7 +52,7 @@ class EditProfileBloc {
     fieldsValidation.value = true;
   }
 
-  void updateProfileInformation() {
+  Future<void> updateProfileInformation() async {
     final theJSON = SharedMethods().handleJsonOfProfile(
       email: userEmail,
       fullName: fullNameController.text,
@@ -97,6 +97,6 @@ class EditProfileBloc {
       wouldYouLikeToAddAnyAdditionalInformation: wouldYouLikeToAddAnyAdditionalInformation,
     );
 
-    profile.doc(userEmail).update(theJSON);
+    await profile.doc(userEmail).update(theJSON);
   }
 }

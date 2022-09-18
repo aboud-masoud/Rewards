@@ -29,8 +29,8 @@ class EditProfileScreen extends StatelessWidget {
           SizedBox(
             width: 75,
             child: IconButton(
-                onPressed: () {
-                  _bloc.updateProfileInformation();
+                onPressed: () async {
+                  await _bloc.updateProfileInformation().then((value) => Navigator.of(context).pop());
                 },
                 icon: Row(
                   children: [
