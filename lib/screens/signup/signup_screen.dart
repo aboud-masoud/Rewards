@@ -9,7 +9,7 @@ import 'package:rewards_app/screens/signup/widgets/step4_view.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 
-enum signupStatusEnum { language, stammering }
+enum SignupStatusEnum { language, stammering }
 
 //TODO: Handle correct design for the fields
 //TODO: Handle the type of registration
@@ -17,7 +17,7 @@ enum signupStatusEnum { language, stammering }
 //TODO: Handle faze 4
 
 class SignUpScreen extends StatelessWidget {
-  final signupStatusEnum signupStatus;
+  final SignupStatusEnum signupStatus;
   SignUpScreen({required this.signupStatus, Key? key}) : super(key: key);
 
   final _bloc = SignUpBloc();

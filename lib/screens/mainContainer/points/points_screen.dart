@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
-import 'package:rewards_app/screens/mainContainer/score/score_bloc.dart';
+import 'package:rewards_app/screens/mainContainer/points/points_bloc.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ScoreScreen extends StatelessWidget {
-  ScoreScreen({Key? key}) : super(key: key);
+class PointsScreen extends StatelessWidget {
+  PointsScreen({Key? key}) : super(key: key);
 
-  final _bloc = ScoreBloc();
+  final _bloc = PointsBloc();
 
   //TODO : handle this page
 
@@ -38,7 +38,7 @@ class ScoreScreen extends StatelessWidget {
               Expanded(child: Container()),
               Center(
                 child: CustomText(
-                  title: AppLocalizations.of(context)!.score,
+                  title: AppLocalizations.of(context)!.tasks,
                   style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
                 ),
               ),
@@ -47,6 +47,36 @@ class ScoreScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      body: Column(
+        children: [
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            color: const Color(0xff3a4da7),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: Row(
+                children: [
+                  CustomText(
+                    title: AppLocalizations.of(context)!.task,
+                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
+                  ),
+                  Expanded(child: Container()),
+                  CustomText(
+                    title: AppLocalizations.of(context)!.tasks,
+                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(itemBuilder: (ctx, index) {
+              return Container();
+            }),
+          )
+        ],
       ),
     );
   }
