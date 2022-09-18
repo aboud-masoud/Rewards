@@ -1,9 +1,9 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:rewards_app/main.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_bloc.dart';
@@ -14,6 +14,8 @@ import 'package:rewards_app/utils/global_value.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
+
+  //TODO: Handle upload/ download profile image
 
   final _bloc = ProfileBloc();
 
@@ -90,6 +92,7 @@ class ProfileScreen extends StatelessWidget {
                                     child: ClipOval(
                                       child: snapshot == null
                                           ? Image.asset("assets/images/blank-profile-picture.png")
+                                          // : Image.network('gs://amwaj-rewards.appspot.com/blank-profile-picture.png')
                                           : Image.file(
                                               File(snapshot.path),
                                               height: 90,
@@ -255,12 +258,15 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  // await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
-                  //   _bloc.imageValue.value = value;
-                  //   await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
-                  //     Navigator.of(context).pop();
-                  //   });
-                  // });
+                  await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
+                    _bloc.imageValue.value = value;
+                    final file = File(value!.path);
+                    Uint8List bytes = file.readAsBytesSync();
+
+                    await _bloc.uploadFile(bytes).then((value) {
+                      Navigator.of(context).pop();
+                    });
+                  });
                 },
                 child: Center(
                   child: CustomText(
@@ -278,12 +284,15 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  // _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
-                  //   _bloc.imageValue.value = value;
-                  //   await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
-                  //     Navigator.of(context).pop();
-                  //   });
-                  // });
+                  _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
+                    _bloc.imageValue.value = value;
+                    final file = File(value!.path);
+                    Uint8List bytes = file.readAsBytesSync();
+
+                    await _bloc.uploadFile(bytes).then((value) {
+                      Navigator.of(context).pop();
+                    });
+                  });
                 },
                 child: Center(
                   child: CustomText(

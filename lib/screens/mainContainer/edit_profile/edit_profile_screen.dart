@@ -11,6 +11,8 @@ class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({Key? key}) : super(key: key);
   final _bloc = EditProfileBloc();
 
+  //TODO: Handle correct design for the fields
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

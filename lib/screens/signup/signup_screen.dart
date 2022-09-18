@@ -11,6 +11,11 @@ import 'package:rewards_app/utils/custom_text_style.dart';
 
 enum signupStatusEnum { language, stammering }
 
+//TODO: Handle correct design for the fields
+//TODO: Handle the type of registration
+//TODO: Handle faze 3
+//TODO: Handle faze 4
+
 class SignUpScreen extends StatelessWidget {
   final signupStatusEnum signupStatus;
   SignUpScreen({required this.signupStatus, Key? key}) : super(key: key);
