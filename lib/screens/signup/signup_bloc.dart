@@ -2,8 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:rewards_app/utils/app_constants.dart';
+import 'package:rewards_app/utils/global_value.dart';
+import 'package:rewards_app/utils/shared_methods.dart';
 
-enum signUpStatusEnum { faild, success, non, inProgress }
+enum SignUpStatusEnum { faild, success, non, inProgress }
 
 class SignUpBloc {
   TextEditingController emailController = TextEditingController();
@@ -24,12 +28,31 @@ class SignUpBloc {
   TextEditingController diagnosedController = TextEditingController();
   TextEditingController disordersfamilyController = TextEditingController();
   TextEditingController enrolledController = TextEditingController();
+  TextEditingController birthGenre = TextEditingController();
+  TextEditingController birthWeight = TextEditingController();
+  TextEditingController wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain = TextEditingController();
+  TextEditingController hasYourChildExperiencedAnyOfThese = TextEditingController();
+  TextEditingController doesYourChildUseAnyMedicationsRegularlyFrequentlyMention = TextEditingController();
+  TextEditingController hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues = TextEditingController();
+  TextEditingController didYourChildDelayInAnyOfTheseDevelopmentalStages = TextEditingController();
+  TextEditingController checkTheSkillsThatYourChildAchievesIndependently = TextEditingController();
+  TextEditingController howDoesYourChildCommunicateMostOfTheTime = TextEditingController();
+  TextEditingController recentlyYourChildsSpeechIs = TextEditingController();
+  TextEditingController whenYourChildDidProduceHisFirstWord = TextEditingController();
+  TextEditingController doesTheChildUseAnyUtterancesInHisSpeechGiveExample = TextEditingController();
+  TextEditingController describeYourChildReceptiveLanguage = TextEditingController();
+  TextEditingController describeYourChildExpressiveLanguage = TextEditingController();
+  TextEditingController describeYourChildBehavior = TextEditingController();
+  TextEditingController describeYourChildFocusAndAttention = TextEditingController();
+  TextEditingController describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay = TextEditingController();
+  TextEditingController howMuchTimeYourChildSpendsOnTVSmartDevices = TextEditingController();
+  TextEditingController wouldYouLikeToAddAnyAdditionalInformation = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
   TextEditingController repasswordController = TextEditingController();
 
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  ValueNotifier<signUpStatusEnum> signupStatus = ValueNotifier<signUpStatusEnum>(signUpStatusEnum.non);
+  ValueNotifier<SignUpStatusEnum> signupStatus = ValueNotifier<SignUpStatusEnum>(SignUpStatusEnum.non);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -37,6 +60,9 @@ class SignUpBloc {
   ValueNotifier<int> stepNumberNotifier = ValueNotifier<int>(1);
 
   final CollectionReference _profiles = FirebaseFirestore.instance.collection('profiles');
+  final CollectionReference _profileDetails = FirebaseFirestore.instance.collection('profileDetails');
+
+  final storage = const FlutterSecureStorage();
 
   void validateFields() {
     // if (emailController.text.isEmpty) {
@@ -63,7 +89,7 @@ class SignUpBloc {
   }
 
   Future<bool> signUp() async {
-    signupStatus.value = signUpStatusEnum.inProgress;
+    signupStatus.value = SignUpStatusEnum.inProgress;
     final User? user;
     try {
       user = (await _auth.createUserWithEmailAndPassword(
@@ -73,52 +99,77 @@ class SignUpBloc {
           .user;
 
       if (user != null) {
-        signupStatus.value = signUpStatusEnum.success;
+        signupStatus.value = SignUpStatusEnum.success;
+        await _saveValuesInMemory(userName: user.email!, password: passwordController.text, uid: user.uid);
 
-        print(user.email);
-        print(user.uid);
+        userEmail = user.email!;
 
-        await _profiles.doc(user.uid).set({
-          "full name": fullNameController.text,
-          "Date Of Birth": dateOfBirthController.text,
-          "Nationality": nationalityController.text,
-          "Gender": genderController.text,
-          "Address": addressController.text,
-          "Used language with the client at home": usedLanguageController.text,
-          "Mobile Number": mobileNumberController.text,
-          "Parents’ occupation": parentOcupationController.text,
-          "siblings and his rank": hisrankController.text,
-          "Is there any kinship between parents?": kinshipController.text,
-          "You found / contact us via": foundCountactController.text,
-          "What is your complaint? briefly": complaintController.text,
-          "When the problem was first noted?": problemFirstNotedController.text,
-          "Does the child have a previous language and speech assessment? What was the Result?": speechassessmentController.text,
-          "Has your child been diagnosed with any of these?": diagnosedController.text,
-          "Is there any similar language or speech disorders noted in the family?": disordersfamilyController.text,
-          "Had your child enrolled previously in any rehabilitation programs (occupational therapy, physical therapy, behavioral modification…)? And how was his/her progress?":
-              enrolledController.text,
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-          // "": "",
-        });
+        final theJSON = SharedMethods().handleJsonOfProfile(
+          email: user.email!,
+          fullName: fullNameController.text,
+          db: dateOfBirthController.text,
+          nationality: nationalityController.text,
+          gender: genderController.text,
+          address: addressController.text,
+          mobileNumber: mobileNumberController.text,
+          usedLanguageWithTheClient: usedLanguageController.text,
+          parentsOccupation: parentOcupationController.text,
+          siblingsAndHisRank: hisrankController.text,
+          isThereAnyKinshipBetweenParents: kinshipController.text,
+          youFoundContactUsVia: foundCountactController.text,
+          whatIsYourComplaintBriefly: complaintController.text,
+          whenTheProblemWasFirstNoted: problemFirstNotedController.text,
+          doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult: speechassessmentController.text,
+          hasYourChildBeenDiagnosedWithAnyOfThese: diagnosedController.text,
+          isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily: disordersfamilyController.text,
+          hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms: enrolledController.text,
+          firstEvaluationDate: "",
+          firstTherapeuticSessionDate: "",
+          therapeuticName: "",
+          birthGenre: birthGenre.text,
+          birthWeight: birthWeight.text,
+          wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain:
+              wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain.text,
+          hasYourChildExperiencedAnyOfThese: hasYourChildExperiencedAnyOfThese.text,
+          doesYourChildUseAnyMedicationsRegularlyFrequentlyMention: doesYourChildUseAnyMedicationsRegularlyFrequentlyMention.text,
+          hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues:
+              hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues.text,
+          didYourChildDelayInAnyOfTheseDevelopmentalStages: didYourChildDelayInAnyOfTheseDevelopmentalStages.text,
+          checkTheSkillsThatYourChildAchievesIndependently: checkTheSkillsThatYourChildAchievesIndependently.text,
+          howDoesYourChildCommunicateMostOfTheTime: howDoesYourChildCommunicateMostOfTheTime.text,
+          recentlyYourChildsSpeechIs: recentlyYourChildsSpeechIs.text,
+          whenYourChildDidProduceHisFirstWord: whenYourChildDidProduceHisFirstWord.text,
+          doesTheChildUseAnyUtterancesInHisSpeechGiveExample: doesTheChildUseAnyUtterancesInHisSpeechGiveExample.text,
+          describeYourChildReceptiveLanguage: describeYourChildReceptiveLanguage.text,
+          describeYourChildExpressiveLanguage: describeYourChildExpressiveLanguage.text,
+          describeYourChildBehavior: describeYourChildBehavior.text,
+          describeYourChildFocusAndAttention: describeYourChildFocusAndAttention.text,
+          describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay:
+              describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay.text,
+          howMuchTimeYourChildSpendsOnTVSmartDevices: howMuchTimeYourChildSpendsOnTVSmartDevices.text,
+          wouldYouLikeToAddAnyAdditionalInformation: wouldYouLikeToAddAnyAdditionalInformation.text,
+        );
+
+        await _profiles.doc(user.email).set(theJSON);
 
         return true;
       } else {
-        signupStatus.value = signUpStatusEnum.faild;
+        signupStatus.value = SignUpStatusEnum.faild;
         return false;
       }
     } catch (error) {
       print("--" + error.toString());
-      signupStatus.value = signUpStatusEnum.faild;
+      signupStatus.value = SignUpStatusEnum.faild;
       return false;
     }
+  }
+
+  Future<void> _saveValuesInMemory({required String userName, required String password, required String uid}) async {
+    await storage.deleteAll();
+
+    await storage.write(key: AppConstants.biometricU, value: userName);
+    await storage.write(key: AppConstants.biometricP, value: password);
+    await storage.write(key: AppConstants.uid, value: uid);
   }
 
   double valueOfProgressBar() {

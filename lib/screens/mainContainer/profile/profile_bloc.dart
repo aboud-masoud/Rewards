@@ -3,11 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rewards_app/main.dart';
+import 'package:rewards_app/utils/app_constants.dart';
 
 class ProfileBloc {
   final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
-  DocumentReference profilesgRef = FirebaseFirestore.instance.collection('profiles').doc();
+  // DocumentReference profilesgRef = FirebaseFirestore.instance.collection('profiles').doc();
   ValueNotifier<XFile?> imageValue = ValueNotifier<XFile?>(null);
   final ImagePicker picker = ImagePicker();
 

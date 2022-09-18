@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rewards_app/main.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_bloc.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/utils/global_value.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
@@ -63,8 +65,7 @@ class ProfileScreen extends StatelessWidget {
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
               if (streamSnapshot.hasData) {
                 final DocumentSnapshot documentSnapshot =
-                    streamSnapshot.data!.docs.singleWhere((element) => element.id == "vGPSTSnoMafgJ8z8sVKHVZefFxU2");
-
+                    streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -230,7 +231,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           const SizedBox(height: 6),
           CustomText(
-            title: desc,
+            title: desc == "" ? "Empty" : desc,
             style: CustomTextStyle().medium(size: 14, color: const Color(0xff404040)),
           ),
         ],
@@ -254,12 +255,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
-                    _bloc.imageValue.value = value;
-                    await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
-                      Navigator.of(context).pop();
-                    });
-                  });
+                  // await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
+                  //   _bloc.imageValue.value = value;
+                  //   await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
+                  //     Navigator.of(context).pop();
+                  //   });
+                  // });
                 },
                 child: Center(
                   child: CustomText(
@@ -277,12 +278,12 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
-                    _bloc.imageValue.value = value;
-                    await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
-                      Navigator.of(context).pop();
-                    });
-                  });
+                  // _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
+                  //   _bloc.imageValue.value = value;
+                  //   await _bloc.saveImages(File(value!.path), _bloc.profilesgRef).then((value) {
+                  //     Navigator.of(context).pop();
+                  //   });
+                  // });
                 },
                 child: Center(
                   child: CustomText(

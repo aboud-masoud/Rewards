@@ -9,6 +9,7 @@ import 'package:rewards_app/models/authentication_models.dart';
 import 'package:rewards_app/screens/mainContainer/main_container.dart';
 import 'package:rewards_app/utils/app_constants.dart';
 import 'package:rewards_app/utils/authentication_service.dart';
+import 'package:rewards_app/utils/global_value.dart';
 import 'package:rewards_app/utils/shared_methods.dart';
 
 enum loginStatusEnum { faild, success, non, inProgress }
@@ -58,7 +59,7 @@ class LoginBloc {
         loginStatus.value = loginStatusEnum.success;
         await _saveValuesInMemory(userName: email, password: password, uid: user.uid);
         print(user.email);
-        print(user.uid);
+        userEmail = user.email!;
 
         Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
           return const MainContainer();
