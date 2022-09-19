@@ -73,17 +73,64 @@ class PointScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height - 255,
-            color: Colors.red,
             child: ListView.builder(
                 itemCount: 50,
                 itemBuilder: (ctx, index) {
-                  return Container();
+                  return tile(
+                      context: ctx,
+                      title:
+                          "React to the posts on Amwaj’s public pages on face-book and Instagram.",
+                      numberOfPoints: "1",
+                      imageIcon: "assets/iconz/videoIcon.png");
                 }),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget tile(
+      {required BuildContext context,
+      required String title,
+      required String numberOfPoints,
+      required String imageIcon}) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 70,
+        color: const Color(0xfff2f2f2),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 8, right: 8),
+          child: Row(
+            children: [
+              Image.asset(
+                imageIcon,
+                width: 18,
+              ),
+              const SizedBox(width: 8),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 120,
+                child: CustomText(
+                  title: title,
+                  maxLins: 2,
+                  shouldFit: false,
+                  style: CustomTextStyle()
+                      .medium(size: 12, color: const Color(0xff3a4da7)),
+                ),
+              ),
+              Expanded(child: Container()),
+              CustomText(
+                title: numberOfPoints,
+                style: CustomTextStyle()
+                    .medium(size: 12, color: const Color(0xff3a4da7)),
+              ),
+              const SizedBox(width: 16),
+            ],
+          ),
+        ),
       ),
     );
   }
