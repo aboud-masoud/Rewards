@@ -30,7 +30,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "assets/images/logo.png",
-                width: 48,
+                width: 40,
               ),
               const SizedBox(
                 width: 20,
@@ -40,14 +40,17 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCenter,
-                    style: CustomTextStyle().semibold(size: 16, color: const Color(0xff3bbc28)),
+                    style: CustomTextStyle()
+                        .semibold(size: 16, color: const Color(0xff3bbc28)),
                   ),
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCentersubtitle,
-                    style: CustomTextStyle().medium(size: 12, color: const Color(0xff707070)),
+                    style: CustomTextStyle()
+                        .medium(size: 12, color: const Color(0xff707070)),
                   ),
                 ],
-              )
+              ),
+              Expanded(child: Container())
             ],
           ),
         ),
@@ -81,7 +84,8 @@ class HomeScreen extends StatelessWidget {
                 title: "amwaj.centre@outlook.com",
                 imagename: "assets/images/email.png",
               ),
-              onTap: () => SharedMethods().sendEmail("amwaj.centre@outlook.com"),
+              onTap: () =>
+                  SharedMethods().sendEmail("amwaj.centre@outlook.com"),
             ),
             const SeperatorView(),
             const FollowView(),

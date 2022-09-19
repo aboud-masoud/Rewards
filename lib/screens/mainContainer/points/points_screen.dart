@@ -39,7 +39,8 @@ class PointsScreen extends StatelessWidget {
               Center(
                 child: CustomText(
                   title: AppLocalizations.of(context)!.tasks,
-                  style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+                  style: CustomTextStyle()
+                      .semibold(size: 16, color: const Color(0xff707070)),
                 ),
               ),
               Expanded(child: Container()),
@@ -48,36 +49,36 @@ class PointsScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            color: const Color(0xff3a4da7),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: Row(
-                children: [
-                  CustomText(
-                    title: AppLocalizations.of(context)!.task,
-                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
-                  ),
-                  Expanded(child: Container()),
-                  CustomText(
-                    title: AppLocalizations.of(context)!.tasks,
-                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(itemBuilder: (ctx, index) {
-              return Container();
-            }),
-          )
-        ],
-      ),
+      // body: Column(
+      //   children: [
+      //     Container(
+      //       height: 50,
+      //       width: MediaQuery.of(context).size.width,
+      //       color: const Color(0xff3a4da7),
+      //       child: Padding(
+      //         padding: const EdgeInsets.only(left: 16, right: 16),
+      //         child: Row(
+      //           children: [
+      //             CustomText(
+      //               title: AppLocalizations.of(context)!.task,
+      //               style: CustomTextStyle().medium(size: 12, color: Colors.white),
+      //             ),
+      //             Expanded(child: Container()),
+      //             CustomText(
+      //               title: AppLocalizations.of(context)!.tasks,
+      //               style: CustomTextStyle().medium(size: 12, color: Colors.white),
+      //             )
+      //           ],
+      //         ),
+      //       ),
+      //     ),
+      //     Expanded(
+      //       child: ListView.builder(itemBuilder: (ctx, index) {
+      //         return Container();
+      //       }),
+      //     )
+      //   ],
+      // ),
     );
   }
 }

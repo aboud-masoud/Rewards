@@ -1,32 +1,23 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:typed_data';
-
 import 'package:rewards_app/utils/global_value.dart';
 
 class ProfileBloc {
   final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
-  // DocumentReference profilesgRef = FirebaseFirestore.instance.collection('profiles').doc();
   ValueNotifier<XFile?> imageValue = ValueNotifier<XFile?>(null);
   final ImagePicker picker = ImagePicker();
 
   Future<void> uploadFile(
-    Uint8List filePath,
+    File filePath,
   ) async {
-    String url;
+    // String url;
 
     try {
-      final metadata = SettableMetadata(
-        contentType: 'image/jpeg',
-        customMetadata: {'picked-file-path': filePath.toString()},
-      );
-      Reference _storage = FirebaseStorage.instance.ref(userEmail);
-      UploadTask uploadTaskSnapshot = _storage.putData(filePath, metadata);
-      // var imageUri = await uploadTaskSnapshot.ref.getDownloadURL();
-      // url = imageUri.toString();
-      // await FirebaseStorage.instance.ref().child(userEmail).putData(filePath);
+      var snapshot = await FirebaseStorage.instance.ref().child('images/$userEmail').putFile(filePath);
     } catch (e) {
       print(e);
     }

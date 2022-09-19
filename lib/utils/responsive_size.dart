@@ -2,21 +2,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
-enum SelectedDevice { PHONE, TABLET, BROWSER }
+enum SelectedDevice { phone, tablet, browser }
 
 class ResponsiveTextSize {
   double textSize(double? size) {
+    double theSize;
     if (size == null) {
-      size = 14;
+      theSize = 14;
+    } else {
+      theSize = size;
     }
-    if (Responsive.selectedDevice() == SelectedDevice.TABLET) {
-      return size + 5;
+    if (Responsive.selectedDevice() == SelectedDevice.tablet) {
+      return theSize + 5;
     }
 
     if (Responsive.isSmall()) {
-      return size - 3;
+      return theSize - 3;
     } else {
-      return size;
+      return theSize;
     }
   }
 }
@@ -29,7 +32,7 @@ class Responsive extends StatelessWidget {
   static double get width => size.width;
   static double get height => size.height;
 
-  Responsive({
+  const Responsive({
     Key? key,
     this.small,
     this.large,
@@ -37,26 +40,29 @@ class Responsive extends StatelessWidget {
 
   // static bool isSmall(BuildContext context) => MediaQuery.of(context).size.height <= 600;
   static bool isSmall() {
-    return MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height <= 700;
+    return MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+            .size
+            .height <=
+        700;
   }
 
   static SelectedDevice selectedDevice() {
     if (kIsWeb) {
-      return SelectedDevice.BROWSER;
+      return SelectedDevice.browser;
     }
     if (devicePixelRatio < 2 && (width >= 1000 || height >= 1000)) {
-      return SelectedDevice.TABLET;
+      return SelectedDevice.tablet;
     } else if (devicePixelRatio == 2 && (width >= 1920 || height >= 1920)) {
-      return SelectedDevice.TABLET;
+      return SelectedDevice.tablet;
     } else {
-      return SelectedDevice.PHONE;
+      return SelectedDevice.phone;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     //final Size _size = MediaQuery.of(context).size;
-    if (selectedDevice() == SelectedDevice.PHONE) {
+    if (selectedDevice() == SelectedDevice.phone) {
       return small!;
     } else {
       return large!;

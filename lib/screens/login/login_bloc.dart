@@ -12,26 +12,28 @@ import 'package:rewards_app/utils/authentication_service.dart';
 import 'package:rewards_app/utils/global_value.dart';
 import 'package:rewards_app/utils/shared_methods.dart';
 
-enum loginStatusEnum { faild, success, non, inProgress }
+enum LoginStatusEnum { faild, success, non, inProgress }
 
 class LoginBloc {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  ValueNotifier<loginStatusEnum> loginStatus = ValueNotifier<loginStatusEnum>(loginStatusEnum.non);
+  ValueNotifier<LoginStatusEnum> loginStatus =
+      ValueNotifier<LoginStatusEnum>(LoginStatusEnum.non);
 
   ValueNotifier<bool> showPasswordLetters = ValueNotifier<bool>(false);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late bool biometricStatus;
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
-      ValueNotifier<AuthenticationBiometricType>(AuthenticationBiometricType(isAvailable: false, type: null));
+      ValueNotifier<AuthenticationBiometricType>(
+          AuthenticationBiometricType(isAvailable: false, type: null));
   StreamController<bool> buildController = StreamController<bool>.broadcast();
   final storage = FlutterSecureStorage();
 
   void validateFields() {
-    loginStatus.value = loginStatusEnum.non;
+    loginStatus.value = LoginStatusEnum.non;
 
     if (emailController.text.isEmpty) {
       fieldsValidation.value = false;
@@ -45,8 +47,10 @@ class LoginBloc {
   }
 
   Future<bool> signInWithEmailAndPassword(
-      {required BuildContext context, required String email, required String password}) async {
-    loginStatus.value = loginStatusEnum.inProgress;
+      {required BuildContext context,
+      required String email,
+      required String password}) async {
+    loginStatus.value = LoginStatusEnum.inProgress;
     final User? user;
     try {
       user = (await _auth.signInWithEmailAndPassword(
@@ -56,23 +60,25 @@ class LoginBloc {
           .user;
 
       if (user != null) {
-        loginStatus.value = loginStatusEnum.success;
-        await _saveValuesInMemory(userName: email, password: password, uid: user.uid);
+        loginStatus.value = LoginStatusEnum.success;
+        await _saveValuesInMemory(
+            userName: email, password: password, uid: user.uid);
         print(user.email);
         userEmail = user.email!;
 
-        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (ctx) {
           return const MainContainer();
         }), (route) => false);
 
         return true;
       } else {
-        loginStatus.value = loginStatusEnum.faild;
+        loginStatus.value = LoginStatusEnum.faild;
         return false;
       }
     } catch (error) {
       print("--" + error.toString());
-      loginStatus.value = loginStatusEnum.faild;
+      loginStatus.value = LoginStatusEnum.faild;
       return false;
     }
   }
@@ -99,7 +105,8 @@ class LoginBloc {
 
   Future<bool> _checkAuthentication(TargetPlatform platform) async {
     if (await AuthenticationService().isBiometricAvailable()) {
-      biometricResultNotifier.value = await (AuthenticationService().getAvailableBiometricTypes(platform));
+      biometricResultNotifier.value =
+          await (AuthenticationService().getAvailableBiometricTypes(platform));
       buildController.sink.add(true);
       return true;
     }
@@ -110,14 +117,20 @@ class LoginBloc {
     final authenticationService = AuthenticationService();
 
     if (await authenticationService.isBiometricAvailable()) {
-      if (await authenticationService.shouldAllowBiometricAuthenticationToContinue(Theme.of(context).platform)) {
+      if (await authenticationService
+          .shouldAllowBiometricAuthenticationToContinue(
+              Theme.of(context).platform)) {
         // continue with authentication
-        final authentication = await authenticationService.authenticateUser("Please use your biometric signature");
+        final authentication = await authenticationService
+            .authenticateUser("Please use your biometric signature");
         if (authentication.success) {
-          var biometricU = await storage.read(key: AppConstants.biometricU) ?? "";
-          var biometricP = await storage.read(key: AppConstants.biometricP) ?? "";
+          var biometricU =
+              await storage.read(key: AppConstants.biometricU) ?? "";
+          var biometricP =
+              await storage.read(key: AppConstants.biometricP) ?? "";
 
-          return await signInWithEmailAndPassword(context: context, email: biometricU, password: biometricP);
+          return await signInWithEmailAndPassword(
+              context: context, email: biometricU, password: biometricP);
         }
       }
     }
@@ -125,7 +138,10 @@ class LoginBloc {
     return false;
   }
 
-  Future<void> _saveValuesInMemory({required String userName, required String password, required String uid}) async {
+  Future<void> _saveValuesInMemory(
+      {required String userName,
+      required String password,
+      required String uid}) async {
     var biometric = await storage.read(key: AppConstants.biometricU);
     if (userName == biometric) {
       await storage.delete(key: AppConstants.biometricU);

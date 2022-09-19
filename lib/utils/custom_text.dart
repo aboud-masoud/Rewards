@@ -9,7 +9,7 @@ class CustomText extends StatelessWidget {
   final bool shouldFit;
   final bool shouldBeCapitalized;
 
-  CustomText({
+  const CustomText({
     required this.title,
     required this.style,
     this.maxLins = 1,

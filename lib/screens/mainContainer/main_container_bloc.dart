@@ -6,6 +6,11 @@ import 'package:rewards_app/screens/mainContainer/home/home_screen.dart';
 import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
+// import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
+// import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
+// // import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
+// import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
+// import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
 
 enum SelectedTab { home, profile, rewards, score, none }
 
@@ -15,7 +20,8 @@ class MainContainerBloc {
 
   int currentTabIndex = 0;
   int previousTabIndex = 0;
-  StreamController<SelectedTab?> currentTabIndexController = StreamController<SelectedTab?>.broadcast();
+  StreamController<SelectedTab?> currentTabIndexController =
+      StreamController<SelectedTab?>.broadcast();
 
   List<Widget> navTabs = [
     HomeScreen(),
@@ -26,14 +32,15 @@ class MainContainerBloc {
 
   final tabs = [
     MyTab(
-        imageNotSelected: Image.asset(
-          'assets/images/Home_icon.png',
-          scale: 4,
-        ),
-        imageSelected: Image.asset(
-          'assets/images/Home_icon_selected.png',
-          scale: 3,
-        )),
+      imageNotSelected: Image.asset(
+        'assets/images/Home_icon.png',
+        scale: 4,
+      ),
+      imageSelected: Image.asset(
+        'assets/images/Home_icon_selected.png',
+        scale: 3,
+      ),
+    ),
     MyTab(
       imageNotSelected: Image.asset(
         'assets/images/Profile_icon.png',
@@ -100,7 +107,8 @@ class MainContainerBloc {
     if (currentTabIndex != index) {
       previousTabIndex = currentTabIndex;
       currentTabIndex = index;
-      currentTabIndexController.sink.add(getSelectedTabDependOnIndex(currentTabIndex));
+      currentTabIndexController.sink
+          .add(getSelectedTabDependOnIndex(currentTabIndex));
     }
     return Future.value(true);
   }

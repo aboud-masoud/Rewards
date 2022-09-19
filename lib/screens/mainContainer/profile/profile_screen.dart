@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -261,9 +260,8 @@ class ProfileScreen extends StatelessWidget {
                   await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
                     _bloc.imageValue.value = value;
                     final file = File(value!.path);
-                    Uint8List bytes = file.readAsBytesSync();
 
-                    await _bloc.uploadFile(bytes).then((value) {
+                    await _bloc.uploadFile(file).then((value) {
                       Navigator.of(context).pop();
                     });
                   });
@@ -287,9 +285,7 @@ class ProfileScreen extends StatelessWidget {
                   _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
                     _bloc.imageValue.value = value;
                     final file = File(value!.path);
-                    Uint8List bytes = file.readAsBytesSync();
-
-                    await _bloc.uploadFile(bytes).then((value) {
+                    await _bloc.uploadFile(file).then((value) {
                       Navigator.of(context).pop();
                     });
                   });
