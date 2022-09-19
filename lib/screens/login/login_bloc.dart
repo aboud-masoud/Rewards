@@ -142,17 +142,12 @@ class LoginBloc {
       {required String userName,
       required String password,
       required String uid}) async {
-    var biometric = await storage.read(key: AppConstants.biometricU);
-    if (userName == biometric) {
-      await storage.delete(key: AppConstants.biometricU);
-      await storage.delete(key: AppConstants.biometricP);
-    } else {
-      await storage.deleteAll();
-    }
+    await storage.deleteAll();
 
     await storage.write(key: AppConstants.biometricU, value: userName);
     await storage.write(key: AppConstants.biometricP, value: password);
     await storage.write(key: AppConstants.uid, value: uid);
+    await storage.write(key: AppConstants.deviceLanguage, value: "en");
   }
 
   Future refreshAppWithLanguageCode(BuildContext context, String code) async {

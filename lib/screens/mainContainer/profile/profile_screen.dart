@@ -43,7 +43,8 @@ class ProfileScreen extends StatelessWidget {
               ),
               CustomText(
                 title: AppLocalizations.of(context)!.profile,
-                style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+                style: CustomTextStyle()
+                    .semibold(size: 16, color: const Color(0xff707070)),
               ),
               IconButton(
                 onPressed: () {
@@ -65,8 +66,9 @@ class ProfileScreen extends StatelessWidget {
             stream: _bloc.profile.snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
               if (streamSnapshot.hasData) {
-                final DocumentSnapshot documentSnapshot =
-                    streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
+                final DocumentSnapshot documentSnapshot = streamSnapshot
+                    .data!.docs
+                    .singleWhere((element) => element.id == userEmail);
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -76,7 +78,8 @@ class ProfileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: const Color(0xffe8ebef)),
-                        borderRadius: const BorderRadius.all(Radius.circular(50)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(50)),
                       ),
                       child: Stack(
                         children: [
@@ -87,17 +90,29 @@ class ProfileScreen extends StatelessWidget {
                                   radius: 80,
                                   backgroundColor: Colors.white,
                                   child: Padding(
-                                    padding: const EdgeInsets.all(4), // Border radius
-                                    child: ClipOval(
-                                      child: snapshot == null
-                                          ? Image.asset("assets/images/blank-profile-picture.png")
-                                          // : Image.network('gs://amwaj-rewards.appspot.com/blank-profile-picture.png')
-                                          : Image.file(
-                                              File(snapshot.path),
-                                              height: 90,
-                                              fit: BoxFit.fill,
-                                            ),
-                                    ),
+                                    padding: const EdgeInsets.all(
+                                        4), // Border radius
+                                    child: FutureBuilder<String>(
+                                        future: _bloc.getDownloadURL(),
+                                        initialData: "",
+                                        builder: (context, snapShot) {
+                                          return ClipOval(
+                                            child: snapShot.data == ""
+                                                ? Image.asset(
+                                                    "assets/images/blank-profile-picture.png",
+                                                    fit: BoxFit.fill)
+                                                : FadeInImage(
+                                                    fit: BoxFit.fill,
+                                                    height: 90,
+                                                    image: NetworkImage(
+                                                        snapShot.data!),
+                                                    placeholder:
+                                                        const AssetImage(
+                                                      "assets/images/blank-profile-picture.png",
+                                                    ),
+                                                  ),
+                                          );
+                                        }),
                                   ),
                                 );
                               }),
@@ -109,19 +124,24 @@ class ProfileScreen extends StatelessWidget {
                               height: 40,
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                border: Border.all(color: const Color(0xffe8ebef)),
-                                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                border:
+                                    Border.all(color: const Color(0xffe8ebef)),
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
                               ),
                               child: CircleAvatar(
                                 radius: 40,
                                 backgroundColor: Colors.white,
                                 child: Padding(
-                                  padding: const EdgeInsets.all(4), // Border radius
+                                  padding:
+                                      const EdgeInsets.all(4), // Border radius
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: const Color(0xff419aff),
-                                      border: Border.all(color: const Color(0xff419aff)),
-                                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                      border: Border.all(
+                                          color: const Color(0xff419aff)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(20)),
                                     ),
                                     child: IconButton(
                                       onPressed: () async {
@@ -144,14 +164,16 @@ class ProfileScreen extends StatelessWidget {
                     Center(
                       child: CustomText(
                         title: documentSnapshot["full name"],
-                        style: CustomTextStyle().bold(size: 22, color: const Color(0xff3a4da7)),
+                        style: CustomTextStyle()
+                            .bold(size: 22, color: const Color(0xff3a4da7)),
                       ),
                     ),
                     const SizedBox(height: 4),
                     Center(
                       child: CustomText(
                         title: documentSnapshot["email"],
-                        style: CustomTextStyle().medium(size: 11, color: const Color(0xff707070)),
+                        style: CustomTextStyle()
+                            .medium(size: 11, color: const Color(0xff707070)),
                       ),
                     ),
                     const SizedBox(height: 50),
@@ -162,50 +184,71 @@ class ProfileScreen extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: const Color(0xffe8ebef)),
-                          borderRadius: const BorderRadius.all(Radius.circular(10)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 24),
                             containtView(
-                                title: AppLocalizations.of(context)!.clientFullName, desc: documentSnapshot["full name"]),
+                                title: AppLocalizations.of(context)!
+                                    .clientFullName,
+                                desc: documentSnapshot["full name"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
                             ),
                             containtView(
-                                title: AppLocalizations.of(context)!.dateofBirth, desc: documentSnapshot["Date Of Birth"]),
+                                title:
+                                    AppLocalizations.of(context)!.dateofBirth,
+                                desc: documentSnapshot["Date Of Birth"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
-                            ),
-                            containtView(title: AppLocalizations.of(context)!.nationality, desc: documentSnapshot["Nationality"]),
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
-                            ),
-                            containtView(title: AppLocalizations.of(context)!.gender, desc: documentSnapshot["Gender"]),
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
                             ),
                             containtView(
-                                title: AppLocalizations.of(context)!.firstEvaluationDate,
+                                title:
+                                    AppLocalizations.of(context)!.nationality,
+                                desc: documentSnapshot["Nationality"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.gender,
+                                desc: documentSnapshot["Gender"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!
+                                    .firstEvaluationDate,
                                 desc: documentSnapshot["1 st Evaluation Date"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
                             ),
                             containtView(
-                                title: AppLocalizations.of(context)!.firstTherapeuticDate,
-                                desc: documentSnapshot["1 st Therapeutic Session Date"]),
+                                title: AppLocalizations.of(context)!
+                                    .firstTherapeuticDate,
+                                desc: documentSnapshot[
+                                    "1 st Therapeutic Session Date"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                              child: Container(
+                                  height: 1, color: const Color(0xffe8ebef)),
                             ),
                             containtView(
-                                title: AppLocalizations.of(context)!.therapeuticName, desc: documentSnapshot["Therapeutic Name"]),
+                                title: AppLocalizations.of(context)!
+                                    .therapeuticName,
+                                desc: documentSnapshot["Therapeutic Name"]),
                             const SizedBox(height: 24),
                           ],
                         ),
@@ -229,12 +272,14 @@ class ProfileScreen extends StatelessWidget {
         children: [
           CustomText(
             title: title,
-            style: CustomTextStyle().medium(size: 11, color: const Color(0xffababab)),
+            style: CustomTextStyle()
+                .medium(size: 11, color: const Color(0xffababab)),
           ),
           const SizedBox(height: 6),
           CustomText(
             title: desc == "" ? "Empty" : desc,
-            style: CustomTextStyle().medium(size: 14, color: const Color(0xff404040)),
+            style: CustomTextStyle()
+                .medium(size: 14, color: const Color(0xff404040)),
           ),
         ],
       ),
@@ -257,7 +302,9 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  await _bloc.picker.pickImage(source: ImageSource.camera).then((value) async {
+                  await _bloc.picker
+                      .pickImage(source: ImageSource.camera)
+                      .then((value) async {
                     _bloc.imageValue.value = value;
                     final file = File(value!.path);
 
@@ -269,7 +316,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: CustomText(
                     title: AppLocalizations.of(context)!.camera,
-                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                    style: CustomTextStyle()
+                        .medium(size: 16, color: const Color(0xffababab)),
                   ),
                 ),
               ),
@@ -282,7 +330,9 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
-                  _bloc.picker.pickImage(source: ImageSource.gallery).then((value) async {
+                  _bloc.picker
+                      .pickImage(source: ImageSource.gallery)
+                      .then((value) async {
                     _bloc.imageValue.value = value;
                     final file = File(value!.path);
                     await _bloc.uploadFile(file).then((value) {
@@ -293,7 +343,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: CustomText(
                     title: AppLocalizations.of(context)!.galary,
-                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                    style: CustomTextStyle()
+                        .medium(size: 16, color: const Color(0xffababab)),
                   ),
                 ),
               ),
@@ -311,7 +362,8 @@ class ProfileScreen extends StatelessWidget {
                 child: Center(
                   child: CustomText(
                     title: AppLocalizations.of(context)!.cancel,
-                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffababab)),
+                    style: CustomTextStyle()
+                        .medium(size: 16, color: const Color(0xffababab)),
                   ),
                 ),
               ),

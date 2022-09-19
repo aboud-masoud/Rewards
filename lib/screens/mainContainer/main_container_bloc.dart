@@ -3,14 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/models/tabs.dart';
 import 'package:rewards_app/screens/mainContainer/home/home_screen.dart';
-import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
+import 'package:rewards_app/screens/mainContainer/point/point_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
-// import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
-// import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
-// // import 'package:rewards_app/screens/mainContainer/points/points_screen.dart';
-// import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
-// import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
 
 enum SelectedTab { home, profile, rewards, score, none }
 
@@ -26,7 +21,7 @@ class MainContainerBloc {
   List<Widget> navTabs = [
     HomeScreen(),
     ProfileScreen(),
-    PointsScreen(),
+    PointScreen(),
     ScoreScreen(),
   ];
 

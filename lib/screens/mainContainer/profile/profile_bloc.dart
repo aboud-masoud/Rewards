@@ -7,37 +7,48 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
 class ProfileBloc {
-  final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
+  final CollectionReference profile =
+      FirebaseFirestore.instance.collection('profiles');
   ValueNotifier<XFile?> imageValue = ValueNotifier<XFile?>(null);
   final ImagePicker picker = ImagePicker();
 
   Future<void> uploadFile(
     File filePath,
   ) async {
-    // String url;
-
     try {
-      var snapshot = await FirebaseStorage.instance.ref().child('images/$userEmail').putFile(filePath);
+      try {
+        deleteFile();
+      } catch (e) {
+        print("Image not Exsist");
+      }
+
+      await FirebaseStorage.instance
+          .ref()
+          .child('images/$userEmail')
+          .putFile(filePath);
     } catch (e) {
       print(e);
     }
   }
 
-  // Future<String> getDownloadURL() async {
-  //   try {
-  //     return await FirebaseStorage.instance.ref().child(userEmail).getDownloadURL();
-  //   } catch (e) {
-  //     return "";
-  //   }
-  // }
+  Future<String> getDownloadURL() async {
+    try {
+      return await FirebaseStorage.instance
+          .ref()
+          .child('images/$userEmail')
+          .getDownloadURL();
+    } catch (e) {
+      return "";
+    }
+  }
 
-  // Future<void> deleteFile() async {
-  //   try {
-  //     await FirebaseStorage.instance.ref().child(userEmail).delete();
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  Future<void> deleteFile() async {
+    try {
+      await FirebaseStorage.instance.ref().child('images/$userEmail').delete();
+    } catch (e) {
+      print(e);
+    }
+  }
 
   // Future<String> uploadFile(File image) async {
   //   // Reference storageReference = FirebaseStorage.instance.ref().child('profile/${image.path}');

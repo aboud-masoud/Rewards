@@ -20,21 +20,16 @@ class _MainContainerState extends State<MainContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: StreamBuilder<SelectedTab?>(
-          initialData: _bloc.getSelectedTabDependOnIndex(_bloc.currentTabIndex),
-          stream: _bloc.currentTabIndexController.stream,
-          builder: (context, snapshot) {
-            return IndexedStack(
+    return StreamBuilder<SelectedTab?>(
+        initialData: _bloc.getSelectedTabDependOnIndex(_bloc.currentTabIndex),
+        stream: _bloc.currentTabIndexController.stream,
+        builder: (context, snapshot) {
+          return Scaffold(
+            body: IndexedStack(
               index: _bloc.getSelectedIndexDependOnTab(snapshot.data),
               children: _bloc.navTabs,
-            );
-          }),
-      bottomNavigationBar: StreamBuilder<SelectedTab?>(
-          initialData: _bloc.getSelectedTabDependOnIndex(_bloc.currentTabIndex),
-          stream: _bloc.currentTabIndexController.stream,
-          builder: (context, snapshot) {
-            return BottomNavigationBar(
+            ),
+            bottomNavigationBar: BottomNavigationBar(
               iconSize: 15,
               backgroundColor: Colors.white,
               unselectedItemColor: const Color(0xffababab),
@@ -91,8 +86,8 @@ class _MainContainerState extends State<MainContainer> {
                   label: AppLocalizations.of(context)!.score,
                 ),
               ],
-            );
-          }),
-    );
+            ),
+          );
+        });
   }
 }
