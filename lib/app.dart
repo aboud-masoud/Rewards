@@ -13,7 +13,8 @@ class MyApp extends StatefulWidget {
   @override
   MyAppState createState() => MyAppState();
 
-  static MyAppState? of(BuildContext context) => context.findAncestorStateOfType<MyAppState>();
+  static MyAppState? of(BuildContext context) =>
+      context.findAncestorStateOfType<MyAppState>();
 }
 
 class MyAppState extends State<MyApp> {
@@ -34,7 +35,8 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         initialData: "en",
-        future: const FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
+        future:
+            const FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
         builder: (context, snapshot) {
           languageSelected.value = snapshot.data.toString();
           return MaterialApp(

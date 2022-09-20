@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rewards_app/app.dart';
+import 'package:rewards_app/models/points_model.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/point/point_bloc.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
+import 'package:rewards_app/utils/global_value.dart';
 
 class PointScreen extends StatelessWidget {
   PointScreen({super.key});
@@ -73,20 +77,41 @@ class PointScreen extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height - 255,
-            child: ListView.builder(
-                itemCount: 50,
-                itemBuilder: (ctx, index) {
-                  return tile(
-                      context: ctx,
-                      title:
-                          "React to the posts on Amwaj’s public pages on face-book and Instagram.",
-                      numberOfPoints: "1",
-                      imageIcon: "assets/iconz/videoIcon.png");
-                }),
-          ),
+          StreamBuilder(
+              stream: _bloc.points.snapshots(),
+              builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                if (streamSnapshot.hasData) {
+                  List<QueryDocumentSnapshot<Object?>> documentSnapshot =
+                      streamSnapshot.data!.docs;
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height - 255,
+                    child: ListView.builder(
+                        itemCount: documentSnapshot.length,
+                        itemBuilder: (ctx, index) {
+                          Points item = Points.fromJson(documentSnapshot[index]
+                              .data() as Map<String, dynamic>);
+                          return tile(
+                              context: ctx,
+                              title: languageSelected.value == "en"
+                                  ? item.stringEn ?? ""
+                                  : item.stringAr ?? "",
+                              numberOfPoints: item.points ?? "",
+                              imageIcon: (item.image != null
+                                  ? "assets/iconz/${item.image}.png"
+                                  : "assets/iconz/videoIcon.png"),
+                              desc: languageSelected.value == "en"
+                                  ? item.descEn ?? ""
+                                  : item.descAr ?? "",
+                              lessThan70: item.lessThan70 ?? "",
+                              between7090: item.between7080 ?? "",
+                              moreThan: item.more90 ?? "");
+                        }),
+                  );
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
         ],
       ),
     );
@@ -96,11 +121,15 @@ class PointScreen extends StatelessWidget {
       {required BuildContext context,
       required String title,
       required String numberOfPoints,
-      required String imageIcon}) {
+      required String imageIcon,
+      required String desc,
+      required String lessThan70,
+      required String between7090,
+      required String moreThan}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(left: 8, right: 8, top: 4, bottom: 4),
       child: Container(
-        height: 70,
+        height: desc != "" ? 140 : 50,
         color: const Color(0xfff2f2f2),
         child: Padding(
           padding: const EdgeInsets.only(left: 8, right: 8),
@@ -113,20 +142,100 @@ class PointScreen extends StatelessWidget {
               const SizedBox(width: 8),
               SizedBox(
                 width: MediaQuery.of(context).size.width - 120,
-                child: CustomText(
-                  title: title,
-                  maxLins: 2,
-                  shouldFit: false,
-                  style: CustomTextStyle()
-                      .medium(size: 12, color: const Color(0xff3a4da7)),
-                ),
+                child: desc != ""
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomText(
+                            title: title,
+                            maxLins: 2,
+                            shouldFit: false,
+                            style: CustomTextStyle().medium(
+                                size: 12, color: const Color(0xff3a4da7)),
+                          ),
+                          const SizedBox(height: 5),
+                          CustomText(
+                            title: desc,
+                            maxLins: 2,
+                            shouldFit: false,
+                            style: CustomTextStyle().regular(
+                                size: 10, color: const Color(0xff404040)),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            color: const Color(0xff419aff),
+                            width: MediaQuery.of(context).size.width - 100,
+                            height: 30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomText(
+                                  title: "Less than 70%",
+                                  shouldFit: false,
+                                  style: CustomTextStyle()
+                                      .regular(size: 10, color: Colors.white),
+                                ),
+                                CustomText(
+                                  title: "70% - 89",
+                                  shouldFit: false,
+                                  style: CustomTextStyle()
+                                      .regular(size: 10, color: Colors.white),
+                                ),
+                                CustomText(
+                                  title: "90% or more",
+                                  shouldFit: false,
+                                  style: CustomTextStyle()
+                                      .regular(size: 10, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            color: const Color(0xf0419aff).withOpacity(0.2),
+                            width: MediaQuery.of(context).size.width - 100,
+                            height: 30,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                CustomText(
+                                  title: lessThan70,
+                                  shouldFit: false,
+                                  style: CustomTextStyle().regular(
+                                      size: 10, color: const Color(0xff404040)),
+                                ),
+                                CustomText(
+                                  title: between7090,
+                                  shouldFit: false,
+                                  style: CustomTextStyle().regular(
+                                      size: 10, color: const Color(0xff404040)),
+                                ),
+                                CustomText(
+                                  title: moreThan,
+                                  shouldFit: false,
+                                  style: CustomTextStyle().regular(
+                                      size: 10, color: const Color(0xff404040)),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      )
+                    : CustomText(
+                        title: title,
+                        maxLins: 2,
+                        shouldFit: false,
+                        style: CustomTextStyle()
+                            .medium(size: 12, color: const Color(0xff3a4da7)),
+                      ),
               ),
               Expanded(child: Container()),
-              CustomText(
-                title: numberOfPoints,
-                style: CustomTextStyle()
-                    .medium(size: 12, color: const Color(0xff3a4da7)),
-              ),
+              numberOfPoints != ""
+                  ? CustomText(
+                      title: numberOfPoints,
+                      style: CustomTextStyle()
+                          .medium(size: 12, color: const Color(0xff3a4da7)),
+                    )
+                  : Container(),
               const SizedBox(width: 16),
             ],
           ),

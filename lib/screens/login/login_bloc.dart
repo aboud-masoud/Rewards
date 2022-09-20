@@ -147,7 +147,8 @@ class LoginBloc {
     await storage.write(key: AppConstants.biometricU, value: userName);
     await storage.write(key: AppConstants.biometricP, value: password);
     await storage.write(key: AppConstants.uid, value: uid);
-    await storage.write(key: AppConstants.deviceLanguage, value: "en");
+    await storage.write(
+        key: AppConstants.deviceLanguage, value: languageSelected.value);
   }
 
   Future refreshAppWithLanguageCode(BuildContext context, String code) async {
