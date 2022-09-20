@@ -6,10 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
+enum pageLoading { none, loading }
+
 class ProfileBloc {
   final CollectionReference profile =
       FirebaseFirestore.instance.collection('profiles');
-  ValueNotifier<XFile?> imageValue = ValueNotifier<XFile?>(null);
+  ValueNotifier<pageLoading> reloadImageView =
+      ValueNotifier<pageLoading>(pageLoading.none);
   final ImagePicker picker = ImagePicker();
 
   Future<void> uploadFile(

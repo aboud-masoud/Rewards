@@ -14,8 +14,6 @@ import 'package:rewards_app/utils/global_value.dart';
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
-  //TODO: Handle upload/ download profile image
-
   final _bloc = ProfileBloc();
 
   @override
@@ -83,39 +81,42 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       child: Stack(
                         children: [
-                          ValueListenableBuilder<XFile?>(
-                              valueListenable: _bloc.imageValue,
-                              builder: (context, snapshot, child) {
-                                return CircleAvatar(
-                                  radius: 80,
-                                  backgroundColor: Colors.white,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(
-                                        4), // Border radius
-                                    child: FutureBuilder<String>(
-                                        future: _bloc.getDownloadURL(),
-                                        initialData: "",
-                                        builder: (context, snapShot) {
-                                          return ClipOval(
-                                            child: snapShot.data == ""
-                                                ? Image.asset(
-                                                    "assets/images/blank-profile-picture.png",
-                                                    fit: BoxFit.fill)
-                                                : FadeInImage(
-                                                    fit: BoxFit.fill,
-                                                    height: 90,
-                                                    image: NetworkImage(
-                                                        snapShot.data!),
-                                                    placeholder:
-                                                        const AssetImage(
+                          CircleAvatar(
+                            radius: 80,
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(4), // Border radius
+                              child: ValueListenableBuilder<pageLoading>(
+                                  valueListenable: _bloc.reloadImageView,
+                                  builder: (context, snapshotImage, child) {
+                                    if (snapshotImage == pageLoading.none) {
+                                      return FutureBuilder<String>(
+                                          future: _bloc.getDownloadURL(),
+                                          initialData: "",
+                                          builder: (context, futureSnapShot) {
+                                            return ClipOval(
+                                              child: futureSnapShot.data == ""
+                                                  ? Image.asset(
                                                       "assets/images/blank-profile-picture.png",
+                                                      fit: BoxFit.fill)
+                                                  : FadeInImage(
+                                                      fit: BoxFit.fill,
+                                                      height: 90,
+                                                      image: NetworkImage(
+                                                          futureSnapShot.data!),
+                                                      placeholder:
+                                                          const AssetImage(
+                                                        "assets/images/blank-profile-picture.png",
+                                                      ),
                                                     ),
-                                                  ),
-                                          );
-                                        }),
-                                  ),
-                                );
-                              }),
+                                            );
+                                          });
+                                    } else {
+                                      return const CircularProgressIndicator();
+                                    }
+                                  }),
+                            ),
+                          ),
                           Positioned(
                             bottom: 0,
                             right: 0,
@@ -302,14 +303,15 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
+                  _bloc.reloadImageView.value = pageLoading.loading;
+                  Navigator.of(context).pop();
+
                   await _bloc.picker
                       .pickImage(source: ImageSource.camera)
                       .then((value) async {
-                    _bloc.imageValue.value = value;
                     final file = File(value!.path);
-
                     await _bloc.uploadFile(file).then((value) {
-                      Navigator.of(context).pop();
+                      _bloc.reloadImageView.value = pageLoading.none;
                     });
                   });
                 },
@@ -330,13 +332,15 @@ class ProfileScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () async {
+                  _bloc.reloadImageView.value = pageLoading.loading;
+                  Navigator.of(context).pop();
+
                   _bloc.picker
                       .pickImage(source: ImageSource.gallery)
                       .then((value) async {
-                    _bloc.imageValue.value = value;
                     final file = File(value!.path);
                     await _bloc.uploadFile(file).then((value) {
-                      Navigator.of(context).pop();
+                      _bloc.reloadImageView.value = pageLoading.none;
                     });
                   });
                 },
