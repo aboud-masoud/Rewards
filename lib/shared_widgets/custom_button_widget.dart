@@ -9,6 +9,8 @@ class CustomButtonWidget extends StatelessWidget {
   final double widthSize;
   final bool isButtonRounded;
   final bool enable;
+  final Color textColor;
+  final double textSize;
   const CustomButtonWidget(
       {required this.title,
       this.titleColor = Colors.white,
@@ -17,6 +19,8 @@ class CustomButtonWidget extends StatelessWidget {
       this.widthSize = 175,
       this.isButtonRounded = false,
       required this.onPress,
+      this.textColor = const Color(0xffffffff),
+      this.textSize = 20,
       Key? key})
       : super(key: key);
 
@@ -27,7 +31,9 @@ class CustomButtonWidget extends StatelessWidget {
       child: ElevatedButton(
         onPressed: enable ? onPress : null,
         style: ElevatedButton.styleFrom(
-          textStyle: CustomTextStyle().medium(size: 20),
+          backgroundColor: backgroundColor,
+          textStyle: CustomTextStyle().medium(size: textSize, color: textColor),
+          foregroundColor: textColor,
           shape: isButtonRounded
               ? RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30.0),

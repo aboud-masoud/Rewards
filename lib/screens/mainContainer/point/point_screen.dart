@@ -7,13 +7,11 @@ import 'package:rewards_app/screens/mainContainer/point/point_bloc.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
-import 'package:rewards_app/utils/global_value.dart';
 
 class PointScreen extends StatelessWidget {
   PointScreen({super.key});
 
   final _bloc = PointBloc();
-  //TODO : handle this page
 
   @override
   Widget build(BuildContext context) {

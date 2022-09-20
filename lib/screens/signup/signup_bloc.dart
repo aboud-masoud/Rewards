@@ -30,37 +30,59 @@ class SignUpBloc {
   TextEditingController enrolledController = TextEditingController();
   TextEditingController birthGenre = TextEditingController();
   TextEditingController birthWeight = TextEditingController();
-  TextEditingController wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain = TextEditingController();
-  TextEditingController hasYourChildExperiencedAnyOfThese = TextEditingController();
-  TextEditingController doesYourChildUseAnyMedicationsRegularlyFrequentlyMention = TextEditingController();
-  TextEditingController hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues = TextEditingController();
-  TextEditingController didYourChildDelayInAnyOfTheseDevelopmentalStages = TextEditingController();
-  TextEditingController checkTheSkillsThatYourChildAchievesIndependently = TextEditingController();
-  TextEditingController howDoesYourChildCommunicateMostOfTheTime = TextEditingController();
+  TextEditingController
+      wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain =
+      TextEditingController();
+  TextEditingController hasYourChildExperiencedAnyOfThese =
+      TextEditingController();
+  TextEditingController
+      doesYourChildUseAnyMedicationsRegularlyFrequentlyMention =
+      TextEditingController();
+  TextEditingController
+      hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues =
+      TextEditingController();
+  TextEditingController didYourChildDelayInAnyOfTheseDevelopmentalStages =
+      TextEditingController();
+  TextEditingController checkTheSkillsThatYourChildAchievesIndependently =
+      TextEditingController();
+  TextEditingController howDoesYourChildCommunicateMostOfTheTime =
+      TextEditingController();
   TextEditingController recentlyYourChildsSpeechIs = TextEditingController();
-  TextEditingController whenYourChildDidProduceHisFirstWord = TextEditingController();
-  TextEditingController doesTheChildUseAnyUtterancesInHisSpeechGiveExample = TextEditingController();
-  TextEditingController describeYourChildReceptiveLanguage = TextEditingController();
-  TextEditingController describeYourChildExpressiveLanguage = TextEditingController();
+  TextEditingController whenYourChildDidProduceHisFirstWord =
+      TextEditingController();
+  TextEditingController doesTheChildUseAnyUtterancesInHisSpeechGiveExample =
+      TextEditingController();
+  TextEditingController describeYourChildReceptiveLanguage =
+      TextEditingController();
+  TextEditingController describeYourChildExpressiveLanguage =
+      TextEditingController();
   TextEditingController describeYourChildBehavior = TextEditingController();
-  TextEditingController describeYourChildFocusAndAttention = TextEditingController();
-  TextEditingController describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay = TextEditingController();
-  TextEditingController howMuchTimeYourChildSpendsOnTVSmartDevices = TextEditingController();
-  TextEditingController wouldYouLikeToAddAnyAdditionalInformation = TextEditingController();
+  TextEditingController describeYourChildFocusAndAttention =
+      TextEditingController();
+  TextEditingController
+      describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay =
+      TextEditingController();
+  TextEditingController howMuchTimeYourChildSpendsOnTVSmartDevices =
+      TextEditingController();
+  TextEditingController wouldYouLikeToAddAnyAdditionalInformation =
+      TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
   TextEditingController repasswordController = TextEditingController();
 
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  ValueNotifier<SignUpStatusEnum> signupStatus = ValueNotifier<SignUpStatusEnum>(SignUpStatusEnum.non);
+  ValueNotifier<SignUpStatusEnum> signupStatus =
+      ValueNotifier<SignUpStatusEnum>(SignUpStatusEnum.non);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // var stepNumber = 1;
   ValueNotifier<int> stepNumberNotifier = ValueNotifier<int>(1);
 
-  final CollectionReference _profiles = FirebaseFirestore.instance.collection('profiles');
-  final CollectionReference _profileDetails = FirebaseFirestore.instance.collection('profileDetails');
+  final CollectionReference _profiles =
+      FirebaseFirestore.instance.collection('profiles');
+  final CollectionReference _profilesScore =
+      FirebaseFirestore.instance.collection('profilesScores');
 
   final storage = const FlutterSecureStorage();
 
@@ -100,7 +122,10 @@ class SignUpBloc {
 
       if (user != null) {
         signupStatus.value = SignUpStatusEnum.success;
-        await _saveValuesInMemory(userName: user.email!, password: passwordController.text, uid: user.uid);
+        await _saveValuesInMemory(
+            userName: user.email!,
+            password: passwordController.text,
+            uid: user.uid);
 
         userEmail = user.email!;
 
@@ -119,10 +144,13 @@ class SignUpBloc {
           youFoundContactUsVia: foundCountactController.text,
           whatIsYourComplaintBriefly: complaintController.text,
           whenTheProblemWasFirstNoted: problemFirstNotedController.text,
-          doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult: speechassessmentController.text,
+          doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult:
+              speechassessmentController.text,
           hasYourChildBeenDiagnosedWithAnyOfThese: diagnosedController.text,
-          isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily: disordersfamilyController.text,
-          hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms: enrolledController.text,
+          isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily:
+              disordersfamilyController.text,
+          hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms:
+              enrolledController.text,
           firstEvaluationDate: "",
           firstTherapeuticSessionDate: "",
           therapeuticName: "",
@@ -130,27 +158,40 @@ class SignUpBloc {
           birthWeight: birthWeight.text,
           wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain:
               wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain.text,
-          hasYourChildExperiencedAnyOfThese: hasYourChildExperiencedAnyOfThese.text,
-          doesYourChildUseAnyMedicationsRegularlyFrequentlyMention: doesYourChildUseAnyMedicationsRegularlyFrequentlyMention.text,
+          hasYourChildExperiencedAnyOfThese:
+              hasYourChildExperiencedAnyOfThese.text,
+          doesYourChildUseAnyMedicationsRegularlyFrequentlyMention:
+              doesYourChildUseAnyMedicationsRegularlyFrequentlyMention.text,
           hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues:
               hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues.text,
-          didYourChildDelayInAnyOfTheseDevelopmentalStages: didYourChildDelayInAnyOfTheseDevelopmentalStages.text,
-          checkTheSkillsThatYourChildAchievesIndependently: checkTheSkillsThatYourChildAchievesIndependently.text,
-          howDoesYourChildCommunicateMostOfTheTime: howDoesYourChildCommunicateMostOfTheTime.text,
+          didYourChildDelayInAnyOfTheseDevelopmentalStages:
+              didYourChildDelayInAnyOfTheseDevelopmentalStages.text,
+          checkTheSkillsThatYourChildAchievesIndependently:
+              checkTheSkillsThatYourChildAchievesIndependently.text,
+          howDoesYourChildCommunicateMostOfTheTime:
+              howDoesYourChildCommunicateMostOfTheTime.text,
           recentlyYourChildsSpeechIs: recentlyYourChildsSpeechIs.text,
-          whenYourChildDidProduceHisFirstWord: whenYourChildDidProduceHisFirstWord.text,
-          doesTheChildUseAnyUtterancesInHisSpeechGiveExample: doesTheChildUseAnyUtterancesInHisSpeechGiveExample.text,
-          describeYourChildReceptiveLanguage: describeYourChildReceptiveLanguage.text,
-          describeYourChildExpressiveLanguage: describeYourChildExpressiveLanguage.text,
+          whenYourChildDidProduceHisFirstWord:
+              whenYourChildDidProduceHisFirstWord.text,
+          doesTheChildUseAnyUtterancesInHisSpeechGiveExample:
+              doesTheChildUseAnyUtterancesInHisSpeechGiveExample.text,
+          describeYourChildReceptiveLanguage:
+              describeYourChildReceptiveLanguage.text,
+          describeYourChildExpressiveLanguage:
+              describeYourChildExpressiveLanguage.text,
           describeYourChildBehavior: describeYourChildBehavior.text,
-          describeYourChildFocusAndAttention: describeYourChildFocusAndAttention.text,
+          describeYourChildFocusAndAttention:
+              describeYourChildFocusAndAttention.text,
           describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay:
               describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay.text,
-          howMuchTimeYourChildSpendsOnTVSmartDevices: howMuchTimeYourChildSpendsOnTVSmartDevices.text,
-          wouldYouLikeToAddAnyAdditionalInformation: wouldYouLikeToAddAnyAdditionalInformation.text,
+          howMuchTimeYourChildSpendsOnTVSmartDevices:
+              howMuchTimeYourChildSpendsOnTVSmartDevices.text,
+          wouldYouLikeToAddAnyAdditionalInformation:
+              wouldYouLikeToAddAnyAdditionalInformation.text,
         );
 
         await _profiles.doc(user.email).set(theJSON);
+        await _profilesScore.doc(user.email).set({"points": "0"});
 
         return true;
       } else {
@@ -164,7 +205,10 @@ class SignUpBloc {
     }
   }
 
-  Future<void> _saveValuesInMemory({required String userName, required String password, required String uid}) async {
+  Future<void> _saveValuesInMemory(
+      {required String userName,
+      required String password,
+      required String uid}) async {
     await storage.deleteAll();
 
     await storage.write(key: AppConstants.biometricU, value: userName);
