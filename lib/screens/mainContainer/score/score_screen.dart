@@ -74,8 +74,11 @@ class ScoreScreen extends StatelessWidget {
                             final DocumentSnapshot documentSnapshot =
                                 streamSnapshot.data!.docs.singleWhere(
                                     (element) => element.id == userEmail);
+                            _bloc.currentUserScore =
+                                int.parse(documentSnapshot["points"]);
+
                             return CustomText(
-                              title: documentSnapshot["points"],
+                              title: _bloc.currentUserScore.toString(),
                               style: CustomTextStyle()
                                   .bold(size: 70, color: Colors.white),
                             );
@@ -104,6 +107,8 @@ class ScoreScreen extends StatelessWidget {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
+                        final int cardScore =
+                            int.parse(documentSnapshot[index]["points"]);
                         return Padding(
                           padding: const EdgeInsets.all(10),
                           child: Container(
@@ -140,12 +145,48 @@ class ScoreScreen extends StatelessWidget {
                                               .replacetext,
                                           textColor: theColor,
                                           textSize: 15,
-                                          onPress: () {
-                                            //TODO : handle press to replace
+                                          onPress: () async {
+                                            showAreYouShoreDialog(context,
+                                                () async {
+                                              if (cardScore <=
+                                                  _bloc.currentUserScore) {
+                                                _bloc.currentUserScore =
+                                                    _bloc.currentUserScore -
+                                                        cardScore;
+
+                                                await _bloc.profilesScore
+                                                    .doc(userEmail)
+                                                    .update({
+                                                  "points":
+                                                      "${_bloc.currentUserScore}"
+                                                });
+
+                                                await _bloc.requestScoreExchange
+                                                    .add(
+                                                  {
+                                                    "email": userEmail,
+                                                    "exchange with":
+                                                        documentSnapshot[index]
+                                                            ["stringEn"],
+                                                    "number of point discounted":
+                                                        cardScore,
+                                                    "number of point the user still have":
+                                                        _bloc.currentUserScore,
+                                                    "date": DateTime.now(),
+                                                  },
+                                                );
+                                              } else {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(SnackBar(
+                                                  content: Text(AppLocalizations
+                                                          .of(context)!
+                                                      .youdonthaveenighscore),
+                                                ));
+                                              }
+                                            });
                                           }),
                                       CustomText(
-                                        title: documentSnapshot[index]
-                                            ["points"],
+                                        title: cardScore.toString(),
                                         style: CustomTextStyle().bold(
                                             size: 35, color: Colors.white),
                                       )
@@ -166,6 +207,51 @@ class ScoreScreen extends StatelessWidget {
               })
         ],
       ),
+    );
+  }
+
+  showAreYouShoreDialog(BuildContext context, Function okSelected) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.cancel),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.okay),
+      onPressed: () {
+        Navigator.of(context).pop();
+        okSelected();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: CustomText(
+        title: AppLocalizations.of(context)!.areyousuretitle,
+        shouldFit: false,
+        style: CustomTextStyle().bold(size: 22, color: const Color(0xff404040)),
+      ),
+      content: CustomText(
+        title: AppLocalizations.of(context)!.areyousurescoremessage,
+        maxLins: 2,
+        shouldFit: false,
+        style:
+            CustomTextStyle().regular(size: 16, color: const Color(0xff404040)),
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

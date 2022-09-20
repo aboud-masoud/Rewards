@@ -84,7 +84,12 @@
     "galary" : "معرض الصور",
     "task" : "المهام",
     "replaceyourpointswith" : "استبدل نقاطك بـ",
-    "replacetext" : "استبدل"
+    "replacetext" : "استبدل",
+    "youdonthaveenighscore" : "ليس لديك ما يكفي من النقاط",
+    "areyousuretitle" : "هل انت متاكد ؟",
+    "areyousurescoremessage" : "هل تريد استبدال نقاطك بالهدية المختارة؟"
+
+
 
 
 

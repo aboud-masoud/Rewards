@@ -84,7 +84,10 @@
   "galary" : "Galary",
   "task" : "Tasks",
   "replaceyourpointswith" : "Replace Your Points with",
-  "replacetext" : "REPLACE"
+  "replacetext" : "REPLACE",
+  "youdonthaveenighscore" : "You Don't Have enough Score",
+  "areyousuretitle" : "Are You Sure ?",
+  "areyousurescoremessage" : "Do you want to replace your points with the selected gift ?"
 
 
 
