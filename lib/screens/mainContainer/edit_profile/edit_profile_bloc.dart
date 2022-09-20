@@ -6,22 +6,26 @@ import 'package:rewards_app/utils/shared_methods.dart';
 class EditProfileBloc {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
-  TextEditingController nationalityController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController usedLanguageController = TextEditingController();
+  // TextEditingController usedLanguageController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController parentOcupationController = TextEditingController();
   TextEditingController hisrankController = TextEditingController();
-  TextEditingController kinshipController = TextEditingController();
-  TextEditingController foundCountactController = TextEditingController();
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
 
-  final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
+  ValueNotifier<String> nationalityValue = ValueNotifier<String>("");
+  ValueNotifier<String> genderValue = ValueNotifier<String>("");
+  ValueNotifier<String> usedLanguageValue = ValueNotifier<String>("");
+  ValueNotifier<String> parentOcupationValue = ValueNotifier<String>("");
+  ValueNotifier<String> foundCountactValue = ValueNotifier<String>("");
+  ValueNotifier<String> kinshipValue = ValueNotifier<String>("");
+
+  final CollectionReference profile =
+      FirebaseFirestore.instance.collection('profiles');
 
   String whatIsYourComplaintBriefly = "";
   String whenTheProblemWasFirstNoted = "";
-  String doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult = "";
+  String doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult =
+      "";
   String hasYourChildBeenDiagnosedWithAnyOfThese = "";
   String isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily = "";
   String hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms = "";
@@ -48,6 +52,39 @@ class EditProfileBloc {
   String howMuchTimeYourChildSpendsOnTVSmartDevices = "";
   String wouldYouLikeToAddAnyAdditionalInformation = "";
 
+  List<String> nationality = [
+    "Yamin",
+    "Jordanian",
+    "Omanian",
+    "Palistanin",
+    "Amarican",
+  ];
+
+  List<String> gender = [
+    "Male",
+    "Female",
+  ];
+
+  List<String> usedLanguage = [
+    "Arabic",
+    "English",
+  ];
+
+  List<String> parentOcupation = [
+    "Yes",
+    "No",
+  ];
+
+  List<String> kinship = [
+    "Yes",
+    "No",
+  ];
+
+  List<String> foundCountact = [
+    "Email",
+    "Mobile",
+  ];
+
   void validateFields() {
     fieldsValidation.value = true;
   }
@@ -57,44 +94,57 @@ class EditProfileBloc {
       email: userEmail,
       fullName: fullNameController.text,
       db: dateOfBirthController.text,
-      nationality: nationalityController.text,
-      gender: genderController.text,
+      nationality: nationalityValue.value,
+      gender: genderValue.value,
       address: addressController.text,
       mobileNumber: mobileNumberController.text,
-      usedLanguageWithTheClient: usedLanguageController.text,
-      parentsOccupation: parentOcupationController.text,
+      usedLanguageWithTheClient: usedLanguageValue.value,
+      parentsOccupation: parentOcupationValue.value,
       siblingsAndHisRank: hisrankController.text,
-      isThereAnyKinshipBetweenParents: kinshipController.text,
-      youFoundContactUsVia: foundCountactController.text,
+      isThereAnyKinshipBetweenParents: kinshipValue.value,
+      youFoundContactUsVia: foundCountactValue.value,
       whatIsYourComplaintBriefly: whatIsYourComplaintBriefly,
       whenTheProblemWasFirstNoted: whenTheProblemWasFirstNoted,
       doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult:
           doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult,
-      hasYourChildBeenDiagnosedWithAnyOfThese: hasYourChildBeenDiagnosedWithAnyOfThese,
-      isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily: isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily,
-      hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms: hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms,
+      hasYourChildBeenDiagnosedWithAnyOfThese:
+          hasYourChildBeenDiagnosedWithAnyOfThese,
+      isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily:
+          isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily,
+      hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms:
+          hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms,
       firstEvaluationDate: firstEvaluationDate,
       firstTherapeuticSessionDate: firstTherapeuticSessionDate,
       therapeuticName: therapeuticName,
       birthGenre: birthGenre,
       birthWeight: birthWeight,
-      wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain: wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain,
+      wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain:
+          wereThereAnyComplicationsDuringPregnancyOrDeliveryExplain,
       hasYourChildExperiencedAnyOfThese: hasYourChildExperiencedAnyOfThese,
-      doesYourChildUseAnyMedicationsRegularlyFrequentlyMention: doesYourChildUseAnyMedicationsRegularlyFrequentlyMention,
-      hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues: hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues,
-      didYourChildDelayInAnyOfTheseDevelopmentalStages: didYourChildDelayInAnyOfTheseDevelopmentalStages,
-      checkTheSkillsThatYourChildAchievesIndependently: checkTheSkillsThatYourChildAchievesIndependently,
-      howDoesYourChildCommunicateMostOfTheTime: howDoesYourChildCommunicateMostOfTheTime,
+      doesYourChildUseAnyMedicationsRegularlyFrequentlyMention:
+          doesYourChildUseAnyMedicationsRegularlyFrequentlyMention,
+      hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues:
+          hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues,
+      didYourChildDelayInAnyOfTheseDevelopmentalStages:
+          didYourChildDelayInAnyOfTheseDevelopmentalStages,
+      checkTheSkillsThatYourChildAchievesIndependently:
+          checkTheSkillsThatYourChildAchievesIndependently,
+      howDoesYourChildCommunicateMostOfTheTime:
+          howDoesYourChildCommunicateMostOfTheTime,
       recentlyYourChildsSpeechIs: recentlyYourChildsSpeechIs,
       whenYourChildDidProduceHisFirstWord: whenYourChildDidProduceHisFirstWord,
-      doesTheChildUseAnyUtterancesInHisSpeechGiveExample: doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
+      doesTheChildUseAnyUtterancesInHisSpeechGiveExample:
+          doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
       describeYourChildReceptiveLanguage: describeYourChildReceptiveLanguage,
       describeYourChildExpressiveLanguage: describeYourChildExpressiveLanguage,
       describeYourChildBehavior: describeYourChildBehavior,
       describeYourChildFocusAndAttention: describeYourChildFocusAndAttention,
-      describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay: describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay,
-      howMuchTimeYourChildSpendsOnTVSmartDevices: howMuchTimeYourChildSpendsOnTVSmartDevices,
-      wouldYouLikeToAddAnyAdditionalInformation: wouldYouLikeToAddAnyAdditionalInformation,
+      describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay:
+          describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay,
+      howMuchTimeYourChildSpendsOnTVSmartDevices:
+          howMuchTimeYourChildSpendsOnTVSmartDevices,
+      wouldYouLikeToAddAnyAdditionalInformation:
+          wouldYouLikeToAddAnyAdditionalInformation,
     );
 
     await profile.doc(userEmail).update(theJSON);

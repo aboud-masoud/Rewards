@@ -10,10 +10,12 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool readOnly;
 
   final List<TextInputFormatter>? inputFormatters;
 
   final Function(String text)? onChange;
+  final Function()? onTap;
 
   const CustomTextField({
     required this.controller,
@@ -25,6 +27,8 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.inputFormatters,
     this.onChange,
+    this.onTap,
+    this.readOnly = false,
     Key? key,
   }) : super(key: key);
 
@@ -37,6 +41,7 @@ class CustomTextField extends StatelessWidget {
         enabled: enabled,
         enableSuggestions: false,
         autocorrect: false,
+        readOnly: readOnly,
         style: enabled
             ? const TextStyle(fontSize: 14, color: Color(0xff191C1F))
             : const TextStyle(
@@ -48,7 +53,8 @@ class CustomTextField extends StatelessWidget {
         cursorColor: const Color(0xff100C31),
         decoration: InputDecoration(
           labelText: hintText,
-          labelStyle: CustomTextStyle().medium(color: const Color(0xffababab), size: 16),
+          labelStyle: CustomTextStyle()
+              .medium(color: const Color(0xffababab), size: 16),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           filled: true,
@@ -57,6 +63,11 @@ class CustomTextField extends StatelessWidget {
         onChanged: (text) {
           if (onChange != null) {
             onChange!(text);
+          }
+        },
+        onTap: () {
+          if (onTap != null) {
+            onTap!();
           }
         },
       ),

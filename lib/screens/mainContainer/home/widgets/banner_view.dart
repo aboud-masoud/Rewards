@@ -6,7 +6,8 @@ import 'package:rewards_app/utils/shared_methods.dart';
 class HomeBannerView extends StatelessWidget {
   HomeBannerView({Key? key}) : super(key: key);
 
-  final CollectionReference banners = FirebaseFirestore.instance.collection('banners');
+  final CollectionReference banners =
+      FirebaseFirestore.instance.collection('banners');
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +16,14 @@ class HomeBannerView extends StatelessWidget {
       child: StreamBuilder(
           stream: banners.snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            if (streamSnapshot.hasData == false) {
-              return Container();
-            } else {
+            if (streamSnapshot.hasData) {
               return BannerCarousel(
                 activeColor: const Color(0xff419aff),
                 height: 200,
                 customizedBanners: bannerWidgets(streamSnapshot.data!.docs),
               );
+            } else {
+              return Container();
             }
           }),
     );
@@ -40,15 +41,15 @@ class HomeBannerView extends StatelessWidget {
             border: Border.all(color: Colors.black, width: 1),
           ),
           child: InkWell(
-            child: Image.network(
-              documentSnapshot["imageURL"],
-              fit: BoxFit.fill,
-            ),
             onTap: documentSnapshot["urlToOpen"] != ""
                 ? () {
                     SharedMethods().openUrl(documentSnapshot["urlToOpen"]);
                   }
                 : null,
+            child: Image.network(
+              documentSnapshot["imageURL"],
+              fit: BoxFit.fill,
+            ),
           ),
         ),
       );

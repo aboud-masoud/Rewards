@@ -15,8 +15,6 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
   final _bloc = HomeBloc();
-  //TODO: Handle click on banner to open new web page
-  //TODO: Handle click numbers
 
   @override
   Widget build(BuildContext context) {
