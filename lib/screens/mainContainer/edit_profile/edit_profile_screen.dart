@@ -198,7 +198,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             hintMessage:
                                 AppLocalizations.of(context)!.nationality,
                             value: _bloc.nationalityValue.value,
-                            items: _bloc.nationality,
+                            items: nationality,
                             onChanged: (value) {
                               _bloc.nationalityValue.value = value!;
                               _bloc.validateFields();
@@ -213,7 +213,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             prefixIcon: const Icon(Icons.type_specimen),
                             hintMessage: AppLocalizations.of(context)!.gender,
                             value: _bloc.genderValue.value,
-                            items: _bloc.gender,
+                            items: gender,
                             onChanged: (value) {
                               _bloc.genderValue.value = value!;
                               _bloc.validateFields();
@@ -237,7 +237,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             hintMessage: AppLocalizations.of(context)!
                                 .usedlanguagewiththeclientathome,
                             value: _bloc.usedLanguageValue.value,
-                            items: _bloc.usedLanguage,
+                            items: usedLanguage,
                             onChanged: (value) {
                               _bloc.usedLanguageValue.value = value!;
                               _bloc.validateFields();
@@ -261,7 +261,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             hintMessage:
                                 AppLocalizations.of(context)!.parentsoccupation,
                             value: _bloc.parentOcupationValue.value,
-                            items: _bloc.parentOcupation,
+                            items: parentOcupation,
                             onChanged: (value) {
                               _bloc.parentOcupationValue.value = value!;
                               _bloc.validateFields();
@@ -287,7 +287,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             hintMessage: AppLocalizations.of(context)!
                                 .isthereanykinshipbetweenparents,
                             value: _bloc.kinshipValue.value,
-                            items: _bloc.kinship,
+                            items: kinship,
                             onChanged: (value) {
                               _bloc.kinshipValue.value = value!;
                               _bloc.validateFields();
@@ -303,7 +303,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             hintMessage: AppLocalizations.of(context)!
                                 .youfoundcontactusvia,
                             value: _bloc.foundCountactValue.value,
-                            items: _bloc.foundCountact,
+                            items: foundCountact,
                             onChanged: (value) {
                               _bloc.foundCountactValue.value = value!;
                               _bloc.validateFields();

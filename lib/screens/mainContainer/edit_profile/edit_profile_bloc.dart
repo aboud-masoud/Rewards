@@ -7,7 +7,6 @@ class EditProfileBloc {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  // TextEditingController usedLanguageController = TextEditingController();
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController hisrankController = TextEditingController();
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
@@ -52,40 +51,9 @@ class EditProfileBloc {
   String howMuchTimeYourChildSpendsOnTVSmartDevices = "";
   String wouldYouLikeToAddAnyAdditionalInformation = "";
 
-  List<String> nationality = [
-    "Yamin",
-    "Jordanian",
-    "Omanian",
-    "Palistanin",
-    "Amarican",
-  ];
-
-  List<String> gender = [
-    "Male",
-    "Female",
-  ];
-
-  List<String> usedLanguage = [
-    "Arabic",
-    "English",
-  ];
-
-  List<String> parentOcupation = [
-    "Yes",
-    "No",
-  ];
-
-  List<String> kinship = [
-    "Yes",
-    "No",
-  ];
-
-  List<String> foundCountact = [
-    "Email",
-    "Mobile",
-  ];
-
   void validateFields() {
+    //TODO : handle validation
+
     fieldsValidation.value = true;
   }
 

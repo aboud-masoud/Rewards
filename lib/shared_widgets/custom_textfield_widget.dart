@@ -59,6 +59,9 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: suffixIcon,
           filled: true,
           fillColor: const Color(0x00000000),
+          border: const OutlineInputBorder(
+            borderSide: BorderSide(),
+          ),
         ),
         onChanged: (text) {
           if (onChange != null) {

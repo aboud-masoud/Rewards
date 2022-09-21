@@ -29,7 +29,8 @@ class SignUpScreen extends StatelessWidget {
       appBar: AppBar(
         title: CustomText(
           title: AppLocalizations.of(context)!.signup,
-          style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+          style: CustomTextStyle()
+              .semibold(size: 16, color: const Color(0xff707070)),
         ),
         backgroundColor: const Color(0xfff9f9f9),
         elevation: 0,
@@ -50,41 +51,12 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 68, child: HeaderView(bloc: _bloc)),
                 Expanded(
-                  child: SingleChildScrollView(child: returnCorrectStepView(snapshot, _bloc)),
+                  child: SingleChildScrollView(
+                      child: returnCorrectStepView(snapshot, _bloc)),
                 )
               ],
             );
           }),
-
-      //       ValueListenableBuilder<bool>(
-      //           valueListenable: _bloc.fieldsValidation,
-      //           builder: (context, snapshot, child) {
-      //             return CustomButtonWidget(
-      //               title: AppLocalizations.of(context)!.submit,
-      //               enable: snapshot,
-      //               onPress: () async {
-      //                 await _bloc.signUp().then((value) {
-      //                   if (value) {
-      //                     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
-      //                       return MainContainer();
-      //                     }), (route) => false);
-      //                   }
-      //                 });
-      //               },
-      //             );
-      //           }),
-      //       ValueListenableBuilder<signUpStatusEnum>(
-      //           valueListenable: _bloc.signupStatus,
-      //           builder: (context, snapshot, child) {
-      //             if (snapshot == signUpStatusEnum.faild) {
-      //               return Text(AppLocalizations.of(context)!.errorInEmailOrPassword,
-      //                   style: CustomTextStyle().regular(color: Colors.red, size: 18));
-      //             } else if (snapshot == signUpStatusEnum.inProgress) {
-      //               return const CircularProgressIndicator();
-      //             } else {
-      //               return Container();
-      //             }
-      //           }),
     );
   }
 

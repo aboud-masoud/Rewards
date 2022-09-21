@@ -13,15 +13,15 @@ class SignUpBloc {
   TextEditingController emailController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
-  TextEditingController nationalityController = TextEditingController();
-  TextEditingController genderController = TextEditingController();
+  ValueNotifier<String> nationalityValue = ValueNotifier<String>("");
+  ValueNotifier<String> genderValue = ValueNotifier<String>("");
   TextEditingController addressController = TextEditingController();
-  TextEditingController usedLanguageController = TextEditingController();
+  ValueNotifier<String> usedLanguageValue = ValueNotifier<String>("");
   TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController parentOcupationController = TextEditingController();
+  ValueNotifier<String> parentOcupationValue = ValueNotifier<String>("");
   TextEditingController hisrankController = TextEditingController();
-  TextEditingController kinshipController = TextEditingController();
-  TextEditingController foundCountactController = TextEditingController();
+  ValueNotifier<String> kinshipValue = ValueNotifier<String>("");
+  ValueNotifier<String> foundCountactValue = ValueNotifier<String>("");
   TextEditingController complaintController = TextEditingController();
   TextEditingController problemFirstNotedController = TextEditingController();
   TextEditingController speechassessmentController = TextEditingController();
@@ -87,6 +87,7 @@ class SignUpBloc {
   final storage = const FlutterSecureStorage();
 
   void validateFields() {
+    //TODO : handle validation
     // if (emailController.text.isEmpty) {
     //   fieldsValidation.value = false;
     // } else if (fullNameController.text.isEmpty) {
@@ -133,15 +134,15 @@ class SignUpBloc {
           email: user.email!,
           fullName: fullNameController.text,
           db: dateOfBirthController.text,
-          nationality: nationalityController.text,
-          gender: genderController.text,
+          nationality: nationalityValue.value,
+          gender: genderValue.value,
           address: addressController.text,
           mobileNumber: mobileNumberController.text,
-          usedLanguageWithTheClient: usedLanguageController.text,
-          parentsOccupation: parentOcupationController.text,
+          usedLanguageWithTheClient: usedLanguageValue.value,
+          parentsOccupation: parentOcupationValue.value,
           siblingsAndHisRank: hisrankController.text,
-          isThereAnyKinshipBetweenParents: kinshipController.text,
-          youFoundContactUsVia: foundCountactController.text,
+          isThereAnyKinshipBetweenParents: kinshipValue.value,
+          youFoundContactUsVia: foundCountactValue.value,
           whatIsYourComplaintBriefly: complaintController.text,
           whenTheProblemWasFirstNoted: problemFirstNotedController.text,
           doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult:

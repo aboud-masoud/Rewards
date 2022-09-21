@@ -35,6 +35,9 @@ class CustomTextFieldWithDropDown extends StatelessWidget {
           FormField(builder: (FormFieldState<String> state) {
             return InputDecorator(
               decoration: InputDecoration(
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(),
+                ),
                 prefixIcon: prefixIcon,
                 labelStyle: CustomTextStyle().regular(size: 16.0),
                 errorStyle: CustomTextStyle()
