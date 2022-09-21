@@ -4,7 +4,7 @@ import 'package:rewards_app/app.dart';
 import 'package:rewards_app/models/authentication_models.dart';
 import 'package:rewards_app/screens/login/login_bloc.dart';
 import 'package:rewards_app/screens/mainContainer/main_container.dart';
-import 'package:rewards_app/screens/signup/signup_faze1.dart';
+import 'package:rewards_app/screens/signup/signup_lunch_screen.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -176,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         _bloc.biometricStatus = false;
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (ctx) {
-                            return const SignupFaze1Screen();
+                            return const SignupLunchScreen();
                           }),
                         );
                       } else {

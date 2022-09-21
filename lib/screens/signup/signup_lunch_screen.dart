@@ -5,8 +5,8 @@ import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:rewards_app/utils/network_info_service.dart';
 
-class SignupFaze1Screen extends StatelessWidget {
-  const SignupFaze1Screen({Key? key}) : super(key: key);
+class SignupLunchScreen extends StatelessWidget {
+  const SignupLunchScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,8 @@ class SignupFaze1Screen extends StatelessWidget {
       appBar: AppBar(
         title: CustomText(
           title: AppLocalizations.of(context)!.signup,
-          style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+          style: CustomTextStyle()
+              .semibold(size: 16, color: const Color(0xff707070)),
         ),
         backgroundColor: const Color(0x00ffffff),
         elevation: 0,
@@ -27,19 +28,24 @@ class SignupFaze1Screen extends StatelessWidget {
               children: [
                 Image.asset(
                   "assets/images/language_pic.png",
-                  width: 220,
+                  width: 150,
                 ),
                 const SizedBox(height: 8),
                 CustomText(
                   title: AppLocalizations.of(context)!.languageDelay,
-                  style: CustomTextStyle().bold(size: 20, color: const Color(0xff419aff)),
+                  style: CustomTextStyle()
+                      .bold(size: 20, color: const Color(0xff419aff)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 32, right: 32, bottom: 16),
+                  padding: const EdgeInsets.only(
+                      top: 8.0, left: 32, right: 32, bottom: 16),
                   child: CustomText(
                     title: AppLocalizations.of(context)!.languageDelaydesc,
-                    maxLins: 2,
-                    style: CustomTextStyle().medium(size: 20, color: const Color(0xffababab)),
+                    maxLins: 3,
+                    textAlign: TextAlign.center,
+                    shouldFit: false,
+                    style: CustomTextStyle()
+                        .medium(size: 13, color: const Color(0xffababab)),
                   ),
                 ),
                 ElevatedButton(
@@ -52,10 +58,12 @@ class SignupFaze1Screen extends StatelessWidget {
                       }),
                     );
                   },
-                  style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xff419aff)),
                   child: CustomText(
                     title: AppLocalizations.of(context)!.getstart,
-                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffffffff)),
+                    style: CustomTextStyle()
+                        .medium(size: 16, color: const Color(0xffffffff)),
                   ),
                 )
               ],
@@ -67,19 +75,24 @@ class SignupFaze1Screen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Image.asset(
                   "assets/images/Stammering_pic.png",
-                  width: 220,
+                  width: 150,
                 ),
                 const SizedBox(height: 8),
                 CustomText(
                   title: AppLocalizations.of(context)!.stammering,
-                  style: CustomTextStyle().bold(size: 20, color: const Color(0xff419aff)),
+                  style: CustomTextStyle()
+                      .bold(size: 20, color: const Color(0xff419aff)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 32, right: 32, bottom: 16),
+                  padding: const EdgeInsets.only(
+                      top: 8.0, left: 32, right: 32, bottom: 16),
                   child: CustomText(
                     title: AppLocalizations.of(context)!.stammeringdesc,
-                    maxLins: 2,
-                    style: CustomTextStyle().medium(size: 20, color: const Color(0xffababab)),
+                    maxLins: 3,
+                    textAlign: TextAlign.center,
+                    shouldFit: false,
+                    style: CustomTextStyle()
+                        .medium(size: 13, color: const Color(0xffababab)),
                   ),
                 ),
                 ElevatedButton(
@@ -92,10 +105,12 @@ class SignupFaze1Screen extends StatelessWidget {
                       }),
                     );
                   },
-                  style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xff419aff)),
                   child: CustomText(
                     title: AppLocalizations.of(context)!.getstart,
-                    style: CustomTextStyle().medium(size: 16, color: const Color(0xffffffff)),
+                    style: CustomTextStyle()
+                        .medium(size: 16, color: const Color(0xffffffff)),
                   ),
                 )
               ],
@@ -107,7 +122,8 @@ class SignupFaze1Screen extends StatelessWidget {
                 Navigator.of(context).pop();
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text(AppLocalizations.of(context)!.checkInternetConnection),
+                  content: Text(
+                      AppLocalizations.of(context)!.checkInternetConnection),
                 ));
               }
             },
@@ -116,11 +132,13 @@ class SignupFaze1Screen extends StatelessWidget {
               children: [
                 Text(
                   AppLocalizations.of(context)!.alreadyHaveanAccount,
-                  style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
+                  style: CustomTextStyle()
+                      .semibold(size: 14, color: const Color(0xff404040)),
                 ),
                 Text(
                   AppLocalizations.of(context)!.loginbutton,
-                  style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
+                  style: CustomTextStyle()
+                      .semibold(size: 14, color: const Color(0xff3bbc28)),
                 ),
               ],
             ),
