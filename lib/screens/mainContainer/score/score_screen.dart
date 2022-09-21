@@ -154,6 +154,7 @@ class ScoreScreen extends StatelessWidget {
                                                     _bloc.currentUserScore -
                                                         cardScore;
 
+                                                // TODO: Handle Success Messages
                                                 await _bloc.profilesScore
                                                     .doc(userEmail)
                                                     .update({

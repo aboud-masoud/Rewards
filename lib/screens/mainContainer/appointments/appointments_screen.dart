@@ -24,7 +24,8 @@ class ApotmentsScreen extends StatelessWidget {
         backgroundColor: const Color(0x00ffffff),
         title: CustomText(
           title: AppLocalizations.of(context)!.apotments,
-          style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
+          style: CustomTextStyle()
+              .semibold(size: 16, color: const Color(0xff707070)),
         ),
       ),
       body: Column(
@@ -36,8 +37,13 @@ class ApotmentsScreen extends StatelessWidget {
               imageName: "assets/images/Counseling.png",
               title: AppLocalizations.of(context)!.familyCounselingSession,
               onTap: () async {
-                final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                await _bloc.appointments.add({"Email": email, "Type": "Counseling", "Date": DateTime.now()});
+                final email = await const FlutterSecureStorage()
+                    .read(key: AppConstants.biometricU);
+                await _bloc.appointments.add({
+                  "Email": email,
+                  "Type": "Counseling",
+                  "Date": DateTime.now()
+                });
                 showAlertDialog(context);
               }),
           const SizedBox(height: 20),
@@ -47,8 +53,13 @@ class ApotmentsScreen extends StatelessWidget {
               imageName: "assets/images/Evaluation.png",
               title: AppLocalizations.of(context)!.evaluationSession,
               onTap: () async {
-                final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                await _bloc.appointments.add({"Email": email, "Type": "Evaluation", "Date": DateTime.now()});
+                final email = await const FlutterSecureStorage()
+                    .read(key: AppConstants.biometricU);
+                await _bloc.appointments.add({
+                  "Email": email,
+                  "Type": "Evaluation",
+                  "Date": DateTime.now()
+                });
                 showAlertDialog(context);
               }),
           const SizedBox(height: 40),
@@ -91,7 +102,8 @@ class ApotmentsScreen extends StatelessWidget {
                 Expanded(child: Container()),
                 CustomText(
                   title: AppLocalizations.of(context)!.bookAn,
-                  style: CustomTextStyle().regular(size: 16, color: Colors.white),
+                  style:
+                      CustomTextStyle().regular(size: 16, color: Colors.white),
                 ),
                 const SizedBox(height: 8),
                 CustomText(
@@ -107,6 +119,7 @@ class ApotmentsScreen extends StatelessWidget {
     ));
   }
 
+  //TODO: add mobile number
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = CustomButtonWidget(
@@ -127,7 +140,8 @@ class ApotmentsScreen extends StatelessWidget {
         title: AppLocalizations.of(context)!.apotmentsDescDialog,
         maxLins: 2,
         shouldFit: false,
-        style: CustomTextStyle().regular(size: 16, color: const Color(0xff404040)),
+        style:
+            CustomTextStyle().regular(size: 16, color: const Color(0xff404040)),
       ),
       actions: [
         okButton,

@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
             const SeperatorView(),
             InkWell(
               child: const OtherViews(
-                title: "0561327448",
+                title: "+971 561327448",
                 imagename: "assets/images/mobile.png",
               ),
               onTap: () => SharedMethods().callNumber("+971561327448"),

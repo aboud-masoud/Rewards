@@ -64,6 +64,7 @@ class ProfileScreen extends StatelessWidget {
             stream: _bloc.profile.snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
               if (streamSnapshot.hasData) {
+                print("as");
                 final DocumentSnapshot documentSnapshot = streamSnapshot
                     .data!.docs
                     .singleWhere((element) => element.id == userEmail);
