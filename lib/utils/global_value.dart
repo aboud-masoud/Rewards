@@ -32,3 +32,13 @@ List<String> foundCountact = [
   "Email",
   "Mobile",
 ];
+
+List<String> diagnosed = [
+  "option1",
+  "option2",
+];
+
+List<String> disordersfamily = [
+  "option1",
+  "option2",
+];

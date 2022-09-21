@@ -25,8 +25,9 @@ class SignUpBloc {
   TextEditingController complaintController = TextEditingController();
   TextEditingController problemFirstNotedController = TextEditingController();
   TextEditingController speechassessmentController = TextEditingController();
-  TextEditingController diagnosedController = TextEditingController();
-  TextEditingController disordersfamilyController = TextEditingController();
+  ValueNotifier<String> diagnosedValue = ValueNotifier<String>("");
+  ValueNotifier<String> disordersfamilyValue = ValueNotifier<String>("");
+
   TextEditingController enrolledController = TextEditingController();
   TextEditingController birthGenre = TextEditingController();
   TextEditingController birthWeight = TextEditingController();
@@ -147,9 +148,9 @@ class SignUpBloc {
           whenTheProblemWasFirstNoted: problemFirstNotedController.text,
           doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult:
               speechassessmentController.text,
-          hasYourChildBeenDiagnosedWithAnyOfThese: diagnosedController.text,
+          hasYourChildBeenDiagnosedWithAnyOfThese: diagnosedValue.value,
           isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily:
-              disordersfamilyController.text,
+              disordersfamilyValue.value,
           hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms:
               enrolledController.text,
           firstEvaluationDate: "",

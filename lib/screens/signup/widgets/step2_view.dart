@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/signup/signup_bloc.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
+import 'package:rewards_app/shared_widgets/custom_textEditor_widget.dart';
+import 'package:rewards_app/shared_widgets/custom_textfield_dropdown_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
+import 'package:rewards_app/utils/global_value.dart';
 
 class Step2View extends StatelessWidget {
   final SignUpBloc bloc;
@@ -14,51 +17,58 @@ class Step2View extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomTextField(
+        const SizedBox(height: 16),
+        CustomTextEditorField(
           controller: bloc.complaintController,
           hintText: AppLocalizations.of(context)!.complaint,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
           onChange: (value) => bloc.validateFields(),
         ),
         const SizedBox(height: 16),
-        CustomTextField(
+        CustomTextEditorField(
           controller: bloc.problemFirstNotedController,
           hintText: AppLocalizations.of(context)!.problemFirstNoted,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
           onChange: (value) => bloc.validateFields(),
         ),
         const SizedBox(height: 16),
-        CustomTextField(
+        CustomTextEditorField(
           controller: bloc.speechassessmentController,
           hintText: AppLocalizations.of(context)!.speechassessment,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
           onChange: (value) => bloc.validateFields(),
         ),
         const SizedBox(height: 16),
-        CustomTextField(
-          controller: bloc.diagnosedController,
-          hintText: AppLocalizations.of(context)!.diagnosed,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
-          onChange: (value) => bloc.validateFields(),
-        ),
+        ValueListenableBuilder(
+            valueListenable: bloc.diagnosedValue,
+            builder: (context, snapshot, child) {
+              return CustomTextFieldWithDropDown(
+                prefixIcon: const Icon(Icons.arrow_circle_down_sharp),
+                hintMessage: AppLocalizations.of(context)!.diagnosed,
+                value: bloc.diagnosedValue.value,
+                items: diagnosed,
+                onChanged: (value) {
+                  bloc.diagnosedValue.value = value!;
+                  bloc.validateFields();
+                },
+              );
+            }),
         const SizedBox(height: 16),
-        CustomTextField(
-          controller: bloc.disordersfamilyController,
-          hintText: AppLocalizations.of(context)!.disordersfamily,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
-          onChange: (value) => bloc.validateFields(),
-        ),
+        ValueListenableBuilder(
+            valueListenable: bloc.disordersfamilyValue,
+            builder: (context, snapshot, child) {
+              return CustomTextFieldWithDropDown(
+                prefixIcon: const Icon(Icons.arrow_circle_down_sharp),
+                hintMessage: AppLocalizations.of(context)!.disordersfamily,
+                value: bloc.disordersfamilyValue.value,
+                items: disordersfamily,
+                onChanged: (value) {
+                  bloc.disordersfamilyValue.value = value!;
+                  bloc.validateFields();
+                },
+              );
+            }),
         const SizedBox(height: 16),
-        CustomTextField(
+        CustomTextEditorField(
           controller: bloc.enrolledController,
           hintText: AppLocalizations.of(context)!.enrolledpreviously,
-          keyboardType: TextInputType.name,
-          prefixIcon: const Icon(Icons.info),
           onChange: (value) => bloc.validateFields(),
         ),
         const SizedBox(height: 16),
