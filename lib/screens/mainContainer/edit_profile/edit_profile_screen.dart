@@ -10,7 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  EditProfileScreen({Key? key}) : super(key: key);
+  const EditProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<EditProfileScreen> createState() => _EditProfileScreenState();
@@ -19,7 +19,6 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final _bloc = EditProfileBloc();
 
-  //TODO: Handle correct design for the fields
   @override
   Widget build(BuildContext context) {
     return Scaffold(
