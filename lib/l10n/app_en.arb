@@ -87,7 +87,12 @@
   "replacetext" : "REPLACE",
   "youdonthaveenighscore" : "You Don't Have enough Score",
   "areyousuretitle" : "Are You Sure ?",
-  "areyousurescoremessage" : "Do you want to replace your points with the selected gift ?"
+  "areyousurescoremessage" : "Do you want to replace your points with the selected gift ?",
+  "done" : "Done",
+  "congratulations" : "Congratulations!",
+  "pleaseproceedtothereceptionist" : "Please proceed to the receptionist to complete your request.",
+  "pointshavebeendeducted" : "points have been deducted, and a request to replace them with",
+  "hasbeenreceived" : "has been received."
 
 
 

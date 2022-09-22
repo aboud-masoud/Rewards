@@ -41,8 +41,7 @@ class ScoreScreen extends StatelessWidget {
               Center(
                 child: CustomText(
                   title: AppLocalizations.of(context)!.score,
-                  style: CustomTextStyle()
-                      .semibold(size: 16, color: const Color(0xff707070)),
+                  style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
                 ),
               ),
               Expanded(child: Container()),
@@ -69,18 +68,14 @@ class ScoreScreen extends StatelessWidget {
                       const SizedBox(height: 65),
                       StreamBuilder(
                           stream: _bloc.profilesScore.snapshots(),
-                          builder: (context,
-                              AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+                          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                             final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs.singleWhere(
-                                    (element) => element.id == userEmail);
-                            _bloc.currentUserScore =
-                                int.parse(documentSnapshot["points"]);
+                                streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
+                            _bloc.currentUserScore = int.parse(documentSnapshot["points"]);
 
                             return CustomText(
                               title: _bloc.currentUserScore.toString(),
-                              style: CustomTextStyle()
-                                  .bold(size: 70, color: Colors.white),
+                              style: CustomTextStyle().bold(size: 70, color: Colors.white),
                             );
                           }),
                     ],
@@ -92,8 +87,7 @@ class ScoreScreen extends StatelessWidget {
           Expanded(child: Container()),
           CustomText(
             title: AppLocalizations.of(context)!.replaceyourpointswith,
-            style: CustomTextStyle()
-                .bold(size: 16, color: const Color(0xff3a4da7)),
+            style: CustomTextStyle().bold(size: 16, color: const Color(0xff3a4da7)),
           ),
           const SizedBox(height: 20),
           StreamBuilder(
@@ -107,15 +101,13 @@ class ScoreScreen extends StatelessWidget {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        final int cardScore =
-                            int.parse(documentSnapshot[index]["points"]);
+                        final int cardScore = int.parse(documentSnapshot[index]["points"]);
                         return Padding(
                           padding: const EdgeInsets.all(10),
                           child: Container(
                             decoration: BoxDecoration(
                               color: theColor,
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(20)),
+                              borderRadius: const BorderRadius.all(Radius.circular(20)),
                             ),
                             width: MediaQuery.of(context).size.width - 100,
                             child: Padding(
@@ -129,66 +121,54 @@ class ScoreScreen extends StatelessWidget {
                                         : documentSnapshot[index]["stringAr"],
                                     shouldFit: false,
                                     maxLins: 4,
-                                    style: CustomTextStyle()
-                                        .medium(size: 16, color: Colors.white),
+                                    style: CustomTextStyle().medium(size: 16, color: Colors.white),
                                   ),
                                   Expanded(child: Container()),
                                   Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                     children: [
                                       CustomButtonWidget(
                                           widthSize: 80,
                                           backgroundColor: Colors.white,
                                           isButtonRounded: true,
-                                          title: AppLocalizations.of(context)!
-                                              .replacetext,
+                                          title: AppLocalizations.of(context)!.replacetext,
                                           textColor: theColor,
                                           textSize: 15,
                                           onPress: () async {
-                                            showAreYouShoreDialog(context,
-                                                () async {
-                                              if (cardScore <=
-                                                  _bloc.currentUserScore) {
-                                                _bloc.currentUserScore =
-                                                    _bloc.currentUserScore -
-                                                        cardScore;
-                                                // TODO: Handle Success Messages
-                                                await _bloc.profilesScore
-                                                    .doc(userEmail)
-                                                    .update({
-                                                  "points":
-                                                      "${_bloc.currentUserScore}"
+                                            showAreYouShoreDialog(context, () async {
+                                              if (cardScore <= _bloc.currentUserScore) {
+                                                _bloc.currentUserScore = _bloc.currentUserScore - cardScore;
+                                                await _bloc.profilesScore.doc(userEmail).update(
+                                                    {"points": "${_bloc.currentUserScore}"}).then((value) async {
+                                                  await _bloc.requestScoreExchange.add(
+                                                    {
+                                                      "email": userEmail,
+                                                      "exchange with": languageSelected.value == "en"
+                                                          ? documentSnapshot[index]["stringEn"]
+                                                          : documentSnapshot[index]["stringAr"],
+                                                      "number of point discounted": cardScore,
+                                                      "number of point the user still have": _bloc.currentUserScore,
+                                                      "date": DateTime.now(),
+                                                    },
+                                                  ).then((value) {
+                                                    successAlert(
+                                                        context,
+                                                        cardScore.toString(),
+                                                        languageSelected.value == "en"
+                                                            ? documentSnapshot[index]["stringEn"]
+                                                            : documentSnapshot[index]["stringAr"]);
+                                                  });
                                                 });
-
-                                                await _bloc.requestScoreExchange
-                                                    .add(
-                                                  {
-                                                    "email": userEmail,
-                                                    "exchange with":
-                                                        documentSnapshot[index]
-                                                            ["stringEn"],
-                                                    "number of point discounted":
-                                                        cardScore,
-                                                    "number of point the user still have":
-                                                        _bloc.currentUserScore,
-                                                    "date": DateTime.now(),
-                                                  },
-                                                );
                                               } else {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(SnackBar(
-                                                  content: Text(AppLocalizations
-                                                          .of(context)!
-                                                      .youdonthaveenighscore),
+                                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                  content: Text(AppLocalizations.of(context)!.youdonthaveenighscore),
                                                 ));
                                               }
                                             });
                                           }),
                                       CustomText(
                                         title: cardScore.toString(),
-                                        style: CustomTextStyle().bold(
-                                            size: 35, color: Colors.white),
+                                        style: CustomTextStyle().bold(size: 35, color: Colors.white),
                                       )
                                     ],
                                   )
@@ -207,6 +187,63 @@ class ScoreScreen extends StatelessWidget {
               })
         ],
       ),
+    );
+  }
+
+  successAlert(BuildContext context, String numberOfPoint, String value) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: const EdgeInsets.only(left: 50, right: 50),
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(20.0),
+              ),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                CustomText(
+                  title: AppLocalizations.of(context)!.congratulations,
+                  shouldFit: false,
+                  style: CustomTextStyle().bold(size: 21, color: const Color(0xff419aff)),
+                ),
+                const SizedBox(height: 20),
+                Image.asset(
+                  "assets/images/mark.png",
+                  width: 200,
+                ),
+                const SizedBox(height: 30),
+                Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: CustomText(
+                    textAlign: TextAlign.center,
+                    title:
+                        "$numberOfPoint ${AppLocalizations.of(context)!.pointshavebeendeducted} $value ${AppLocalizations.of(context)!.hasbeenreceived} ${AppLocalizations.of(context)!.pleaseproceedtothereceptionist}",
+                    shouldFit: false,
+                    maxLins: 6,
+                    style: CustomTextStyle().regular(size: 12, color: const Color(0xff707070)),
+                  ),
+                ),
+                const SizedBox(height: 50),
+
+                CustomButtonWidget(
+                  title: AppLocalizations.of(context)!.done,
+                  onPress: () {
+                    Navigator.of(context).pop();
+                  },
+                  backgroundColor: const Color(0xff419aff),
+                  isButtonRounded: true,
+                )
+                // alert,
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -237,8 +274,7 @@ class ScoreScreen extends StatelessWidget {
         title: AppLocalizations.of(context)!.areyousurescoremessage,
         maxLins: 2,
         shouldFit: false,
-        style:
-            CustomTextStyle().regular(size: 16, color: const Color(0xff404040)),
+        style: CustomTextStyle().regular(size: 16, color: const Color(0xff404040)),
       ),
       actions: [
         cancelButton,

@@ -87,7 +87,13 @@
     "replacetext" : "استبدل",
     "youdonthaveenighscore" : "ليس لديك ما يكفي من النقاط",
     "areyousuretitle" : "هل انت متاكد ؟",
-    "areyousurescoremessage" : "هل تريد استبدال نقاطك بالهدية المختارة؟"
+    "areyousurescoremessage" : "هل تريد استبدال نقاطك بالهدية المختارة؟",
+    "done" : "تم",
+    "congratulations" : "تهانينا!",
+    "pleaseproceedtothereceptionist" : "يرجى التوجه إلى موظف الاستقبال لإكمال طلبك.",
+    "pointshavebeendeducted" : "تم خصم النقاط وطلب استبدالها",
+    "hasbeenreceived" : "تم استلام."
+
 
 
 
