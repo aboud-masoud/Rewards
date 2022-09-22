@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 
 class CustomTextEditorField extends StatelessWidget {
@@ -25,14 +26,17 @@ class CustomTextEditorField extends StatelessWidget {
         minLines: 5,
         maxLines: 5,
         autocorrect: false,
-        style: const TextStyle(fontSize: 14, color: Color(0xff191C1F)),
+        style: const TextStyle(fontSize: 12, color: Color(0xff191C1F)),
         controller: controller,
         cursorColor: const Color(0xff100C31),
         decoration: InputDecoration(
-          labelText: hintText,
-          labelStyle: CustomTextStyle()
-              .medium(color: const Color(0xffababab), size: 16),
-          filled: true,
+          label: CustomText(
+            title: hintText,
+            shouldFit: false,
+            maxLins: 4,
+            style: CustomTextStyle().medium(color: const Color(0xffababab), size: 12),
+          ),
+          filled: false,
           fillColor: const Color(0x00000000),
           border: const OutlineInputBorder(
             borderSide: BorderSide(),

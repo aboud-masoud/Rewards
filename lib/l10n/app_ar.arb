@@ -92,7 +92,33 @@
     "congratulations" : "تهانينا!",
     "pleaseproceedtothereceptionist" : "يرجى التوجه إلى موظف الاستقبال لإكمال طلبك.",
     "pointshavebeendeducted" : "تم خصم النقاط وطلب استبدالها",
-    "hasbeenreceived" : "تم استلام."
+    "hasbeenreceived" : "تم استلام.",
+    "howdoestheclientcommunicatemostofthetime" : "كيف يتواصل العميل معظم الوقت؟",
+    "describeingeneralclientsbehavior" : "وصف (بشكل عام) سلوك العملاء",
+    "describeclientsfocusandattention" : "صف تركيز العملاء واهتمامهم",
+    "wouldyouliketoaddanyadditionalinformation" : "هل ترغب في إضافة أي معلومات إضافية؟",
+    "medicalhistory" : "تاريخ طبى",
+    "doestheclientuseanymedicationsregularlyfrequently" : "هل يستخدم العميل أي أدوية بشكل منتظم؟ أذكر من فضلك",
+    "doestheclienthaveanydifficultiesinvisionhearingoranyothersensationissues" : "هل يعاني العميل من أي صعوبات في الرؤية أو السمع أو أي مشاكل أخرى تتعلق بالإحساس؟ أذكر من فضلك",
+    "preferablehandfortheclient" : "اليد المفضلة للعميل",
+    "wasthebeginningofstutteringsymptomsassociatedwithlanguageorspeechdifficulty" : "هل كانت بداية أعراض التأتأة المرتبطة باللغة أو صعوبة الكلام؟",
+    "isthereanysimilarspeechdisordernotedinthefamily" : "هل هناك أي اضطراب في الكلام المماثل الذي لوحظ في الأسرة؟",
+    "isstutteringseveritychangeamongplacespeoplesituations" : "هل تتغير شدة التلعثم بين الأماكن / الأشخاص / المواقف؟",
+    "stutteringhistory" : "تاريخ التأتأة",
+    "duringthestutteringmomenttheclientoryouwill" : "خلال لحظة التأتأة ، العميل أو سوف تفعله",
+    "thestutteringmomentsinclientsspeechappearon" : "As you note, the stuttering moments in clients’ speech appear on",
+    "arethestutteringmomentsbehaviorsthattheclientexperienceseems" : "Are the stuttering moments / behaviors that the client experience seems",
+    "stutteringsymptomsfirstnoted" : "When were the stuttering symptoms first noted?"
+
+
+
+
+
+
+
+
+
+
 
 
 

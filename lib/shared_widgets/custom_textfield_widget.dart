@@ -43,9 +43,9 @@ class CustomTextField extends StatelessWidget {
         autocorrect: false,
         readOnly: readOnly,
         style: enabled
-            ? const TextStyle(fontSize: 14, color: Color(0xff191C1F))
+            ? const TextStyle(fontSize: 12, color: Color(0xff191C1F))
             : const TextStyle(
-                fontSize: 14,
+                fontSize: 12,
                 color: Color(0xff898989),
               ),
         controller: controller,
@@ -53,8 +53,7 @@ class CustomTextField extends StatelessWidget {
         cursorColor: const Color(0xff100C31),
         decoration: InputDecoration(
           labelText: hintText,
-          labelStyle: CustomTextStyle()
-              .medium(color: const Color(0xffababab), size: 16),
+          labelStyle: CustomTextStyle().medium(color: const Color(0xffababab), size: 12),
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,
           filled: true,

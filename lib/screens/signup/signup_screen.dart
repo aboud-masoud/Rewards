@@ -15,7 +15,6 @@ enum SignupStatusEnum { language, stammering }
 //TODO: Handle the type of registration
 //TODO: Handle faze 3
 //TODO: Handle faze 4
-//TODO: handle validatation
 class SignUpScreen extends StatelessWidget {
   final SignupStatusEnum signupStatus;
   SignUpScreen({required this.signupStatus, Key? key}) : super(key: key);
@@ -29,8 +28,7 @@ class SignUpScreen extends StatelessWidget {
       appBar: AppBar(
         title: CustomText(
           title: AppLocalizations.of(context)!.signup,
-          style: CustomTextStyle()
-              .semibold(size: 16, color: const Color(0xff707070)),
+          style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
         ),
         backgroundColor: const Color(0xfff9f9f9),
         elevation: 0,
@@ -51,8 +49,7 @@ class SignUpScreen extends StatelessWidget {
               children: [
                 SizedBox(height: 68, child: HeaderView(bloc: _bloc)),
                 Expanded(
-                  child: SingleChildScrollView(
-                      child: returnCorrectStepView(snapshot, _bloc)),
+                  child: SingleChildScrollView(child: returnCorrectStepView(snapshot, _bloc)),
                 )
               ],
             );

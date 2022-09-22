@@ -26,10 +26,12 @@ class CustomTextFieldWithDropDown extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           value != ''
-              ? CustomText(
-                  title: hintMessage,
-                  style: CustomTextStyle()
-                      .regular(size: 12, color: const Color(0xff707070)),
+              ? Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: CustomText(
+                    title: hintMessage,
+                    style: CustomTextStyle().regular(size: 12, color: const Color(0xff707070)),
+                  ),
                 )
               : Container(),
           FormField(builder: (FormFieldState<String> state) {
@@ -39,10 +41,10 @@ class CustomTextFieldWithDropDown extends StatelessWidget {
                   borderSide: BorderSide(),
                 ),
                 prefixIcon: prefixIcon,
-                labelStyle: CustomTextStyle().regular(size: 16.0),
-                errorStyle: CustomTextStyle()
-                    .regular(color: Colors.redAccent, size: 16.0),
+                labelStyle: CustomTextStyle().regular(size: 12),
+                errorStyle: CustomTextStyle().regular(color: Colors.redAccent, size: 12),
                 hintText: hintMessage,
+                hintStyle: CustomTextStyle().regular(size: 12),
               ),
               isEmpty: value == '',
               child: DropdownButtonHideUnderline(
@@ -56,10 +58,7 @@ class CustomTextFieldWithDropDown extends StatelessWidget {
                       state.didChange(newValue);
                     }
                   },
-                  items: items
-                      .map((String item) => DropdownMenuItem<String>(
-                          child: Text(item), value: item))
-                      .toList(),
+                  items: items.map((String item) => DropdownMenuItem<String>(child: Text(item), value: item)).toList(),
                 ),
               ),
             );

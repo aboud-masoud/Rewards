@@ -92,8 +92,23 @@
   "congratulations" : "Congratulations!",
   "pleaseproceedtothereceptionist" : "Please proceed to the receptionist to complete your request.",
   "pointshavebeendeducted" : "points have been deducted, and a request to replace them with",
-  "hasbeenreceived" : "has been received."
-
+  "hasbeenreceived" : "has been received.",
+  "howdoestheclientcommunicatemostofthetime" : "How does the client communicate most of the time?",
+  "describeingeneralclientsbehavior" : "Describe (in general) clients’ behavior",
+  "describeclientsfocusandattention" : "Describe clients’ focus and attention",
+  "wouldyouliketoaddanyadditionalinformation" : "Would you like to add any additional information?",
+  "medicalhistory" : "MEDICAL HISTORY",
+  "doestheclientuseanymedicationsregularlyfrequently" : "Does the client use any medications regularly-frequently? Mention please",
+  "doestheclienthaveanydifficultiesinvisionhearingoranyothersensationissues" : "Does the client have any difficulties in vision, hearing, or any other sensation issues? Mention please",
+  "preferablehandfortheclient" : "Preferable hand for the client",
+  "wasthebeginningofstutteringsymptomsassociatedwithlanguageorspeechdifficulty" : "Was the beginning of stuttering symptoms associated with language or speech difficulty?",
+  "isthereanysimilarspeechdisordernotedinthefamily" : "Is there any similar speech disorder noted in the family?",
+  "isstutteringseveritychangeamongplacespeoplesituations" : "Is stuttering severity change among places/people/situations?",
+  "stutteringhistory" : "STUTTERING HISTORY",
+  "duringthestutteringmomenttheclientoryouwill" : "During the stuttering moment, the client or you will",
+  "thestutteringmomentsinclientsspeechappearon" : "As you note, the stuttering moments in clients’ speech appear on",
+  "arethestutteringmomentsbehaviorsthattheclientexperienceseems" : "Are the stuttering moments / behaviors that the client experience seems",
+  "stutteringsymptomsfirstnoted" : "When were the stuttering symptoms first noted?"
 
 
 

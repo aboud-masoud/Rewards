@@ -39,16 +39,11 @@ class _Step1ViewState extends State<Step1View> {
             onChange: (value) => widget.bloc.validateFields(),
             onTap: () async {
               DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(1900),
-                  lastDate: DateTime(2101));
+                  context: context, initialDate: DateTime.now(), firstDate: DateTime(1900), lastDate: DateTime(2101));
               if (pickedDate != null) {
-                String formattedDate =
-                    DateFormat('yyyy-MM-dd').format(pickedDate);
+                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
                 setState(() {
-                  widget.bloc.dateOfBirthController.text =
-                      formattedDate; //set output date to TextField value.
+                  widget.bloc.dateOfBirthController.text = formattedDate; //set output date to TextField value.
                 });
               } else {
                 print("Date is not selected");
@@ -98,8 +93,7 @@ class _Step1ViewState extends State<Step1View> {
             builder: (context, snapshot, child) {
               return CustomTextFieldWithDropDown(
                 prefixIcon: const Icon(Icons.language),
-                hintMessage: AppLocalizations.of(context)!
-                    .usedlanguagewiththeclientathome,
+                hintMessage: AppLocalizations.of(context)!.usedlanguagewiththeclientathome,
                 value: widget.bloc.usedLanguageValue.value,
                 items: usedLanguage,
                 onChanged: (value) {
@@ -139,37 +133,36 @@ class _Step1ViewState extends State<Step1View> {
           prefixIcon: const Icon(Icons.percent),
           onChange: (value) => widget.bloc.validateFields(),
         ),
-        const SizedBox(height: 16),
-        ValueListenableBuilder(
-            valueListenable: widget.bloc.kinshipValue,
-            builder: (context, snapshot, child) {
-              return CustomTextFieldWithDropDown(
-                prefixIcon: const Icon(Icons.arrow_circle_down_sharp),
-                hintMessage: AppLocalizations.of(context)!
-                    .isthereanykinshipbetweenparents,
-                value: widget.bloc.kinshipValue.value,
-                items: kinship,
-                onChanged: (value) {
-                  widget.bloc.kinshipValue.value = value!;
-                  widget.bloc.validateFields();
-                },
-              );
-            }),
-        const SizedBox(height: 16),
-        ValueListenableBuilder(
-            valueListenable: widget.bloc.foundCountactValue,
-            builder: (context, snapshot, child) {
-              return CustomTextFieldWithDropDown(
-                prefixIcon: const Icon(Icons.contact_page),
-                hintMessage: AppLocalizations.of(context)!.youfoundcontactusvia,
-                value: widget.bloc.foundCountactValue.value,
-                items: foundCountact,
-                onChanged: (value) {
-                  widget.bloc.foundCountactValue.value = value!;
-                  widget.bloc.validateFields();
-                },
-              );
-            }),
+        // const SizedBox(height: 16),
+        // ValueListenableBuilder(
+        //     valueListenable: widget.bloc.kinshipValue,
+        //     builder: (context, snapshot, child) {
+        //       return CustomTextFieldWithDropDown(
+        //         prefixIcon: const Icon(Icons.arrow_circle_down_sharp),
+        //         hintMessage: AppLocalizations.of(context)!.isthereanykinshipbetweenparents,
+        //         value: widget.bloc.kinshipValue.value,
+        //         items: kinship,
+        //         onChanged: (value) {
+        //           widget.bloc.kinshipValue.value = value!;
+        //           widget.bloc.validateFields();
+        //         },
+        //       );
+        //     }),
+        // const SizedBox(height: 16),
+        // ValueListenableBuilder(
+        //     valueListenable: widget.bloc.foundCountactValue,
+        //     builder: (context, snapshot, child) {
+        //       return CustomTextFieldWithDropDown(
+        //         prefixIcon: const Icon(Icons.contact_page),
+        //         hintMessage: AppLocalizations.of(context)!.youfoundcontactusvia,
+        //         value: widget.bloc.foundCountactValue.value,
+        //         items: foundCountact,
+        //         onChanged: (value) {
+        //           widget.bloc.foundCountactValue.value = value!;
+        //           widget.bloc.validateFields();
+        //         },
+        //       );
+        //     }),
         const SizedBox(height: 16),
         CustomTextField(
           controller: widget.bloc.emailController,
@@ -204,8 +197,7 @@ class _Step1ViewState extends State<Step1View> {
                 enable: snapshot,
                 backgroundColor: const Color(0xff419aff),
                 onPress: () {
-                  widget.bloc.stepNumberNotifier.value =
-                      widget.bloc.stepNumberNotifier.value + 1;
+                  widget.bloc.stepNumberNotifier.value = widget.bloc.stepNumberNotifier.value + 1;
                 },
               );
             }),
@@ -214,10 +206,8 @@ class _Step1ViewState extends State<Step1View> {
             valueListenable: widget.bloc.signupStatus,
             builder: (context, snapshot, child) {
               if (snapshot == SignUpStatusEnum.faild) {
-                return Text(
-                    AppLocalizations.of(context)!.errorInEmailOrPassword,
-                    style:
-                        CustomTextStyle().regular(color: Colors.red, size: 18));
+                return Text(AppLocalizations.of(context)!.errorInEmailOrPassword,
+                    style: CustomTextStyle().regular(color: Colors.red, size: 18));
               } else if (snapshot == SignUpStatusEnum.inProgress) {
                 return const CircularProgressIndicator();
               } else {
