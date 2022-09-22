@@ -18,6 +18,8 @@ class EditProfileBloc {
   ValueNotifier<String> foundCountactValue = ValueNotifier<String>("");
   ValueNotifier<String> kinshipValue = ValueNotifier<String>("");
 
+  bool openPageForTheFirstTime = true;
+
   final CollectionReference profile =
       FirebaseFirestore.instance.collection('profiles');
 
@@ -52,9 +54,21 @@ class EditProfileBloc {
   String wouldYouLikeToAddAnyAdditionalInformation = "";
 
   void validateFields() {
-    //TODO : handle validation
-
-    fieldsValidation.value = true;
+    if (fullNameController.text.isNotEmpty &&
+        dateOfBirthController.text.isNotEmpty &&
+        nationalityValue.value != "" &&
+        genderValue.value != "" &&
+        addressController.text.isNotEmpty &&
+        usedLanguageValue.value != "" &&
+        mobileNumberController.text.isNotEmpty &&
+        parentOcupationValue.value != "" &&
+        hisrankController.text.isNotEmpty &&
+        kinshipValue.value != "" &&
+        foundCountactValue.value != "") {
+      fieldsValidation.value = true;
+    } else {
+      fieldsValidation.value = false;
+    }
   }
 
   Future<void> updateProfileInformation() async {
