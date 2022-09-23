@@ -22,6 +22,8 @@ class _Step1ViewState extends State<Step1View> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 16),
+
         CustomTextField(
           controller: widget.bloc.fullNameController,
           hintText: AppLocalizations.of(context)!.name_hint,

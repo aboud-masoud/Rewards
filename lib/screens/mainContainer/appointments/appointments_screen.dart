@@ -28,34 +28,44 @@ class ApotmentsScreen extends StatelessWidget {
           style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          box(
-              context: context,
-              backgroundColor: const Color(0xffc193e9),
-              imageName: "assets/images/Counseling.png",
-              title: AppLocalizations.of(context)!.familyCounselingSession,
-              onTap: () async {
-                final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                await _bloc.appointments.add(
-                    {"Email": email, "Type": "Counseling", "Date": DateTime.now(), "mobile number": userMobileNumber});
-                showAlertDialog(context);
-              }),
-          const SizedBox(height: 20),
-          box(
-              context: context,
-              backgroundColor: const Color(0xffe99393),
-              imageName: "assets/images/Evaluation.png",
-              title: AppLocalizations.of(context)!.evaluationSession,
-              onTap: () async {
-                final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                await _bloc.appointments.add(
-                    {"Email": email, "Type": "Evaluation", "Date": DateTime.now(), "mobile number": userMobileNumber});
-                showAlertDialog(context);
-              }),
-          const SizedBox(height: 40),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            box(
+                context: context,
+                backgroundColor: const Color(0xffc193e9),
+                imageName: "assets/images/Counseling.png",
+                title: AppLocalizations.of(context)!.familyCounselingSession,
+                onTap: () async {
+                  final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
+                  await _bloc.appointments.add({
+                    "Email": email,
+                    "Type": "Counseling",
+                    "Date": DateTime.now(),
+                    "mobile number": userMobileNumber
+                  });
+                  showAlertDialog(context);
+                }),
+            const SizedBox(height: 20),
+            box(
+                context: context,
+                backgroundColor: const Color(0xffe99393),
+                imageName: "assets/images/Evaluation.png",
+                title: AppLocalizations.of(context)!.evaluationSession,
+                onTap: () async {
+                  final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
+                  await _bloc.appointments.add({
+                    "Email": email,
+                    "Type": "Evaluation",
+                    "Date": DateTime.now(),
+                    "mobile number": userMobileNumber
+                  });
+                  showAlertDialog(context);
+                }),
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }
@@ -66,48 +76,49 @@ class ApotmentsScreen extends StatelessWidget {
       required String imageName,
       required String title,
       required Function() onTap}) {
-    return Expanded(
+    return SizedBox(
+        height: 321,
         child: Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      child: InkWell(
-        onTap: () => onTap(),
-        child: Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: backgroundColor,
-            border: Border.all(color: const Color(0xffe8ebef)),
-            borderRadius: const BorderRadius.all(Radius.circular(50)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 30),
-                Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    imageName,
-                    width: 275,
-                  ),
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: InkWell(
+            onTap: () => onTap(),
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                border: Border.all(color: const Color(0xffe8ebef)),
+                borderRadius: const BorderRadius.all(Radius.circular(50)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 30),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Image.asset(
+                        imageName,
+                        width: 275,
+                      ),
+                    ),
+                    Expanded(child: Container()),
+                    CustomText(
+                      title: AppLocalizations.of(context)!.bookAn,
+                      style: CustomTextStyle().regular(size: 16, color: Colors.white),
+                    ),
+                    const SizedBox(height: 8),
+                    CustomText(
+                      title: title,
+                      style: CustomTextStyle().bold(size: 25, color: Colors.white),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
                 ),
-                Expanded(child: Container()),
-                CustomText(
-                  title: AppLocalizations.of(context)!.bookAn,
-                  style: CustomTextStyle().regular(size: 16, color: Colors.white),
-                ),
-                const SizedBox(height: 8),
-                CustomText(
-                  title: title,
-                  style: CustomTextStyle().bold(size: 25, color: Colors.white),
-                ),
-                const SizedBox(height: 30),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   showAlertDialog(BuildContext context) {

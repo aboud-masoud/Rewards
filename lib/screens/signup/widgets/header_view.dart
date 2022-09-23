@@ -38,7 +38,8 @@ class HeaderView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText(
-                        title: AppLocalizations.of(context)!.step + " " + bloc.stepNumberNotifier.value.toString() + "/4",
+                        title:
+                            AppLocalizations.of(context)!.step + " " + bloc.stepNumberNotifier.value.toString() + "/4",
                         style: CustomTextStyle().medium(size: 10, color: const Color(0xffababab)),
                       ),
                       CustomText(
@@ -58,7 +59,7 @@ class HeaderView extends StatelessWidget {
           backgroundColor: const Color(0xfff9f9f9),
           color: const Color(0xff419aff),
         ),
-        const SizedBox(height: 8),
+        const SizedBox(height: 4),
       ],
     );
   }
