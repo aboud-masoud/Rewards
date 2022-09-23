@@ -2,11 +2,18 @@ String userEmail = "";
 String userMobileNumber = "";
 
 List<String> nationality = [
-  "Yamin",
+  "Yemen",
   "Jordanian",
   "Omanian",
-  "Palistanin",
+  "Palastanian",
   "Amarican",
+  "Egyption",
+  "Iraqi",
+  "Syrian",
+  "UAE",
+  "Sudanese",
+  "Pakistani",
+  "Marroco",
 ];
 
 List<String> gender = [
