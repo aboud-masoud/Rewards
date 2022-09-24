@@ -40,8 +40,7 @@ class PointScreen extends StatelessWidget {
               Center(
                 child: CustomText(
                   title: AppLocalizations.of(context)!.tasks,
-                  style: CustomTextStyle()
-                      .semibold(size: 16, color: const Color(0xff707070)),
+                  style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
                 ),
               ),
               Expanded(child: Container()),
@@ -62,14 +61,12 @@ class PointScreen extends StatelessWidget {
                 children: [
                   CustomText(
                     title: AppLocalizations.of(context)!.task,
-                    style:
-                        CustomTextStyle().medium(size: 12, color: Colors.white),
+                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
                   ),
                   Expanded(child: Container()),
                   CustomText(
                     title: AppLocalizations.of(context)!.tasks,
-                    style:
-                        CustomTextStyle().medium(size: 12, color: Colors.white),
+                    style: CustomTextStyle().medium(size: 12, color: Colors.white),
                   )
                 ],
               ),
@@ -79,28 +76,20 @@ class PointScreen extends StatelessWidget {
               stream: _bloc.points.snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                 if (streamSnapshot.hasData) {
-                  List<QueryDocumentSnapshot<Object?>> documentSnapshot =
-                      streamSnapshot.data!.docs;
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height - 255,
+                  List<QueryDocumentSnapshot<Object?>> documentSnapshot = streamSnapshot.data!.docs;
+                  return Expanded(
                     child: ListView.builder(
                         itemCount: documentSnapshot.length,
                         itemBuilder: (ctx, index) {
-                          Points item = Points.fromJson(documentSnapshot[index]
-                              .data() as Map<String, dynamic>);
+                          Points item = Points.fromJson(documentSnapshot[index].data() as Map<String, dynamic>);
                           return tile(
                               context: ctx,
-                              title: languageSelected.value == "en"
-                                  ? item.stringEn ?? ""
-                                  : item.stringAr ?? "",
+                              title: languageSelected.value == "en" ? item.stringEn ?? "" : item.stringAr ?? "",
                               numberOfPoints: item.points ?? "",
                               imageIcon: (item.image != null
                                   ? "assets/iconz/${item.image}.png"
                                   : "assets/iconz/videoIcon.png"),
-                              desc: languageSelected.value == "en"
-                                  ? item.descEn ?? ""
-                                  : item.descAr ?? "",
+                              desc: languageSelected.value == "en" ? item.descEn ?? "" : item.descAr ?? "",
                               lessThan70: item.lessThan70 ?? "",
                               between7090: item.between7080 ?? "",
                               moreThan: item.more90 ?? "");
@@ -148,16 +137,14 @@ class PointScreen extends StatelessWidget {
                             title: title,
                             maxLins: 2,
                             shouldFit: false,
-                            style: CustomTextStyle().medium(
-                                size: 12, color: const Color(0xff3a4da7)),
+                            style: CustomTextStyle().medium(size: 12, color: const Color(0xff3a4da7)),
                           ),
                           const SizedBox(height: 5),
                           CustomText(
                             title: desc,
                             maxLins: 2,
                             shouldFit: false,
-                            style: CustomTextStyle().regular(
-                                size: 10, color: const Color(0xff404040)),
+                            style: CustomTextStyle().regular(size: 10, color: const Color(0xff404040)),
                           ),
                           const SizedBox(height: 8),
                           Container(
@@ -170,20 +157,17 @@ class PointScreen extends StatelessWidget {
                                 CustomText(
                                   title: "Less than 70%",
                                   shouldFit: false,
-                                  style: CustomTextStyle()
-                                      .regular(size: 10, color: Colors.white),
+                                  style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 ),
                                 CustomText(
                                   title: "70% - 89",
                                   shouldFit: false,
-                                  style: CustomTextStyle()
-                                      .regular(size: 10, color: Colors.white),
+                                  style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 ),
                                 CustomText(
                                   title: "90% or more",
                                   shouldFit: false,
-                                  style: CustomTextStyle()
-                                      .regular(size: 10, color: Colors.white),
+                                  style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 )
                               ],
                             ),
@@ -198,20 +182,17 @@ class PointScreen extends StatelessWidget {
                                 CustomText(
                                   title: lessThan70,
                                   shouldFit: false,
-                                  style: CustomTextStyle().regular(
-                                      size: 10, color: const Color(0xff404040)),
+                                  style: CustomTextStyle().regular(size: 10, color: const Color(0xff404040)),
                                 ),
                                 CustomText(
                                   title: between7090,
                                   shouldFit: false,
-                                  style: CustomTextStyle().regular(
-                                      size: 10, color: const Color(0xff404040)),
+                                  style: CustomTextStyle().regular(size: 10, color: const Color(0xff404040)),
                                 ),
                                 CustomText(
                                   title: moreThan,
                                   shouldFit: false,
-                                  style: CustomTextStyle().regular(
-                                      size: 10, color: const Color(0xff404040)),
+                                  style: CustomTextStyle().regular(size: 10, color: const Color(0xff404040)),
                                 )
                               ],
                             ),
@@ -222,16 +203,14 @@ class PointScreen extends StatelessWidget {
                         title: title,
                         maxLins: 2,
                         shouldFit: false,
-                        style: CustomTextStyle()
-                            .medium(size: 12, color: const Color(0xff3a4da7)),
+                        style: CustomTextStyle().medium(size: 12, color: const Color(0xff3a4da7)),
                       ),
               ),
               Expanded(child: Container()),
               numberOfPoints != ""
                   ? CustomText(
                       title: numberOfPoints,
-                      style: CustomTextStyle()
-                          .medium(size: 12, color: const Color(0xff3a4da7)),
+                      style: CustomTextStyle().medium(size: 12, color: const Color(0xff3a4da7)),
                     )
                   : Container(),
               const SizedBox(width: 16),

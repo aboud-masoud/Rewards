@@ -69,14 +69,18 @@ class ScoreScreen extends StatelessWidget {
                       StreamBuilder(
                           stream: _bloc.profilesScore.snapshots(),
                           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                            final DocumentSnapshot documentSnapshot =
-                                streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
-                            _bloc.currentUserScore = int.parse(documentSnapshot["points"]);
+                            if (streamSnapshot.hasData) {
+                              final DocumentSnapshot documentSnapshot =
+                                  streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
+                              _bloc.currentUserScore = int.parse(documentSnapshot["points"]);
 
-                            return CustomText(
-                              title: _bloc.currentUserScore.toString(),
-                              style: CustomTextStyle().bold(size: 70, color: Colors.white),
-                            );
+                              return CustomText(
+                                title: _bloc.currentUserScore.toString(),
+                                style: CustomTextStyle().bold(size: 70, color: Colors.white),
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
                           }),
                     ],
                   ),
