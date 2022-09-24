@@ -155,7 +155,7 @@ class PointScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 CustomText(
-                                  title: "Less than 70%",
+                                  title: AppLocalizations.of(context)!.lessthan,
                                   shouldFit: false,
                                   style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 ),
@@ -165,7 +165,7 @@ class PointScreen extends StatelessWidget {
                                   style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 ),
                                 CustomText(
-                                  title: "90% or more",
+                                  title: AppLocalizations.of(context)!.morethan,
                                   shouldFit: false,
                                   style: CustomTextStyle().regular(size: 10, color: Colors.white),
                                 )
