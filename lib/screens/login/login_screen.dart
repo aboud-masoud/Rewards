@@ -26,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     _bloc.onInitBiometric(context);
+    _bloc.totalNotifications = 0;
     super.initState();
   }
 
@@ -44,18 +45,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                           onPressed: () async {
-                            await _bloc.refreshAppWithLanguageCode(context,
-                                languageSelected.value == "en" ? "ar" : "en");
+                            await _bloc.refreshAppWithLanguageCode(
+                                context, languageSelected.value == "en" ? "ar" : "en");
                           },
                           child: ValueListenableBuilder<String>(
                               valueListenable: languageSelected,
                               builder: (context, snapshot, child) {
                                 return CustomText(
-                                    title:
-                                        snapshot == "en" ? "عربي" : "English",
-                                    style: CustomTextStyle().bold(
-                                        size: 18,
-                                        color: const Color(0xff419aff)));
+                                    title: snapshot == "en" ? "عربي" : "English",
+                                    style: CustomTextStyle().bold(size: 18, color: const Color(0xff419aff)));
                               }))),
                   Image.asset(
                     "assets/images/logo.png",
@@ -64,26 +62,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 10),
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCenter,
-                    style: CustomTextStyle()
-                        .bold(size: 18, color: const Color(0xff3bbc28)),
+                    style: CustomTextStyle().bold(size: 18, color: const Color(0xff3bbc28)),
                   ),
                   const SizedBox(height: 5),
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCentersubtitle,
-                    style: CustomTextStyle()
-                        .bold(size: 12, color: const Color(0xff707070)),
+                    style: CustomTextStyle().bold(size: 12, color: const Color(0xff707070)),
                   ),
                   const SizedBox(height: 50),
                   CustomText(
                     title: AppLocalizations.of(context)!.welcomeback,
-                    style: CustomTextStyle()
-                        .bold(size: 24, color: const Color(0xff3bbc28)),
+                    style: CustomTextStyle().bold(size: 24, color: const Color(0xff3bbc28)),
                   ),
                   const SizedBox(height: 14),
                   CustomText(
                     title: AppLocalizations.of(context)!.loginmessage,
-                    style: CustomTextStyle()
-                        .bold(size: 16, color: const Color(0xff707070)),
+                    style: CustomTextStyle().bold(size: 16, color: const Color(0xff707070)),
                   ),
                   const SizedBox(height: 30),
                   CustomTextField(
@@ -107,8 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 width: 20,
                               ),
                               onPressed: () {
-                                _bloc.showPasswordLetters.value =
-                                    !_bloc.showPasswordLetters.value;
+                                _bloc.showPasswordLetters.value = !_bloc.showPasswordLetters.value;
                               }),
                           onChange: (value) => _bloc.validateFields(),
                         );
@@ -130,17 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: _bloc.passwordController.text)
                                   .then((value) {
                                 if (value) {
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(builder: (ctx) {
+                                  Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
                                     return const MainContainer();
                                   }), (route) => false);
                                 }
                               });
                             } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: Text(AppLocalizations.of(context)!
-                                    .checkInternetConnection),
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(AppLocalizations.of(context)!.checkInternetConnection),
                               ));
                             }
                           },
@@ -158,11 +148,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       valueListenable: _bloc.loginStatus,
                       builder: (context, snapshot, child) {
                         if (snapshot == LoginStatusEnum.faild) {
-                          return Text(
-                              AppLocalizations.of(context)!
-                                  .errorInEmailOrPassword,
-                              style: CustomTextStyle()
-                                  .regular(color: Colors.red, size: 16));
+                          return Text(AppLocalizations.of(context)!.errorInEmailOrPassword,
+                              style: CustomTextStyle().regular(color: Colors.red, size: 16));
                         } else if (snapshot == LoginStatusEnum.inProgress) {
                           return const CircularProgressIndicator();
                         } else {
@@ -181,8 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text(AppLocalizations.of(context)!
-                              .checkInternetConnection),
+                          content: Text(AppLocalizations.of(context)!.checkInternetConnection),
                         ));
                       }
                     },
@@ -191,13 +177,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         Text(
                           AppLocalizations.of(context)!.donthaveanaccount,
-                          style: CustomTextStyle().semibold(
-                              size: 14, color: const Color(0xff404040)),
+                          style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
                         ),
                         Text(
                           AppLocalizations.of(context)!.signup,
-                          style: CustomTextStyle().semibold(
-                              size: 14, color: const Color(0xff3bbc28)),
+                          style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
                         ),
                       ],
                     ),
@@ -235,8 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Center(
                     child: CustomText(
                       title: AppLocalizations.of(context)!.or,
-                      style: CustomTextStyle()
-                          .medium(color: const Color(0xff8F8F8F), size: 12),
+                      style: CustomTextStyle().medium(color: const Color(0xff8F8F8F), size: 12),
                       shouldFit: false,
                     ),
                   ),
@@ -270,15 +253,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   Expanded(
                     child: CustomText(
                       title: AppLocalizations.of(context)!.login_biometric,
-                      style: CustomTextStyle()
-                          .medium(color: const Color(0xff191C1F), size: 14),
+                      style: CustomTextStyle().medium(color: const Color(0xff191C1F), size: 14),
                       shouldFit: false,
                     ),
                   ),
                   Image.asset(
-                    (biometricType == BiometricType.face)
-                        ? 'assets/images/face_id.png'
-                        : 'assets/images/touch_id.png',
+                    (biometricType == BiometricType.face) ? 'assets/images/face_id.png' : 'assets/images/touch_id.png',
                     height: 30,
                     color: const Color(0xff191C1F),
                     alignment: Alignment.center,

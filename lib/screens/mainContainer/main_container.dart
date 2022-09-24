@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/mainContainer/main_container_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/utils/firebase_cloud_messaging.dart';
 
 class MainContainer extends StatefulWidget {
   const MainContainer({Key? key}) : super(key: key);
@@ -11,6 +12,11 @@ class MainContainer extends StatefulWidget {
 
 class _MainContainerState extends State<MainContainer> {
   final _bloc = MainContainerBloc();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void changeActivePage(int index) {
     setState(() {

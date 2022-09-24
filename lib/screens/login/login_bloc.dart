@@ -17,18 +17,17 @@ enum LoginStatusEnum { faild, success, non, inProgress }
 class LoginBloc {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late int totalNotifications;
 
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  ValueNotifier<LoginStatusEnum> loginStatus =
-      ValueNotifier<LoginStatusEnum>(LoginStatusEnum.non);
+  ValueNotifier<LoginStatusEnum> loginStatus = ValueNotifier<LoginStatusEnum>(LoginStatusEnum.non);
 
   ValueNotifier<bool> showPasswordLetters = ValueNotifier<bool>(false);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late bool biometricStatus;
   ValueNotifier<AuthenticationBiometricType> biometricResultNotifier =
-      ValueNotifier<AuthenticationBiometricType>(
-          AuthenticationBiometricType(isAvailable: false, type: null));
+      ValueNotifier<AuthenticationBiometricType>(AuthenticationBiometricType(isAvailable: false, type: null));
   StreamController<bool> buildController = StreamController<bool>.broadcast();
   final storage = FlutterSecureStorage();
 
@@ -47,9 +46,7 @@ class LoginBloc {
   }
 
   Future<bool> signInWithEmailAndPassword(
-      {required BuildContext context,
-      required String email,
-      required String password}) async {
+      {required BuildContext context, required String email, required String password}) async {
     loginStatus.value = LoginStatusEnum.inProgress;
     final User? user;
     try {
@@ -61,13 +58,11 @@ class LoginBloc {
 
       if (user != null) {
         loginStatus.value = LoginStatusEnum.success;
-        await _saveValuesInMemory(
-            userName: email, password: password, uid: user.uid);
+        await _saveValuesInMemory(userName: email, password: password, uid: user.uid);
         print(user.email);
         userEmail = user.email!;
 
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (ctx) {
+        Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (ctx) {
           return const MainContainer();
         }), (route) => false);
 
@@ -105,8 +100,7 @@ class LoginBloc {
 
   Future<bool> _checkAuthentication(TargetPlatform platform) async {
     if (await AuthenticationService().isBiometricAvailable()) {
-      biometricResultNotifier.value =
-          await (AuthenticationService().getAvailableBiometricTypes(platform));
+      biometricResultNotifier.value = await (AuthenticationService().getAvailableBiometricTypes(platform));
       buildController.sink.add(true);
       return true;
     }
@@ -117,20 +111,14 @@ class LoginBloc {
     final authenticationService = AuthenticationService();
 
     if (await authenticationService.isBiometricAvailable()) {
-      if (await authenticationService
-          .shouldAllowBiometricAuthenticationToContinue(
-              Theme.of(context).platform)) {
+      if (await authenticationService.shouldAllowBiometricAuthenticationToContinue(Theme.of(context).platform)) {
         // continue with authentication
-        final authentication = await authenticationService
-            .authenticateUser("Please use your biometric signature");
+        final authentication = await authenticationService.authenticateUser("Please use your biometric signature");
         if (authentication.success) {
-          var biometricU =
-              await storage.read(key: AppConstants.biometricU) ?? "";
-          var biometricP =
-              await storage.read(key: AppConstants.biometricP) ?? "";
+          var biometricU = await storage.read(key: AppConstants.biometricU) ?? "";
+          var biometricP = await storage.read(key: AppConstants.biometricP) ?? "";
 
-          return await signInWithEmailAndPassword(
-              context: context, email: biometricU, password: biometricP);
+          return await signInWithEmailAndPassword(context: context, email: biometricU, password: biometricP);
         }
       }
     }
@@ -138,17 +126,13 @@ class LoginBloc {
     return false;
   }
 
-  Future<void> _saveValuesInMemory(
-      {required String userName,
-      required String password,
-      required String uid}) async {
+  Future<void> _saveValuesInMemory({required String userName, required String password, required String uid}) async {
     await storage.deleteAll();
 
     await storage.write(key: AppConstants.biometricU, value: userName);
     await storage.write(key: AppConstants.biometricP, value: password);
     await storage.write(key: AppConstants.uid, value: uid);
-    await storage.write(
-        key: AppConstants.deviceLanguage, value: languageSelected.value);
+    await storage.write(key: AppConstants.deviceLanguage, value: languageSelected.value);
   }
 
   Future refreshAppWithLanguageCode(BuildContext context, String code) async {

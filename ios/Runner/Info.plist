@@ -34,6 +34,11 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>Please authorize to use the app</string>
 	<key>UILaunchStoryboardName</key>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
