@@ -7,15 +7,13 @@ class EditProfileBloc {
   TextEditingController fullNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
-  TextEditingController mobileNumberController = TextEditingController();
-  TextEditingController hisrankController = TextEditingController();
+  TextEditingController mobileNumber1Controller = TextEditingController();
+  TextEditingController mobileNumber2Controller = TextEditingController();
+
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
-  TextEditingController parentsoccupationController = TextEditingController();
 
   ValueNotifier<String> nationalityValue = ValueNotifier<String>("");
   ValueNotifier<String> genderValue = ValueNotifier<String>("");
-  ValueNotifier<String> usedLanguageValue = ValueNotifier<String>("");
-  ValueNotifier<String> kinshipValue = ValueNotifier<String>("");
 
   bool openPageForTheFirstTime = true;
 
@@ -57,11 +55,7 @@ class EditProfileBloc {
         nationalityValue.value != "" &&
         genderValue.value != "" &&
         addressController.text.isNotEmpty &&
-        usedLanguageValue.value != "" &&
-        mobileNumberController.text.isNotEmpty &&
-        parentsoccupationController.text != "" &&
-        hisrankController.text.isNotEmpty &&
-        kinshipValue.value != "") {
+        (mobileNumber1Controller.text.isNotEmpty || mobileNumber2Controller.text.isNotEmpty)) {
       fieldsValidation.value = true;
     } else {
       fieldsValidation.value = false;
@@ -76,11 +70,12 @@ class EditProfileBloc {
       nationality: nationalityValue.value,
       gender: genderValue.value,
       address: addressController.text,
-      mobileNumber: mobileNumberController.text,
-      usedLanguageWithTheClient: usedLanguageValue.value,
-      parentsOccupation: parentsoccupationController.text,
-      siblingsAndHisRank: hisrankController.text,
-      isThereAnyKinshipBetweenParents: kinshipValue.value,
+      mobileNumber1: mobileNumber1Controller.text,
+      mobileNumber2: mobileNumber2Controller.text,
+      usedLanguageWithTheClient: "",
+      parentsOccupation: "",
+      siblingsAndHisRank: "",
+      isThereAnyKinshipBetweenParents: "",
       youFoundContactUsVia: foundCountactValue,
       whatIsYourComplaintBriefly: whatIsYourComplaintBriefly,
       whenTheProblemWasFirstNoted: whenTheProblemWasFirstNoted,

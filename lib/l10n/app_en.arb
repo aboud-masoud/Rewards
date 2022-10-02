@@ -63,7 +63,7 @@
   "clientFullName" : "Client's Full Name*",
   "firstEvaluationDate" : "1 st Evaluation Date",
   "firstTherapeuticDate" : "1 st Therapeutic Session Date",
-  "therapeuticName" : "Therapeutic Name",
+  "therapeuticName" : "Therapist Name",
   "tasks" : "Points",
   "apotments" : "Appointments",
   "bookAn" : "Book an",
@@ -113,7 +113,9 @@
   "morethan" : "90% or more",
   "landline" : "Landline",
   "mobilephone"  : "Mobile Number",
-  "apotmentsTime" : "15 Min"
+  "apotmentsTime" : "15 Min",
+  "mobileNumberone" : "Mobile Number 1",
+  "mobileNumbertwo" : "Mobile Number 2"
 
 
 

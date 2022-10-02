@@ -76,7 +76,7 @@ class EditProfileScreen extends StatelessWidget {
                     _bloc.genderValue.value = documentSnapshot["Gender"] ?? "";
                     _bloc.addressController.text = documentSnapshot["Address"] ?? "";
                     // _bloc.usedLanguageValue.value = documentSnapshot["Used language with the client at home"] ?? "";
-                    _bloc.mobileNumberController.text = documentSnapshot["Mobile Number"] ?? "";
+                    _bloc.mobileNumber1Controller.text = documentSnapshot["Mobile Number"] ?? "";
                     // _bloc.parentOcupationValue.value = documentSnapshot["Parents occupation"] ?? "";
                     // _bloc.hisrankController.text = documentSnapshot["siblings and his rank"] ?? "";
                     // _bloc.kinshipValue.value = documentSnapshot["Is there any kinship between parents?"] ?? "";
@@ -207,59 +207,21 @@ class EditProfileScreen extends StatelessWidget {
                         onChange: (value) => _bloc.validateFields(),
                       ),
                       const SizedBox(height: 16),
-                      ValueListenableBuilder(
-                          valueListenable: _bloc.usedLanguageValue,
-                          builder: (context, snapshot, child) {
-                            return CustomTextFieldWithDropDown(
-                              prefixIcon: const Icon(Icons.language),
-                              hintMessage: AppLocalizations.of(context)!.usedlanguagewiththeclientathome,
-                              value: _bloc.usedLanguageValue.value,
-                              items: usedLanguage,
-                              onChanged: (value) {
-                                _bloc.usedLanguageValue.value = value!;
-                                _bloc.validateFields();
-                              },
-                            );
-                          }),
-                      const SizedBox(height: 16),
                       CustomTextField(
-                        controller: _bloc.mobileNumberController,
-                        hintText: AppLocalizations.of(context)!.mobileNumber,
+                        controller: _bloc.mobileNumber1Controller,
+                        hintText: AppLocalizations.of(context)!.mobileNumberone,
                         keyboardType: TextInputType.phone,
                         prefixIcon: const Icon(Icons.phone),
                         onChange: (value) => _bloc.validateFields(),
                       ),
                       const SizedBox(height: 16),
                       CustomTextField(
-                        controller: _bloc.parentsoccupationController,
-                        hintText: AppLocalizations.of(context)!.parentsoccupation,
-                        keyboardType: TextInputType.name,
-                        prefixIcon: const Icon(Icons.person),
+                        controller: _bloc.mobileNumber2Controller,
+                        hintText: AppLocalizations.of(context)!.mobileNumbertwo,
+                        keyboardType: TextInputType.phone,
+                        prefixIcon: const Icon(Icons.phone),
                         onChange: (value) => _bloc.validateFields(),
                       ),
-                      const SizedBox(height: 16),
-                      CustomTextField(
-                        controller: _bloc.hisrankController,
-                        hintText: AppLocalizations.of(context)!.siblingsandhisrank,
-                        keyboardType: TextInputType.name,
-                        prefixIcon: const Icon(Icons.percent),
-                        onChange: (value) => _bloc.validateFields(),
-                      ),
-                      const SizedBox(height: 16),
-                      ValueListenableBuilder(
-                          valueListenable: _bloc.kinshipValue,
-                          builder: (context, snapshot, child) {
-                            return CustomTextFieldWithDropDown(
-                              prefixIcon: const Icon(Icons.arrow_circle_down_sharp),
-                              hintMessage: AppLocalizations.of(context)!.isthereanykinshipbetweenparents,
-                              value: _bloc.kinshipValue.value,
-                              items: yesnoList,
-                              onChanged: (value) {
-                                _bloc.kinshipValue.value = value!;
-                                _bloc.validateFields();
-                              },
-                            );
-                          }),
                       const SizedBox(height: 50),
                     ],
                   );

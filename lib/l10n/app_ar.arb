@@ -51,7 +51,7 @@
     "dateofBirth" : "تاريخ الولادة",
     "nationality" : "الجنسية",
     "gender" : "الجنس",
-    "address" : "العنوان",
+    "address" : "مكان السكن",
     "usedlanguagewiththeclientathome" : "اللغة المستخدمة مع المستفيد في المنزل",
     "mobileNumber" : "رقم الهاتف المحمول",
     "parentsoccupation" : "مهنة الوالدين",
@@ -113,7 +113,9 @@
     "morethan" : "90٪ أو أكثر",
     "landline" : "الهاتف الارضي",
     "mobilephone"  : "الهاتف المحمول",
-    "apotmentsTime" : "١٥ دقيقة"
+    "apotmentsTime" : "١٥ دقيقة",
+    "mobileNumberone" : "رقم هاتف الأب",
+    "mobileNumbertwo" : "رقم هاتف الأم"
 
 
 

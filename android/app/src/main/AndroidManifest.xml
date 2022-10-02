@@ -23,7 +23,7 @@
     </queries>
 
    <application
-        android:label="rewards_app"
+        android:label="Amwaj Center"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
