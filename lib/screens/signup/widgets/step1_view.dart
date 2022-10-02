@@ -59,7 +59,7 @@ class _Step1ViewState extends State<Step1View> {
                 prefixIcon: const Icon(Icons.nature_outlined),
                 hintMessage: AppLocalizations.of(context)!.nationality,
                 value: widget.bloc.nationalityValue.value,
-                items: nationality,
+                items: nationality(context),
                 onChanged: (value) {
                   widget.bloc.nationalityValue.value = value!;
                   widget.bloc.validateFields();

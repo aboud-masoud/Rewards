@@ -10,28 +10,26 @@ class EditProfileBloc {
   TextEditingController mobileNumberController = TextEditingController();
   TextEditingController hisrankController = TextEditingController();
   ValueNotifier<bool> fieldsValidation = ValueNotifier<bool>(false);
+  TextEditingController parentsoccupationController = TextEditingController();
 
   ValueNotifier<String> nationalityValue = ValueNotifier<String>("");
   ValueNotifier<String> genderValue = ValueNotifier<String>("");
   ValueNotifier<String> usedLanguageValue = ValueNotifier<String>("");
-  ValueNotifier<String> parentOcupationValue = ValueNotifier<String>("");
-  ValueNotifier<String> foundCountactValue = ValueNotifier<String>("");
   ValueNotifier<String> kinshipValue = ValueNotifier<String>("");
 
   bool openPageForTheFirstTime = true;
 
-  final CollectionReference profile =
-      FirebaseFirestore.instance.collection('profiles');
+  final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
 
   String whatIsYourComplaintBriefly = "";
   String whenTheProblemWasFirstNoted = "";
-  String doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult =
-      "";
+  String doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult = "";
   String hasYourChildBeenDiagnosedWithAnyOfThese = "";
   String isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily = "";
   String hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms = "";
   String firstEvaluationDate = "";
   String firstTherapeuticSessionDate = "";
+  String foundCountactValue = "";
   String therapeuticName = "";
   String birthGenre = "";
   String birthWeight = "";
@@ -61,10 +59,9 @@ class EditProfileBloc {
         addressController.text.isNotEmpty &&
         usedLanguageValue.value != "" &&
         mobileNumberController.text.isNotEmpty &&
-        parentOcupationValue.value != "" &&
+        parentsoccupationController.text != "" &&
         hisrankController.text.isNotEmpty &&
-        kinshipValue.value != "" &&
-        foundCountactValue.value != "") {
+        kinshipValue.value != "") {
       fieldsValidation.value = true;
     } else {
       fieldsValidation.value = false;
@@ -81,16 +78,15 @@ class EditProfileBloc {
       address: addressController.text,
       mobileNumber: mobileNumberController.text,
       usedLanguageWithTheClient: usedLanguageValue.value,
-      parentsOccupation: parentOcupationValue.value,
+      parentsOccupation: parentsoccupationController.text,
       siblingsAndHisRank: hisrankController.text,
       isThereAnyKinshipBetweenParents: kinshipValue.value,
-      youFoundContactUsVia: foundCountactValue.value,
+      youFoundContactUsVia: foundCountactValue,
       whatIsYourComplaintBriefly: whatIsYourComplaintBriefly,
       whenTheProblemWasFirstNoted: whenTheProblemWasFirstNoted,
       doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult:
           doesTheChildHaveAPreviousLanguageAndSpeechAssessmentWhatWasTheResult,
-      hasYourChildBeenDiagnosedWithAnyOfThese:
-          hasYourChildBeenDiagnosedWithAnyOfThese,
+      hasYourChildBeenDiagnosedWithAnyOfThese: hasYourChildBeenDiagnosedWithAnyOfThese,
       isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily:
           isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily,
       hadYourChildEnrolledPreviouslyInAnyRehabilitationPrograms:
@@ -107,26 +103,20 @@ class EditProfileBloc {
           doesYourChildUseAnyMedicationsRegularlyFrequentlyMention,
       hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues:
           hasYourChildHadAVisionHearingProblemsOrAnyOtherSensoryIssues,
-      didYourChildDelayInAnyOfTheseDevelopmentalStages:
-          didYourChildDelayInAnyOfTheseDevelopmentalStages,
-      checkTheSkillsThatYourChildAchievesIndependently:
-          checkTheSkillsThatYourChildAchievesIndependently,
-      howDoesYourChildCommunicateMostOfTheTime:
-          howDoesYourChildCommunicateMostOfTheTime,
+      didYourChildDelayInAnyOfTheseDevelopmentalStages: didYourChildDelayInAnyOfTheseDevelopmentalStages,
+      checkTheSkillsThatYourChildAchievesIndependently: checkTheSkillsThatYourChildAchievesIndependently,
+      howDoesYourChildCommunicateMostOfTheTime: howDoesYourChildCommunicateMostOfTheTime,
       recentlyYourChildsSpeechIs: recentlyYourChildsSpeechIs,
       whenYourChildDidProduceHisFirstWord: whenYourChildDidProduceHisFirstWord,
-      doesTheChildUseAnyUtterancesInHisSpeechGiveExample:
-          doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
+      doesTheChildUseAnyUtterancesInHisSpeechGiveExample: doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
       describeYourChildReceptiveLanguage: describeYourChildReceptiveLanguage,
       describeYourChildExpressiveLanguage: describeYourChildExpressiveLanguage,
       describeYourChildBehavior: describeYourChildBehavior,
       describeYourChildFocusAndAttention: describeYourChildFocusAndAttention,
       describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay:
           describeYourChildPlayShareActivitiesSymbolicPlayAndRolePlay,
-      howMuchTimeYourChildSpendsOnTVSmartDevices:
-          howMuchTimeYourChildSpendsOnTVSmartDevices,
-      wouldYouLikeToAddAnyAdditionalInformation:
-          wouldYouLikeToAddAnyAdditionalInformation,
+      howMuchTimeYourChildSpendsOnTVSmartDevices: howMuchTimeYourChildSpendsOnTVSmartDevices,
+      wouldYouLikeToAddAnyAdditionalInformation: wouldYouLikeToAddAnyAdditionalInformation,
     );
 
     await profile.doc(userEmail).update(theJSON);

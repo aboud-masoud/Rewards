@@ -65,7 +65,7 @@ class ScoreScreen extends StatelessWidget {
                 Center(
                   child: Column(
                     children: [
-                      const SizedBox(height: 65),
+                      const SizedBox(height: 80),
                       StreamBuilder(
                           stream: _bloc.profilesScore.snapshots(),
                           builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
@@ -76,7 +76,7 @@ class ScoreScreen extends StatelessWidget {
 
                               return CustomText(
                                 title: _bloc.currentUserScore.toString(),
-                                style: CustomTextStyle().bold(size: 70, color: Colors.white),
+                                style: CustomTextStyle().bold(size: 50, color: Colors.white),
                               );
                             } else {
                               return const CircularProgressIndicator();

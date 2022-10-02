@@ -167,7 +167,7 @@ class ProfileScreen extends StatelessWidget {
                         style: CustomTextStyle().medium(size: 11, color: const Color(0xff707070)),
                       ),
                     ),
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.only(left: 24, right: 24),
                       child: Container(

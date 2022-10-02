@@ -1,28 +1,39 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 String userEmail = "";
 String userMobileNumber = "";
 
-List<String> nationality = [
-  "Yemen",
-  "Jordanian",
-  "Omanian",
-  "Palastanian",
-  "Amarican",
-  "Egyption",
-  "Iraqi",
-  "Syrian",
-  "UAE",
-  "Sudanese",
-  "Pakistani",
-  "Marroco",
-];
+//TODO: Handle Loclization
+// https://www.hatit.net/5610/%D8%A7%D8%B3%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-%D8%A8%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A/
+// and India , Canada , others
+List<String> nationality(BuildContext context) {
+  return [
+    "Yemen",
+    // AppLocalizations.of(context)!.yemen,
+    "Jordanian",
+    "Omanian",
+    "Palastanian",
+    "Amarican",
+    "Egyption",
+    "Iraqi",
+    "Syrian",
+    "UAE",
+    "Sudanese",
+    "Pakistani",
+    "Marroco",
+  ];
+}
 
 List<String> gender = [
   "Male",
   "Female",
 ];
 
+//TODO: Handle usedLanguage dispaly
+
 List<String> usedLanguage = [
-  "Arabic",
+  "العربية",
   "English",
 ];
 
@@ -42,8 +53,10 @@ List<String> yesnomaybeList = [
 ];
 
 List<String> foundCountact = [
-  "Email",
-  "Mobile",
+  "Media",
+  "Previos Known",
+  "Friends",
+  "Internet",
 ];
 
 List<String> stutteringsymptomsfirstnoted = [

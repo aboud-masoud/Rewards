@@ -22,10 +22,20 @@ class SharedMethods {
   }
 
   Future<void> sendEmail(String email) async {
-    final Uri emailLaunchUri = Uri(scheme: 'mailto', path: email, queryParameters: {'subject': 'Amwaj Center Application'});
+    final Uri emailLaunchUri =
+        Uri(scheme: 'mailto', path: email, queryParameters: {'subject': 'Amwaj Center Application'});
 
     if (!await launchUrl(emailLaunchUri)) {
       throw 'Could not launch $emailLaunchUri';
+    }
+  }
+
+  Future<void> openMap({required double latitude, required double longitude}) async {
+    String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+    if (await canLaunchUrl(Uri(path: googleUrl))) {
+      await launchUrl(Uri(path: googleUrl));
+    } else {
+      throw 'Could not open the map.';
     }
   }
 
@@ -108,7 +118,8 @@ class SharedMethods {
       "How does your child communicate, most of the time?": howDoesYourChildCommunicateMostOfTheTime,
       "Recently, your child’s speech is": recentlyYourChildsSpeechIs,
       "When your child did produce his first word?": whenYourChildDidProduceHisFirstWord,
-      "Does the child use any utterances in his speech? Give example": doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
+      "Does the child use any utterances in his speech? Give example":
+          doesTheChildUseAnyUtterancesInHisSpeechGiveExample,
       "Describe your child’s receptive language": describeYourChildReceptiveLanguage,
       "Describe your child’s expressive language": describeYourChildExpressiveLanguage,
       "Describe your child’s behavior": describeYourChildBehavior,

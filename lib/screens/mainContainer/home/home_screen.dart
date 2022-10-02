@@ -38,13 +38,11 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCenter,
-                    style: CustomTextStyle()
-                        .semibold(size: 16, color: const Color(0xff3bbc28)),
+                    style: CustomTextStyle().semibold(size: 16, color: const Color(0xff3bbc28)),
                   ),
                   CustomText(
                     title: AppLocalizations.of(context)!.amwajCentersubtitle,
-                    style: CustomTextStyle()
-                        .medium(size: 12, color: const Color(0xff707070)),
+                    style: CustomTextStyle().medium(size: 12, color: const Color(0xff707070)),
                   ),
                 ],
               ),
@@ -62,28 +60,27 @@ class HomeScreen extends StatelessWidget {
             const WorkingHoursView(),
             const SeperatorView(),
             InkWell(
-              child: const OtherViews(
-                title: "+971 6525 1112",
+              child: OtherViews(
+                title: AppLocalizations.of(context)!.landline,
                 imagename: "assets/images/phone.png",
               ),
               onTap: () => SharedMethods().callNumber("+97165251112"),
             ),
             const SeperatorView(),
             InkWell(
-              child: const OtherViews(
-                title: "+971 561327448",
+              child: OtherViews(
+                title: AppLocalizations.of(context)!.mobilephone,
                 imagename: "assets/images/mobile.png",
               ),
               onTap: () => SharedMethods().callNumber("+971561327448"),
             ),
             const SeperatorView(),
             InkWell(
-              child: const OtherViews(
-                title: "amwaj.centre@outlook.com",
+              child: OtherViews(
+                title: AppLocalizations.of(context)!.email_hint,
                 imagename: "assets/images/email.png",
               ),
-              onTap: () =>
-                  SharedMethods().sendEmail("amwaj.centre@outlook.com"),
+              onTap: () => SharedMethods().sendEmail("amwaj.centre@outlook.com"),
             ),
             const SeperatorView(),
             const FollowView(),

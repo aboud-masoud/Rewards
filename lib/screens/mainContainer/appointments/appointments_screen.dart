@@ -37,6 +37,7 @@ class ApotmentsScreen extends StatelessWidget {
                 backgroundColor: const Color(0xffc193e9),
                 imageName: "assets/images/Counseling.png",
                 title: AppLocalizations.of(context)!.familyCounselingSession,
+                desc: AppLocalizations.of(context)!.apotmentsTime,
                 onTap: () async {
                   final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
                   await _bloc.appointments.add({
@@ -75,6 +76,7 @@ class ApotmentsScreen extends StatelessWidget {
       required Color backgroundColor,
       required String imageName,
       required String title,
+      String? desc,
       required Function() onTap}) {
     return SizedBox(
         height: 321,
@@ -112,6 +114,12 @@ class ApotmentsScreen extends StatelessWidget {
                       title: title,
                       style: CustomTextStyle().bold(size: 25, color: Colors.white),
                     ),
+                    desc != null
+                        ? CustomText(
+                            title: desc,
+                            style: CustomTextStyle().bold(size: 18, color: Colors.white),
+                          )
+                        : Container(),
                     const SizedBox(height: 30),
                   ],
                 ),

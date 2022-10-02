@@ -32,7 +32,7 @@
   "profile" : "Profile",
   "rewards" : "Rewards",
   "score" : "Score",
-  "locationAddress" : "896F+55W - Al Taawun St - Al Khan / Sharjah - United Arab Emirates",
+  "locationAddress" : "Alkhan - Altawwun street - alqema 102 - opposite side of Expo",
   "workHours" : "Work Hours",
   "friday" : "Friday",
   "saturday" : "Saturday",
@@ -110,7 +110,10 @@
   "arethestutteringmomentsbehaviorsthattheclientexperienceseems" : "Are the stuttering moments / behaviors that the client experience seems",
   "stutteringsymptomsfirstnoted" : "When were the stuttering symptoms first noted?",
   "lessthan" : "Less than 70%",
-  "morethan" : "90% or more"
+  "morethan" : "90% or more",
+  "landline" : "Landline",
+  "mobilephone"  : "Mobile Number",
+  "apotmentsTime" : "15 Min"
 
 
 

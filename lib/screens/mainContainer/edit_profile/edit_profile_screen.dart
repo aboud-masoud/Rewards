@@ -176,7 +176,7 @@ class EditProfileScreen extends StatelessWidget {
                               prefixIcon: const Icon(Icons.nature_outlined),
                               hintMessage: AppLocalizations.of(context)!.nationality,
                               value: _bloc.nationalityValue.value,
-                              items: nationality,
+                              items: nationality(context),
                               onChanged: (value) {
                                 _bloc.nationalityValue.value = value!;
                                 _bloc.validateFields();
@@ -230,20 +230,13 @@ class EditProfileScreen extends StatelessWidget {
                         onChange: (value) => _bloc.validateFields(),
                       ),
                       const SizedBox(height: 16),
-                      ValueListenableBuilder(
-                          valueListenable: _bloc.parentOcupationValue,
-                          builder: (context, snapshot, child) {
-                            return CustomTextFieldWithDropDown(
-                              prefixIcon: const Icon(Icons.person),
-                              hintMessage: AppLocalizations.of(context)!.parentsoccupation,
-                              value: _bloc.parentOcupationValue.value,
-                              items: parentOcupation,
-                              onChanged: (value) {
-                                _bloc.parentOcupationValue.value = value!;
-                                _bloc.validateFields();
-                              },
-                            );
-                          }),
+                      CustomTextField(
+                        controller: _bloc.parentsoccupationController,
+                        hintText: AppLocalizations.of(context)!.parentsoccupation,
+                        keyboardType: TextInputType.name,
+                        prefixIcon: const Icon(Icons.person),
+                        onChange: (value) => _bloc.validateFields(),
+                      ),
                       const SizedBox(height: 16),
                       CustomTextField(
                         controller: _bloc.hisrankController,
@@ -263,21 +256,6 @@ class EditProfileScreen extends StatelessWidget {
                               items: yesnoList,
                               onChanged: (value) {
                                 _bloc.kinshipValue.value = value!;
-                                _bloc.validateFields();
-                              },
-                            );
-                          }),
-                      const SizedBox(height: 16),
-                      ValueListenableBuilder(
-                          valueListenable: _bloc.foundCountactValue,
-                          builder: (context, snapshot, child) {
-                            return CustomTextFieldWithDropDown(
-                              prefixIcon: const Icon(Icons.contact_page),
-                              hintMessage: AppLocalizations.of(context)!.youfoundcontactusvia,
-                              value: _bloc.foundCountactValue.value,
-                              items: foundCountact,
-                              onChanged: (value) {
-                                _bloc.foundCountactValue.value = value!;
                                 _bloc.validateFields();
                               },
                             );
