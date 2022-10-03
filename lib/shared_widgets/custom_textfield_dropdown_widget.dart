@@ -27,42 +27,51 @@ class CustomTextFieldWithDropDown extends StatelessWidget {
         children: [
           value != ''
               ? Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                  padding: const EdgeInsets.only(bottom: 5.0),
                   child: CustomText(
                     title: hintMessage,
-                    style: CustomTextStyle().regular(size: 12, color: const Color(0xff707070)),
+                    style: CustomTextStyle().regular(size: 14, color: const Color(0xff707070)),
                   ),
                 )
               : Container(),
-          FormField(builder: (FormFieldState<String> state) {
-            return InputDecorator(
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(
-                  borderSide: BorderSide(),
+          SizedBox(
+            height: 55,
+            child: FormField(builder: (FormFieldState<String> state) {
+              return InputDecorator(
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(),
+                  ),
+                  prefixIcon: prefixIcon,
+                  labelStyle: CustomTextStyle().regular(size: 11),
+                  errorStyle: CustomTextStyle().regular(color: Colors.redAccent, size: 11),
+                  hintText: hintMessage,
+                  hintStyle: CustomTextStyle().regular(size: 11),
                 ),
-                prefixIcon: prefixIcon,
-                labelStyle: CustomTextStyle().regular(size: 12),
-                errorStyle: CustomTextStyle().regular(color: Colors.redAccent, size: 12),
-                hintText: hintMessage,
-                hintStyle: CustomTextStyle().regular(size: 12),
-              ),
-              isEmpty: value == '',
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: value == "" ? null : value,
-                  isDense: true,
-                  onChanged: (String? newValue) {
-                    if (newValue != null) {
-                      // value = newValue;
-                      onChanged!(newValue);
-                      state.didChange(newValue);
-                    }
-                  },
-                  items: items.map((String item) => DropdownMenuItem<String>(child: Text(item), value: item)).toList(),
+                isEmpty: value == '',
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: value == "" ? null : value,
+                    isDense: true,
+                    onChanged: (String? newValue) {
+                      if (newValue != null) {
+                        onChanged!(newValue);
+                        state.didChange(newValue);
+                      }
+                    },
+                    items: items
+                        .map((String item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: CustomText(
+                              title: item,
+                              style: CustomTextStyle().regular(size: 14),
+                            )))
+                        .toList(),
+                  ),
                 ),
-              ),
-            );
-          }),
+              );
+            }),
+          ),
         ],
       ),
     );

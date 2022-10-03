@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:rewards_app/screens/signup/signup_screen.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:rewards_app/utils/network_info_service.dart';
 
-class SignupLunchScreen extends StatelessWidget {
-  const SignupLunchScreen({Key? key}) : super(key: key);
+enum SignupStatusEnum { language, stammering }
+
+class AssesmentSessionScreen extends StatelessWidget {
+  const AssesmentSessionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: CustomText(
-          title: AppLocalizations.of(context)!.signup,
+          title: AppLocalizations.of(context)!.evaluationSession,
           style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
         ),
         backgroundColor: const Color(0x00ffffff),
@@ -23,8 +24,10 @@ class SignupLunchScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 20),
             SizedBox(
               height: 350,
+              width: MediaQuery.of(context).size.width,
               child: Column(
                 children: [
                   Image.asset(
@@ -48,13 +51,13 @@ class SignupLunchScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) {
-                          return SignUpScreen(
-                            signupStatus: SignupStatusEnum.language,
-                          );
-                        }),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(builder: (ctx) {
+                      //     return SignUpScreen(
+                      //       signupStatus: SignupStatusEnum.language,
+                      //     );
+                      //   }),
+                      // );
                     },
                     style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
                     child: CustomText(
@@ -91,13 +94,13 @@ class SignupLunchScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (ctx) {
-                          return SignUpScreen(
-                            signupStatus: SignupStatusEnum.stammering,
-                          );
-                        }),
-                      );
+                      // Navigator.of(context).push(
+                      //   MaterialPageRoute(builder: (ctx) {
+                      //     return SignUpScreen(
+                      //       signupStatus: SignupStatusEnum.stammering,
+                      //     );
+                      //   }),
+                      // );
                     },
                     style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
                     child: CustomText(
@@ -105,30 +108,6 @@ class SignupLunchScreen extends StatelessWidget {
                       style: CustomTextStyle().medium(size: 16, color: const Color(0xffffffff)),
                     ),
                   )
-                ],
-              ),
-            ),
-            TextButton(
-              onPressed: () async {
-                if (await NetworkInfoService().isConnected()) {
-                  Navigator.of(context).pop();
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(AppLocalizations.of(context)!.checkInternetConnection),
-                  ));
-                }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.alreadyHaveanAccount,
-                    style: CustomTextStyle().semibold(size: 14, color: const Color(0xff404040)),
-                  ),
-                  Text(
-                    AppLocalizations.of(context)!.loginbutton,
-                    style: CustomTextStyle().semibold(size: 14, color: const Color(0xff3bbc28)),
-                  ),
                 ],
               ),
             ),

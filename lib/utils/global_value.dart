@@ -1,36 +1,83 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/app.dart';
 
 String userEmail = "";
-String userMobileNumber = "";
+String mobileNumber1 = "";
+String mobileNumber2 = "";
+String fullname = "";
 
-//TODO: Handle Loclization
-// https://www.hatit.net/5610/%D8%A7%D8%B3%D9%85%D8%A7%D8%A1-%D8%A7%D9%84%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9-%D8%A8%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D9%84%D9%8A%D8%B2%D9%8A/
-// and India , Canada , others
-List<String> nationality(BuildContext context) {
-  return [
-    "Yemen",
-    // AppLocalizations.of(context)!.yemen,
-    "Jordanian",
-    "Omanian",
-    "Palastanian",
-    "Amarican",
-    "Egyption",
-    "Iraqi",
-    "Syrian",
-    "UAE",
-    "Sudanese",
-    "Pakistani",
-    "Marroco",
-  ];
-}
-
-List<String> gender = [
+List<String> genderEnList = [
   "Male",
   "Female",
 ];
 
-//TODO: Handle usedLanguage dispaly
+List<String> genderArList = [
+  "ذكر",
+  "انثى",
+];
+
+List<String> genderEnToAr() {
+  if (languageSelected.value == "en") {
+    return genderEnList;
+  } else {
+    return genderArList;
+  }
+}
+
+List<String> natonalityEnList = [
+  "Saudi",
+  "Jordanian",
+  "Egyptian",
+  "Qatari",
+  "Iraqi",
+  "Omani",
+  "Sudanese",
+  "Libyan",
+  "Yemeni",
+  "Kuwaiti",
+  "Emirati",
+  "Algerian",
+  "Tunisian",
+  "Syrian",
+  "Bahraini",
+  "palestinian",
+  "Moroccan",
+  "Indian",
+  "Pakistani",
+  "Canadaian",
+  "Other",
+];
+
+List<String> natonalityArList = [
+  "السعودية",
+  "الاردن",
+  "مصر",
+  "قطر",
+  "العراق",
+  "عمان",
+  "السودان",
+  "ليبيا",
+  "اليمن",
+  "الكويت",
+  "الامارات",
+  "الجزائر",
+  "تونس",
+  "سوريا",
+  "البحرين",
+  "فلسطين",
+  "المغرب",
+  "الهند",
+  "باكستان",
+  "كندا",
+  "اخرى",
+];
+
+List<String> natonalityEnToAr() {
+  if (languageSelected.value == "en") {
+    return natonalityEnList;
+  } else {
+    return natonalityArList;
+  }
+}
 
 List<String> usedLanguage = [
   "العربية",

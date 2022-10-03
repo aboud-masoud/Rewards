@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rewards_app/app.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/edit_profile/edit_profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_bloc.dart';
@@ -66,7 +67,9 @@ class ProfileScreen extends StatelessWidget {
                 final DocumentSnapshot documentSnapshot =
                     streamSnapshot.data!.docs.singleWhere((element) => element.id == userEmail);
 
-                userMobileNumber = documentSnapshot["Mobile Number"];
+                mobileNumber1 = documentSnapshot["Mobile Number 1"] ?? "";
+                mobileNumber2 = documentSnapshot["Mobile Number 2"] ?? "";
+                fullname = documentSnapshot["full name"] ?? "";
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,13 +185,6 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             const SizedBox(height: 24),
                             containtView(
-                                title: AppLocalizations.of(context)!.clientFullName,
-                                desc: documentSnapshot["full name"]),
-                            Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Container(height: 1, color: const Color(0xffe8ebef)),
-                            ),
-                            containtView(
                                 title: AppLocalizations.of(context)!.dateofBirth,
                                 desc: documentSnapshot["Date Of Birth"]),
                             Padding(
@@ -197,12 +193,38 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             containtView(
                                 title: AppLocalizations.of(context)!.nationality,
-                                desc: documentSnapshot["Nationality"]),
+                                desc: languageSelected.value == "en"
+                                    ? documentSnapshot["NationalityEn"]
+                                    : documentSnapshot["NationalityAr"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: Container(height: 1, color: const Color(0xffe8ebef)),
                             ),
-                            containtView(title: AppLocalizations.of(context)!.gender, desc: documentSnapshot["Gender"]),
+                            containtView(
+                                title: AppLocalizations.of(context)!.gender,
+                                desc: languageSelected.value == "en"
+                                    ? documentSnapshot["GenderEn"]
+                                    : documentSnapshot["GenderAr"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.mobileNumberone,
+                                desc: documentSnapshot["Mobile Number 1"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.mobileNumbertwo,
+                                desc: documentSnapshot["Mobile Number 2"]),
+                            Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Container(height: 1, color: const Color(0xffe8ebef)),
+                            ),
+                            containtView(
+                                title: AppLocalizations.of(context)!.address, desc: documentSnapshot["Address"]),
                             Padding(
                               padding: const EdgeInsets.all(16),
                               child: Container(height: 1, color: const Color(0xffe8ebef)),

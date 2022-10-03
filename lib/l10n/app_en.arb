@@ -115,7 +115,9 @@
   "mobilephone"  : "Mobile Number",
   "apotmentsTime" : "15 Min",
   "mobileNumberone" : "Mobile Number 1",
-  "mobileNumbertwo" : "Mobile Number 2"
+  "mobileNumbertwo" : "Mobile Number 2",
+  "male" : "Male",
+  "female" : "Female"
 
 
 

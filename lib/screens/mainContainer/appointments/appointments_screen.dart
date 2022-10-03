@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_bloc.dart';
+import 'package:rewards_app/screens/mainContainer/appointments/assesment_session_screen.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/utils/app_constants.dart';
 import 'package:rewards_app/utils/custom_text.dart';
@@ -8,6 +9,7 @@ import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
+//TODO: Handle Apointment
 class ApotmentsScreen extends StatelessWidget {
   ApotmentsScreen({Key? key}) : super(key: key);
 
@@ -44,7 +46,9 @@ class ApotmentsScreen extends StatelessWidget {
                     "Email": email,
                     "Type": "Counseling",
                     "Date": DateTime.now(),
-                    "mobile number": userMobileNumber
+                    "mobile number 1": mobileNumber1,
+                    "mobile number 2": mobileNumber2,
+                    "Full name": fullname
                   });
                   showAlertDialog(context);
                 }),
@@ -55,14 +59,18 @@ class ApotmentsScreen extends StatelessWidget {
                 imageName: "assets/images/Evaluation.png",
                 title: AppLocalizations.of(context)!.evaluationSession,
                 onTap: () async {
-                  final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                  await _bloc.appointments.add({
-                    "Email": email,
-                    "Type": "Evaluation",
-                    "Date": DateTime.now(),
-                    "mobile number": userMobileNumber
-                  });
-                  showAlertDialog(context);
+                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                    return const AssesmentSessionScreen();
+                  }));
+
+                  // final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
+                  // await _bloc.appointments.add({
+                  //   "Email": email,
+                  //   "Type": "Evaluation",
+                  //   "Date": DateTime.now(),
+                  //   "mobile number": "userMobileNumber"
+                  // });
+                  // showAlertDialog(context);
                 }),
             const SizedBox(height: 40),
           ],

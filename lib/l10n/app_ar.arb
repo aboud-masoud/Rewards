@@ -115,7 +115,9 @@
     "mobilephone"  : "الهاتف المحمول",
     "apotmentsTime" : "١٥ دقيقة",
     "mobileNumberone" : "رقم هاتف الأب",
-    "mobileNumbertwo" : "رقم هاتف الأم"
+    "mobileNumbertwo" : "رقم هاتف الأم",
+    "male" : "ذكر",
+    "female" : "انثى"
 
 
 
