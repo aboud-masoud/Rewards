@@ -4,17 +4,17 @@ import 'package:rewards_app/screens/login/login_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/app_constants.dart';
+import 'package:rewards_app/utils/firebase_cloud_messaging_util.dart';
 
 ValueNotifier<String> languageSelected = ValueNotifier<String>("en");
+final GlobalKey<NavigatorState> appKey = GlobalKey<NavigatorState>();
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
+  const MyApp();
   @override
   MyAppState createState() => MyAppState();
 
-  static MyAppState? of(BuildContext context) =>
-      context.findAncestorStateOfType<MyAppState>();
+  static MyAppState? of(BuildContext context) => context.findAncestorStateOfType<MyAppState>();
 }
 
 class MyAppState extends State<MyApp> {
@@ -28,6 +28,11 @@ class MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 2), () {
+        FirebaseCloudMessagingUtil.initConfigure(appKey.currentContext!);
+      });
+    });
     super.initState();
   }
 
@@ -35,12 +40,12 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return FutureBuilder(
         initialData: "en",
-        future:
-            const FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
+        future: const FlutterSecureStorage().read(key: AppConstants.deviceLanguage),
         builder: (context, snapshot) {
           languageSelected.value = snapshot.data.toString();
           return MaterialApp(
             title: 'Rewards APP',
+            navigatorKey: appKey,
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
