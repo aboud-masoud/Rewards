@@ -29,7 +29,7 @@ class _CustomCheckBoxButtonsState extends State<CustomCheckBoxButtons> {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: SizedBox(
-        height: 60.0 * widget.options.length,
+        height: 63.0 * widget.options.length,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

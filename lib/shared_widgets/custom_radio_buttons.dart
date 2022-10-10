@@ -115,7 +115,7 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
                 ? Row(
                     children: [
                       Radio(
-                        value: 3,
+                        value: 4,
                         groupValue: val,
                         onChanged: (value) {
                           setState(() {

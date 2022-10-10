@@ -51,6 +51,26 @@ class AppointmentsBloc {
   String howMuchTimeYourChildSpendsOnTVDevices = "";
   TextEditingController additionalInformationController = TextEditingController();
 
+  //##Step 2 (stuttering)
+  String whenWreTheStutteringSymptomsFirstNoted = "";
+  String werethestutteringsymptomscontinuedchanged = "";
+  String whatAreTheNotedStutteringBehaviorsClientSpeech = "";
+  String areAnyOfTheseBehaviorsAssociatedWithTheStutteringMoment = "";
+  String areTheStutteringMomentsBehaviorsThatTheClientExperienceSeems = "";
+  String asYouNoteTheStutteringMomentsClientsSpeechAppear = "";
+  String duringTheStutteringMomentTheClientYouWill = "";
+  String isStutteringSeverityChangeAmongPlacesSituations = "";
+  String isThereAnySimilarSpeechDisorderNotedFamily = "";
+  String wasTheBeginningOfStutteringSymptomsAssociatedWithLanguageSpeechDifficulty = "";
+  String preferableHandForTheClient = "";
+
+  //##Step 3 (stuttering)
+  TextEditingController doesTheClientHaveAnyDifficultiesVisionHearingSensation = TextEditingController();
+  //##Step 4 (stuttering)
+  String howDoesTheClientCommunicateTime = "";
+  TextEditingController describeClientsBehaviorController = TextEditingController();
+  TextEditingController describeClientsfocusController = TextEditingController();
+
   String returnCorrectStepImage() {
     switch (stepNumberNotifier.value) {
       case 1:
@@ -67,13 +87,15 @@ class AppointmentsBloc {
   String returnCorrectStepTitle(BuildContext context, bool isItLanguage) {
     switch (stepNumberNotifier.value) {
       case 1:
-        return isItLanguage
-            ? AppLocalizations.of(context)!.identityInformation
-            : AppLocalizations.of(context)!.stutteringhistory;
+        return AppLocalizations.of(context)!.identityInformation;
       case 2:
-        return isItLanguage ? AppLocalizations.of(context)!.caseHistory : AppLocalizations.of(context)!.medicalhistory;
+        return isItLanguage
+            ? AppLocalizations.of(context)!.caseHistory
+            : AppLocalizations.of(context)!.stutteringhistory;
       case 3:
-        return AppLocalizations.of(context)!.birthandDevelopmentHistory;
+        return isItLanguage
+            ? AppLocalizations.of(context)!.birthandDevelopmentHistory
+            : AppLocalizations.of(context)!.medicalhistory;
       default:
         return AppLocalizations.of(context)!.communication;
     }
@@ -108,6 +130,18 @@ class AppointmentsBloc {
     }
   }
 
+  void validateFieldsStuttering1() {
+    if (usedLanguageWithTheClientAtHome.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (parentsOccupationController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (clientsSiblingsAndHisRanknController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else {
+      fieldsValidation.value = true;
+    }
+  }
+
   void validateFieldsLang2() {
     if (whatIsYourComplaintBrieflyController.text.isEmpty) {
       fieldsValidation.value = false;
@@ -120,6 +154,34 @@ class AppointmentsBloc {
     } else if (isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily.isEmpty) {
       fieldsValidation.value = false;
     } else if (hadYourChildEnrolledPreviouslyInRehabilitationPrograms.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else {
+      fieldsValidation.value = true;
+    }
+  }
+
+  void validateFieldsStuttering2() {
+    if (whenWreTheStutteringSymptomsFirstNoted.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (werethestutteringsymptomscontinuedchanged.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (whatAreTheNotedStutteringBehaviorsClientSpeech.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (areAnyOfTheseBehaviorsAssociatedWithTheStutteringMoment.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (areTheStutteringMomentsBehaviorsThatTheClientExperienceSeems.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (asYouNoteTheStutteringMomentsClientsSpeechAppear.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (duringTheStutteringMomentTheClientYouWill.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (isStutteringSeverityChangeAmongPlacesSituations.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (isThereAnySimilarSpeechDisorderNotedFamily.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (wasTheBeginningOfStutteringSymptomsAssociatedWithLanguageSpeechDifficulty.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (preferableHandForTheClient.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -140,6 +202,16 @@ class AppointmentsBloc {
     } else if (hasYourChildHadVisionProblems.isEmpty) {
       fieldsValidation.value = false;
     } else if (checkTheSkillsThatYourChildAchievesIndependently.isEmpty) {
+      fieldsValidation.value = false;
+    } else {
+      fieldsValidation.value = true;
+    }
+  }
+
+  void validateFieldsStuttering3() {
+    if (doesYourChildUseAnyMedicationsRegularlyFrequentlyController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (doesTheClientHaveAnyDifficultiesVisionHearingSensation.text.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -174,6 +246,65 @@ class AppointmentsBloc {
     } else {
       fieldsValidation.value = true;
     }
+  }
+
+  void validateFieldsStuttering4() {
+    if (howDoesTheClientCommunicateTime.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (describeClientsBehaviorController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (describeClientsfocusController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else {
+      fieldsValidation.value = true;
+    }
+  }
+
+  Future<bool> bookStuttering() async {
+    signupStatus.value = SignUpStatusEnum.inProgress;
+    final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
+    await appointments.add({
+      "Email": email,
+      "Type": "Evaluation Stuttering",
+      "Client’s full name": fullname,
+      "mobile number 1": mobileNumber1,
+      "mobile number 2": mobileNumber2,
+      "Date of birth": dateOfBirth,
+      "Nationality": nationality,
+      "Gender": gender,
+      "Address": address,
+      "Used language with the client at home*:Used language with the client at home": usedLanguageWithTheClientAtHome,
+      "Parents’ occupation": parentsOccupationController.text,
+      "Client’s siblings and his rank": clientsSiblingsAndHisRanknController.text,
+      "When were the stuttering symptoms first noted?": whenWreTheStutteringSymptomsFirstNoted,
+      "Were the stuttering symptoms continued, consistent, or changed with time?":
+          werethestutteringsymptomscontinuedchanged,
+      "What are the noted stuttering behaviors in the client’s speech:": whatAreTheNotedStutteringBehaviorsClientSpeech,
+      "Are any of these behaviors associated with the stuttering moment?":
+          areAnyOfTheseBehaviorsAssociatedWithTheStutteringMoment,
+      "Are the stuttering moments / behaviors that the client experience seems:":
+          areTheStutteringMomentsBehaviorsThatTheClientExperienceSeems,
+      "As you note, the stuttering moments in clients’ speech appear on: ":
+          asYouNoteTheStutteringMomentsClientsSpeechAppear,
+      "During the stuttering moment, the client or you will": duringTheStutteringMomentTheClientYouWill,
+      "Is stuttering severity change among places/people/situations?": isStutteringSeverityChangeAmongPlacesSituations,
+      "Is there any similar speech disorder noted in the family?": isThereAnySimilarSpeechDisorderNotedFamily,
+      "Was the beginning of stuttering symptoms associated with language or speech difficulty?":
+          wasTheBeginningOfStutteringSymptomsAssociatedWithLanguageSpeechDifficulty,
+      "Preferable hand for the client:": preferableHandForTheClient,
+      "Does the client use any medications regularly-frequently? Mention please.":
+          doesYourChildUseAnyMedicationsRegularlyFrequentlyController.text,
+      "Does the client have any difficulties in vision, hearing, or any other sensation issues? Mention please.":
+          doesTheClientHaveAnyDifficultiesVisionHearingSensation.text,
+      "How does the client communicate most of the time?": howDoesTheClientCommunicateTime,
+      "Describe (in general) clients’ behavior.": describeClientsBehaviorController.text,
+      "Describe clients’ focus and attention.": describeClientsfocusController.text,
+      "Would you like to add any additional information?": additionalInformationController.text,
+    });
+
+    signupStatus.value = SignUpStatusEnum.success;
+
+    return true;
   }
 
   Future<bool> bookLanguageDelay() async {
