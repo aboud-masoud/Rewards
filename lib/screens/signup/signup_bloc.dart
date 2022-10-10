@@ -30,9 +30,6 @@ class SignUpBloc {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  // var stepNumber = 1;
-  // ValueNotifier<int> stepNumberNotifier = ValueNotifier<int>(1);
-
   final CollectionReference _profiles = FirebaseFirestore.instance.collection('profiles');
   final CollectionReference _profilesScore = FirebaseFirestore.instance.collection('profilesScores');
 
@@ -124,43 +121,4 @@ class SignUpBloc {
     await storage.write(key: AppConstants.biometricP, value: password);
     await storage.write(key: AppConstants.uid, value: uid);
   }
-
-  // double valueOfProgressBar() {
-  //   switch (stepNumberNotifier.value) {
-  //     case 1:
-  //       return 0.25;
-  //     case 2:
-  //       return 0.5;
-  //     case 3:
-  //       return 0.75;
-  //     default:
-  //       return 1;
-  //   }
-  // }
-
-  // String returnCorrectStepImage() {
-  //   switch (stepNumberNotifier.value) {
-  //     case 1:
-  //       return "profil.png";
-  //     case 2:
-  //       return "calendar.png";
-  //     case 3:
-  //       return "calendar.png";
-  //     default:
-  //       return "Communication.png";
-  //   }
-  // }
-
-  // String returnCorrectStepTitle(BuildContext context) {
-  //   switch (stepNumberNotifier.value) {
-  //     case 1:
-  //       return AppLocalizations.of(context)!.identityInformation;
-  //     case 2:
-  //       return AppLocalizations.of(context)!.stutteringhistory; // caseHistory;
-  //     case 3:
-  //       return AppLocalizations.of(context)!.medicalhistory; //birthandDevelopmentHistory;
-  //     default:
-  //       return AppLocalizations.of(context)!.communication;
-  //   }
-  // }
 }

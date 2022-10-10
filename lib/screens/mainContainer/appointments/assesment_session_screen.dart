@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/screens/mainContainer/appointments/language_view/language_screen.dart';
+import 'package:rewards_app/screens/mainContainer/appointments/stuttering_view/stuttering_screen.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
-import 'package:rewards_app/utils/network_info_service.dart';
-
-enum SignupStatusEnum { language, stammering }
 
 class AssesmentSessionScreen extends StatelessWidget {
   const AssesmentSessionScreen({Key? key}) : super(key: key);
@@ -51,13 +50,11 @@ class AssesmentSessionScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(builder: (ctx) {
-                      //     return SignUpScreen(
-                      //       signupStatus: SignupStatusEnum.language,
-                      //     );
-                      //   }),
-                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) {
+                          return LanguageScreen();
+                        }),
+                      );
                     },
                     style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
                     child: CustomText(
@@ -94,13 +91,11 @@ class AssesmentSessionScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Navigator.of(context).push(
-                      //   MaterialPageRoute(builder: (ctx) {
-                      //     return SignUpScreen(
-                      //       signupStatus: SignupStatusEnum.stammering,
-                      //     );
-                      //   }),
-                      // );
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (ctx) {
+                          return StutteringScreen();
+                        }),
+                      );
                     },
                     style: ElevatedButton.styleFrom(primary: const Color(0xff419aff)),
                     child: CustomText(

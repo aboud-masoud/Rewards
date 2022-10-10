@@ -62,15 +62,6 @@ class ApotmentsScreen extends StatelessWidget {
                   Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
                     return const AssesmentSessionScreen();
                   }));
-
-                  // final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                  // await _bloc.appointments.add({
-                  //   "Email": email,
-                  //   "Type": "Evaluation",
-                  //   "Date": DateTime.now(),
-                  //   "mobile number": "userMobileNumber"
-                  // });
-                  // showAlertDialog(context);
                 }),
             const SizedBox(height: 40),
           ],
