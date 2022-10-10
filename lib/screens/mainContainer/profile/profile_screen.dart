@@ -70,7 +70,10 @@ class ProfileScreen extends StatelessWidget {
                 mobileNumber1 = documentSnapshot["Mobile Number 1"] ?? "";
                 mobileNumber2 = documentSnapshot["Mobile Number 2"] ?? "";
                 fullname = documentSnapshot["full name"] ?? "";
-
+                gender = documentSnapshot["GenderEn"] ?? "";
+                address = documentSnapshot["Address"] ?? "";
+                nationality = documentSnapshot["NationalityEn"] ?? "";
+                dateOfBirth = documentSnapshot["Date Of Birth"] ?? "";
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

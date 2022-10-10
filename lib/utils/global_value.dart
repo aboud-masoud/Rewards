@@ -5,6 +5,11 @@ String mobileNumber1 = "";
 String mobileNumber2 = "";
 String fullname = "";
 
+String gender = "";
+String address = "";
+String nationality = "";
+String dateOfBirth = "";
+
 List<String> genderEnList = [
   "Male",
   "Female",
