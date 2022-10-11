@@ -15,7 +15,7 @@ class StutteringStep3View extends StatefulWidget {
 class _StutteringStep3ViewState extends State<StutteringStep3View> {
   @override
   void initState() {
-    widget.bloc.fieldsValidation.value = false;
+    widget.bloc.fieldsValidation.value = true;
     super.initState();
   }
 
@@ -28,13 +28,11 @@ class _StutteringStep3ViewState extends State<StutteringStep3View> {
           CustomTextEditorField(
             controller: widget.bloc.doesYourChildUseAnyMedicationsRegularlyFrequentlyController,
             hintText: AppLocalizations.of(context)!.doesclientmedications,
-            onChange: (value) => widget.bloc.validateFieldsStuttering3(),
           ),
           const SizedBox(height: 16),
           CustomTextEditorField(
             controller: widget.bloc.doesTheClientHaveAnyDifficultiesVisionHearingSensation,
             hintText: AppLocalizations.of(context)!.doesclientdifficulties,
-            onChange: (value) => widget.bloc.validateFieldsStuttering3(),
           ),
           const SizedBox(height: 16),
           ValueListenableBuilder<bool>(

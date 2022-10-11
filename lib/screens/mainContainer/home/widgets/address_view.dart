@@ -12,9 +12,7 @@ class AddressView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: InkWell(
-        onTap: () => SharedMethods()
-            .openMap(latitude: 25.310699622122698, longitude: 55.37293264232896), //TODO :Test Handle Open Google Map
-
+        onTap: () => SharedMethods().openMap(latitude: 25.310699622122698, longitude: 55.37293264232896),
         child: Row(
           children: [
             Image.asset(

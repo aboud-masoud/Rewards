@@ -4,6 +4,7 @@ import 'package:rewards_app/screens/mainContainer/main_container.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/shared_widgets/custom_checkbox_buttons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:rewards_app/shared_widgets/custom_radio_buttons.dart';
 import 'package:rewards_app/shared_widgets/custom_textEditor_widget.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
@@ -55,6 +56,36 @@ class _StutteringStep4ViewState extends State<StutteringStep4View> {
             controller: widget.bloc.describeClientsfocusController,
             hintText: AppLocalizations.of(context)!.describeclientsfocusandattention,
             onChange: (value) => widget.bloc.validateFieldsStuttering4(),
+          ),
+          const SizedBox(height: 16),
+          CustomCheckBoxButtons(
+            hintMessage: AppLocalizations.of(context)!.preferredevaluationsession,
+            options: [
+              AppLocalizations.of(context)!.saturday,
+              AppLocalizations.of(context)!.sunday,
+              AppLocalizations.of(context)!.monday,
+              AppLocalizations.of(context)!.tuesday,
+              AppLocalizations.of(context)!.wednesday,
+              AppLocalizations.of(context)!.thursday,
+            ],
+            selectedOptions: (p0) {
+              for (var x in p0) {
+                widget.bloc.preferredevaluationsession = "${widget.bloc.preferredevaluationsession}, $x";
+              }
+              widget.bloc.validateFieldsLang4();
+            },
+          ),
+          const SizedBox(height: 16),
+          CustomRadioButtons(
+            hintMessage: AppLocalizations.of(context)!.preferredtreatmentsessions,
+            option1: AppLocalizations.of(context)!.preferredtreatmentsessions1,
+            option2: AppLocalizations.of(context)!.preferredtreatmentsessions2,
+            option3: AppLocalizations.of(context)!.preferredtreatmentsessions3,
+            option4: AppLocalizations.of(context)!.preferredtreatmentsessions4,
+            selectedOption: (p0) {
+              widget.bloc.preferredtreatmentsessions = p0;
+              widget.bloc.validateFieldsLang4();
+            },
           ),
           const SizedBox(height: 16),
           CustomTextEditorField(

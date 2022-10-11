@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rewards_app/screens/mainContainer/appointments/appointments_bloc.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
+import 'package:rewards_app/shared_widgets/custom_checkbox_buttons.dart';
 import 'package:rewards_app/shared_widgets/custom_radio_buttons.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/shared_widgets/custom_textfield_widget.dart';
@@ -20,13 +21,17 @@ class _StutteringStep1ViewState extends State<StutteringStep1View> {
       child: Column(
         children: [
           const SizedBox(height: 16),
-          CustomRadioButtons(
+          CustomCheckBoxButtons(
             hintMessage: AppLocalizations.of(context)!.usedlanguagewiththeclientathome,
-            option1: AppLocalizations.of(context)!.arabic,
-            option2: AppLocalizations.of(context)!.english,
-            option3: AppLocalizations.of(context)!.other,
-            selectedOption: (p0) {
-              widget.bloc.usedLanguageWithTheClientAtHome = p0;
+            options: [
+              AppLocalizations.of(context)!.arabic,
+              AppLocalizations.of(context)!.english,
+              AppLocalizations.of(context)!.other,
+            ],
+            selectedOptions: (p0) {
+              for (var x in p0) {
+                widget.bloc.usedLanguageWithTheClientAtHome = "${widget.bloc.usedLanguageWithTheClientAtHome}, $x";
+              }
               widget.bloc.validateFieldsStuttering1();
             },
           ),

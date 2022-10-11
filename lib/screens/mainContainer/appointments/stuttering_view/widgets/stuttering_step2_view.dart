@@ -60,7 +60,6 @@ class _StutteringStep2ViewState extends State<StutteringStep2View> {
               AppLocalizations.of(context)!.stutteringnotedclientspeech4,
               AppLocalizations.of(context)!.stutteringnotedclientspeech5,
               AppLocalizations.of(context)!.stutteringnotedclientspeech6,
-              AppLocalizations.of(context)!.other,
             ],
             selectedOptions: (p0) {
               for (var x in p0) {
@@ -99,14 +98,20 @@ class _StutteringStep2ViewState extends State<StutteringStep2View> {
             },
           ),
           const SizedBox(height: 16),
-          CustomRadioButtons(
+          CustomCheckBoxButtons(
             hintMessage: AppLocalizations.of(context)!.notemomentsstuttering,
-            option1: AppLocalizations.of(context)!.notemomentsstuttering1,
-            option2: AppLocalizations.of(context)!.notemomentsstuttering2,
-            option3: AppLocalizations.of(context)!.notemomentsstuttering3,
-            option4: AppLocalizations.of(context)!.notemomentsstuttering4,
-            selectedOption: (p0) {
-              widget.bloc.asYouNoteTheStutteringMomentsClientsSpeechAppear = p0;
+            example: AppLocalizations.of(context)!.checkall,
+            options: [
+              AppLocalizations.of(context)!.notemomentsstuttering1,
+              AppLocalizations.of(context)!.notemomentsstuttering2,
+              AppLocalizations.of(context)!.notemomentsstuttering3,
+              AppLocalizations.of(context)!.notemomentsstuttering4,
+            ],
+            selectedOptions: (p0) {
+              for (var x in p0) {
+                widget.bloc.asYouNoteTheStutteringMomentsClientsSpeechAppear =
+                    "${widget.bloc.asYouNoteTheStutteringMomentsClientsSpeechAppear}, $x";
+              }
               widget.bloc.validateFieldsStuttering2();
             },
           ),

@@ -9,7 +9,6 @@ import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
-//TODO: Handle Apointment
 class ApotmentsScreen extends StatelessWidget {
   ApotmentsScreen({Key? key}) : super(key: key);
 
@@ -41,16 +40,18 @@ class ApotmentsScreen extends StatelessWidget {
                 title: AppLocalizations.of(context)!.familyCounselingSession,
                 desc: AppLocalizations.of(context)!.apotmentsTime,
                 onTap: () async {
-                  final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
-                  await _bloc.appointments.add({
-                    "Email": email,
-                    "Type": "Counseling",
-                    "Date": DateTime.now(),
-                    "mobile number 1": mobileNumber1,
-                    "mobile number 2": mobileNumber2,
-                    "Full name": fullname
+                  showAreYouShoreDialog(context, () async {
+                    final email = await const FlutterSecureStorage().read(key: AppConstants.biometricU);
+                    await _bloc.appointments.add({
+                      "Email": email,
+                      "Type": "Counseling",
+                      "Date": DateTime.now(),
+                      "mobile number 1": mobileNumber1,
+                      "mobile number 2": mobileNumber2,
+                      "Full name": fullname
+                    });
+                    showAlertDialog(context);
                   });
-                  showAlertDialog(context);
                 }),
             const SizedBox(height: 20),
             box(
@@ -152,6 +153,44 @@ class ApotmentsScreen extends StatelessWidget {
       ),
       actions: [
         okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAreYouShoreDialog(BuildContext context, Function okSelected) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.cancel),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(AppLocalizations.of(context)!.okay),
+      onPressed: () {
+        Navigator.of(context).pop();
+        okSelected();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: CustomText(
+        title: AppLocalizations.of(context)!.areyousuretitle,
+        shouldFit: false,
+        style: CustomTextStyle().bold(size: 22, color: const Color(0xff404040)),
+      ),
+      actions: [
+        cancelButton,
+        continueButton,
       ],
     );
 

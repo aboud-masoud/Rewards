@@ -32,7 +32,6 @@ class _LanguageStep3ViewState extends State<LanguageStep3View> {
             hintMessage: AppLocalizations.of(context)!.birthgenre,
             option1: AppLocalizations.of(context)!.natural,
             option2: AppLocalizations.of(context)!.cesarean,
-            option3: AppLocalizations.of(context)!.other,
             selectedOption: (p0) {
               widget.bloc.birthGenre = p0;
               widget.bloc.validateFieldsLang3();
@@ -96,7 +95,6 @@ class _LanguageStep3ViewState extends State<LanguageStep3View> {
               AppLocalizations.of(context)!.delaydevelopmental3,
               AppLocalizations.of(context)!.delaydevelopmental4,
               AppLocalizations.of(context)!.delaydevelopmental5,
-              AppLocalizations.of(context)!.other,
             ],
             selectedOptions: (p0) {
               for (var x in p0) {

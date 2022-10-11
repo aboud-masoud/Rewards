@@ -27,6 +27,8 @@ class CustomRadioButtons extends StatefulWidget {
   State<CustomRadioButtons> createState() => _CustomRadioButtonsState();
 }
 
+//TODO : Other Should show textField
+
 class _CustomRadioButtonsState extends State<CustomRadioButtons> {
   int val = -1;
 
@@ -36,12 +38,12 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: SizedBox(
         height: widget.option5 != null
-            ? 270
+            ? 285
             : widget.option4 != null
-                ? 220
+                ? 235
                 : widget.option3 != null
-                    ? 170
-                    : 120,
+                    ? 185
+                    : 135,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,6 +51,8 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
               padding: const EdgeInsets.only(bottom: 5.0),
               child: CustomText(
                 title: widget.hintMessage,
+                maxLins: 2,
+                shouldFit: false,
                 style: CustomTextStyle().medium(size: 14, color: const Color(0xff707070)),
               ),
             ),
@@ -136,7 +140,7 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
                 ? Row(
                     children: [
                       Radio(
-                        value: 3,
+                        value: 5,
                         groupValue: val,
                         onChanged: (value) {
                           setState(() {

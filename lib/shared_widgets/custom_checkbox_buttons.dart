@@ -14,6 +14,7 @@ class CustomCheckBoxButtons extends StatefulWidget {
   @override
   State<CustomCheckBoxButtons> createState() => _CustomCheckBoxButtonsState();
 }
+//TODO : Other Should show textField
 
 class _CustomCheckBoxButtonsState extends State<CustomCheckBoxButtons> {
   List<bool> selectedBoxs = [];
@@ -59,18 +60,21 @@ class _CustomCheckBoxButtonsState extends State<CustomCheckBoxButtons> {
                     return CheckboxListTile(
                       title: CustomText(
                         title: widget.options[index],
-                        style: CustomTextStyle().medium(
-                          size: 13,
+                        maxLins: 2,
+                        style: CustomTextStyle().regular(
+                          size: 11,
                           color: const Color(0xff707070),
                         ),
                         shouldFit: false,
                       ),
                       value: selectedBoxs[index],
                       onChanged: (val) {
+                        print(val);
                         List<String> list = [];
                         setState(() {
-                          if (val!) {
-                            selectedBoxs[index] = val;
+                          selectedBoxs[index] = val!;
+
+                          if (val) {
                             for (int i = 0; i <= selectedBoxs.length - 1; i++) {
                               if (selectedBoxs[i]) {
                                 list.add(widget.options[i]);

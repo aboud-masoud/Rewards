@@ -50,6 +50,8 @@ class AppointmentsBloc {
   TextEditingController whatAreYourChildBestReinforcementsController = TextEditingController();
   String howMuchTimeYourChildSpendsOnTVDevices = "";
   TextEditingController additionalInformationController = TextEditingController();
+  String preferredtreatmentsessions = "";
+  String preferredevaluationsession = "";
 
   //##Step 2 (stuttering)
   String whenWreTheStutteringSymptomsFirstNoted = "";
@@ -117,13 +119,7 @@ class AppointmentsBloc {
   void validateFieldsLang1() {
     if (usedLanguageWithTheClientAtHome.isEmpty) {
       fieldsValidation.value = false;
-    } else if (parentsOccupationController.text.isEmpty) {
-      fieldsValidation.value = false;
     } else if (clientsSiblingsAndHisRanknController.text.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (isThereAnyKinshipBetweenParents.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (youFoundCcontactUsVia.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -132,8 +128,6 @@ class AppointmentsBloc {
 
   void validateFieldsStuttering1() {
     if (usedLanguageWithTheClientAtHome.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (parentsOccupationController.text.isEmpty) {
       fieldsValidation.value = false;
     } else if (clientsSiblingsAndHisRanknController.text.isEmpty) {
       fieldsValidation.value = false;
@@ -149,11 +143,7 @@ class AppointmentsBloc {
       fieldsValidation.value = false;
     } else if (doesTheChildHavePreviousLanguageAndSpeechAssessmentWhatWasTheResultController.text.isEmpty) {
       fieldsValidation.value = false;
-    } else if (hasYourChildBeenDiagnosedWithAnyOfThese.isEmpty) {
-      fieldsValidation.value = false;
     } else if (isThereAnySimilarLanguageOrSpeechDisordersNotedInTheFamily.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (hadYourChildEnrolledPreviouslyInRehabilitationPrograms.text.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -166,8 +156,6 @@ class AppointmentsBloc {
     } else if (werethestutteringsymptomscontinuedchanged.isEmpty) {
       fieldsValidation.value = false;
     } else if (whatAreTheNotedStutteringBehaviorsClientSpeech.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (areAnyOfTheseBehaviorsAssociatedWithTheStutteringMoment.isEmpty) {
       fieldsValidation.value = false;
     } else if (areTheStutteringMomentsBehaviorsThatTheClientExperienceSeems.isEmpty) {
       fieldsValidation.value = false;
@@ -191,27 +179,7 @@ class AppointmentsBloc {
   void validateFieldsLang3() {
     if (birthGenre.isEmpty) {
       fieldsValidation.value = false;
-    } else if (birthWeightController.text.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (wereThereAnyComplicationsDuringPregnancyOrDeliverytController.text.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (hasYourChildExperiencedAnyOfThese.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (doesYourChildUseAnyMedicationsRegularlyFrequentlyController.text.isEmpty) {
-      fieldsValidation.value = false;
     } else if (hasYourChildHadVisionProblems.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (checkTheSkillsThatYourChildAchievesIndependently.isEmpty) {
-      fieldsValidation.value = false;
-    } else {
-      fieldsValidation.value = true;
-    }
-  }
-
-  void validateFieldsStuttering3() {
-    if (doesYourChildUseAnyMedicationsRegularlyFrequentlyController.text.isEmpty) {
-      fieldsValidation.value = false;
-    } else if (doesTheClientHaveAnyDifficultiesVisionHearingSensation.text.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -225,8 +193,6 @@ class AppointmentsBloc {
       fieldsValidation.value = false;
     } else if (whenYourChildDidProduceHisFirstWordController.text.isEmpty) {
       fieldsValidation.value = false;
-    } else if (doesTheChildUseAnyUtterancesSpeechController.text.isEmpty) {
-      fieldsValidation.value = false;
     } else if (describeYourChildReceptiveLanguageController.text.isEmpty) {
       fieldsValidation.value = false;
     } else if (describeYourChildExpressiveLanguageController.text.isEmpty) {
@@ -237,11 +203,11 @@ class AppointmentsBloc {
       fieldsValidation.value = false;
     } else if (describeYourChildPlayShareActivitiesSymbolicPlayController.text.isEmpty) {
       fieldsValidation.value = false;
-    } else if (whatAreYourChildBestReinforcementsController.text.isEmpty) {
-      fieldsValidation.value = false;
     } else if (howMuchTimeYourChildSpendsOnTVDevices.isEmpty) {
       fieldsValidation.value = false;
-    } else if (additionalInformationController.text.isEmpty) {
+    } else if (preferredtreatmentsessions.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (preferredevaluationsession.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -254,6 +220,10 @@ class AppointmentsBloc {
     } else if (describeClientsBehaviorController.text.isEmpty) {
       fieldsValidation.value = false;
     } else if (describeClientsfocusController.text.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (preferredtreatmentsessions.isEmpty) {
+      fieldsValidation.value = false;
+    } else if (preferredevaluationsession.isEmpty) {
       fieldsValidation.value = false;
     } else {
       fieldsValidation.value = true;
@@ -300,6 +270,9 @@ class AppointmentsBloc {
       "Describe (in general) clients’ behavior.": describeClientsBehaviorController.text,
       "Describe clients’ focus and attention.": describeClientsfocusController.text,
       "Would you like to add any additional information?": additionalInformationController.text,
+      "Which time you are preferred for your treatment sessions : ": preferredevaluationsession,
+      "Which day/ days you are preferred for your evaluation session:": preferredtreatmentsessions,
+      "Date": DateTime.now(),
     });
 
     signupStatus.value = SignUpStatusEnum.success;
@@ -359,6 +332,8 @@ class AppointmentsBloc {
       "What are your child’s best reinforcements?": whatAreYourChildBestReinforcementsController.text,
       "How much time your child spends on TV/ smart devices?": howMuchTimeYourChildSpendsOnTVDevices,
       "Would you like to add any additional information?": additionalInformationController.text,
+      "Which time you are preferred for your treatment sessions : ": preferredevaluationsession,
+      "Which day/ days you are preferred for your evaluation session:": preferredtreatmentsessions,
       "Date": DateTime.now(),
     });
 
