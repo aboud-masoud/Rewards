@@ -57,6 +57,7 @@ class _LanguageStep2ViewState extends State<LanguageStep2View> {
               AppLocalizations.of(context)!.diagnosed7,
               AppLocalizations.of(context)!.other,
             ],
+            haveOther: true,
             selectedOptions: (p0) {
               for (var x in p0) {
                 widget.bloc.hasYourChildBeenDiagnosedWithAnyOfThese =

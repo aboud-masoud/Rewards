@@ -43,6 +43,7 @@ class _LaguageStep4ViewState extends State<LanguageStep4View> {
               AppLocalizations.of(context)!.communicatechildtime6,
               AppLocalizations.of(context)!.other,
             ],
+            haveOther: true,
             selectedOptions: (p0) {
               for (var x in p0) {
                 widget.bloc.howDoesYourChildCommunicateMostOfTheTime =
@@ -62,6 +63,7 @@ class _LaguageStep4ViewState extends State<LanguageStep4View> {
               AppLocalizations.of(context)!.childspeech5,
               AppLocalizations.of(context)!.other,
             ],
+            haveOther: true,
             selectedOptions: (p0) {
               for (var x in p0) {
                 widget.bloc.recentlyYourChildsSpeechIs = "${widget.bloc.recentlyYourChildsSpeechIs}, $x";

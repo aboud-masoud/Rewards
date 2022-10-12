@@ -28,6 +28,7 @@ class _LanguageStep1ViewState extends State<LanguageStep1View> {
               AppLocalizations.of(context)!.english,
               AppLocalizations.of(context)!.other,
             ],
+            haveOther: true,
             selectedOptions: (p0) {
               for (var x in p0) {
                 widget.bloc.usedLanguageWithTheClientAtHome = "${widget.bloc.usedLanguageWithTheClientAtHome}, $x";
@@ -68,6 +69,7 @@ class _LanguageStep1ViewState extends State<LanguageStep1View> {
             option3: AppLocalizations.of(context)!.internetsearch,
             option4: AppLocalizations.of(context)!.advertisements,
             option5: AppLocalizations.of(context)!.other,
+            haveOther: true,
             selectedOption: (p0) {
               widget.bloc.youFoundCcontactUsVia = p0;
               widget.bloc.validateFieldsLang1();

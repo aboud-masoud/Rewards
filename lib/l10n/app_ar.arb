@@ -240,7 +240,9 @@
     "preferredtreatmentsessions2" : "1:00PM-4:00PM",
     "preferredtreatmentsessions3" : "4:00PM-6:00PM",
     "preferredtreatmentsessions4" : "6:00PM-8:00PM",
-    "preferredevaluationsession" : "ما هو اليوم او الأيام الأنسب لكم لحضور جلسة التقييم"
+    "preferredevaluationsession" : "ما هو اليوم او الأيام الأنسب لكم لحضور جلسة التقييم",
+    "otherfield" : "اكتب هنا"
+
 
 
 

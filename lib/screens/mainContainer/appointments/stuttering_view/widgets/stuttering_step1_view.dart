@@ -28,6 +28,7 @@ class _StutteringStep1ViewState extends State<StutteringStep1View> {
               AppLocalizations.of(context)!.english,
               AppLocalizations.of(context)!.other,
             ],
+            haveOther: true,
             selectedOptions: (p0) {
               for (var x in p0) {
                 widget.bloc.usedLanguageWithTheClientAtHome = "${widget.bloc.usedLanguageWithTheClientAtHome}, $x";

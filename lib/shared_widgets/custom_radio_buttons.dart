@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CustomRadioButtons extends StatefulWidget {
   final String hintMessage;
@@ -9,6 +10,7 @@ class CustomRadioButtons extends StatefulWidget {
   final String? option3;
   final String? option4;
   final String? option5;
+  final bool haveOther;
 
   final Function(String) selectedOption;
 
@@ -20,6 +22,7 @@ class CustomRadioButtons extends StatefulWidget {
     this.option4,
     this.option5,
     required this.selectedOption,
+    this.haveOther = false,
     Key? key,
   }) : super(key: key);
 
@@ -27,10 +30,9 @@ class CustomRadioButtons extends StatefulWidget {
   State<CustomRadioButtons> createState() => _CustomRadioButtonsState();
 }
 
-//TODO : Other Should show textField
-
 class _CustomRadioButtonsState extends State<CustomRadioButtons> {
   int val = -1;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,9 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
       padding: const EdgeInsets.only(left: 16, right: 16),
       child: SizedBox(
         height: widget.option5 != null
-            ? 285
+            ? widget.haveOther && val == 5
+                ? 329
+                : 285
             : widget.option4 != null
                 ? 235
                 : widget.option3 != null
@@ -137,23 +141,44 @@ class _CustomRadioButtonsState extends State<CustomRadioButtons> {
                   )
                 : Container(),
             widget.option5 != null
-                ? Row(
+                ? Column(
                     children: [
-                      Radio(
-                        value: 5,
-                        groupValue: val,
-                        onChanged: (value) {
-                          setState(() {
-                            val = value as int;
-                            widget.selectedOption(widget.option5!);
-                          });
-                        },
-                        activeColor: Colors.green,
+                      Row(
+                        children: [
+                          Radio(
+                            value: 5,
+                            groupValue: val,
+                            onChanged: (value) {
+                              setState(() {
+                                val = value as int;
+                                widget.selectedOption(widget.option5!);
+                              });
+                            },
+                            activeColor: Colors.green,
+                          ),
+                          CustomText(
+                            title: widget.option5,
+                            style: CustomTextStyle().regular(size: 12, color: const Color(0xff707070)),
+                          ),
+                        ],
                       ),
-                      CustomText(
-                        title: widget.option5,
-                        style: CustomTextStyle().regular(size: 12, color: const Color(0xff707070)),
-                      ),
+                      widget.haveOther && val == 5
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                              child: TextField(
+                                controller: controller,
+                                enableSuggestions: false,
+                                autocorrect: false,
+                                decoration: InputDecoration(
+                                  labelText: AppLocalizations.of(context)!.otherfield,
+                                  labelStyle: CustomTextStyle().medium(color: const Color(0xffababab), size: 12),
+                                ),
+                                onEditingComplete: () {
+                                  widget.selectedOption(controller.text);
+                                },
+                              ),
+                            )
+                          : Container()
                     ],
                   )
                 : Container(),
