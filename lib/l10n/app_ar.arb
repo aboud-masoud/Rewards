@@ -242,7 +242,12 @@
     "preferredtreatmentsessions4" : "6:00PM-8:00PM",
     "preferredevaluationsession" : "ما هو اليوم او الأيام الأنسب لكم لحضور جلسة التقييم",
     "otherfield" : "اكتب هنا",
-    "deleteaccount" : "حذف الحساب"
+    "deleteaccount" : "حذف الحساب",
+    "book" : "حجز",
+    "delete1" : "هل تريد",
+    "delete2" : "حذف",
+    "delete3" : "حسابك ؟"
+
 
 
 

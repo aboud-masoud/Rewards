@@ -241,6 +241,10 @@
   "preferredtreatmentsessions4" : "6:00PM-8:00PM",
   "preferredevaluationsession" : "Which day/days you are preferred for your evaluation session:",
   "otherfield" : "Write Here",
-  "deleteaccount" : "Delete Account"
+  "deleteaccount" : "Delete Account",
+  "book" : "Booking",
+  "delete1" : "Do you want to",
+  "delete2" : "delete",
+  "delete3" : "your account ?"
 
 }

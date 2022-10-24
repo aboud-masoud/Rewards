@@ -23,30 +23,9 @@ class ScoreScreen extends StatelessWidget {
         elevation: 0,
         title: Container(
           color: const Color(0x00ffffff),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                    return ApotmentsScreen();
-                  }));
-                },
-                icon: Image.asset(
-                  "assets/images/calendar_profile_icon.png",
-                  width: 18,
-                ),
-              ),
-              Expanded(child: Container()),
-              Center(
-                child: CustomText(
-                  title: AppLocalizations.of(context)!.score,
-                  style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
-                ),
-              ),
-              Expanded(child: Container()),
-              const SizedBox(width: 50),
-            ],
+          child: CustomText(
+            title: AppLocalizations.of(context)!.score,
+            style: CustomTextStyle().semibold(size: 16, color: const Color(0xff707070)),
           ),
         ),
       ),

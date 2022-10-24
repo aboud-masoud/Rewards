@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:rewards_app/models/tabs.dart';
+import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/home/home_screen.dart';
-import 'package:rewards_app/screens/mainContainer/point/point_screen.dart';
 import 'package:rewards_app/screens/mainContainer/profile/profile_screen.dart';
 import 'package:rewards_app/screens/mainContainer/score/score_screen.dart';
 
@@ -15,13 +15,12 @@ class MainContainerBloc {
 
   int currentTabIndex = 0;
   int previousTabIndex = 0;
-  StreamController<SelectedTab?> currentTabIndexController =
-      StreamController<SelectedTab?>.broadcast();
+  StreamController<SelectedTab?> currentTabIndexController = StreamController<SelectedTab?>.broadcast();
 
   List<Widget> navTabs = [
     HomeScreen(),
     ProfileScreen(),
-    PointScreen(),
+    ApotmentsScreen(),
     ScoreScreen(),
   ];
 
@@ -102,8 +101,7 @@ class MainContainerBloc {
     if (currentTabIndex != index) {
       previousTabIndex = currentTabIndex;
       currentTabIndex = index;
-      currentTabIndexController.sink
-          .add(getSelectedTabDependOnIndex(currentTabIndex));
+      currentTabIndexController.sink.add(getSelectedTabDependOnIndex(currentTabIndex));
     }
     return Future.value(true);
   }

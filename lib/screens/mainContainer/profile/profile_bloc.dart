@@ -1,19 +1,24 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:rewards_app/utils/app_constants.dart';
 import 'package:rewards_app/utils/global_value.dart';
 
-enum pageLoading { none, loading }
+enum PageLoading { none, loading }
+
+enum DeleteLoading { none, loading }
 
 class ProfileBloc {
-  final CollectionReference profile =
-      FirebaseFirestore.instance.collection('profiles');
-  ValueNotifier<pageLoading> reloadImageView =
-      ValueNotifier<pageLoading>(pageLoading.none);
+  final CollectionReference profile = FirebaseFirestore.instance.collection('profiles');
+  ValueNotifier<PageLoading> reloadImageView = ValueNotifier<PageLoading>(PageLoading.none);
   final ImagePicker picker = ImagePicker();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  ValueNotifier<DeleteLoading> deleteAccountStatus = ValueNotifier<DeleteLoading>(DeleteLoading.none);
 
   Future<void> uploadFile(
     File filePath,
@@ -25,10 +30,7 @@ class ProfileBloc {
         print("Image not Exsist");
       }
 
-      await FirebaseStorage.instance
-          .ref()
-          .child('images/$userEmail')
-          .putFile(filePath);
+      await FirebaseStorage.instance.ref().child('images/$userEmail').putFile(filePath);
     } catch (e) {
       print(e);
     }
@@ -36,10 +38,7 @@ class ProfileBloc {
 
   Future<String> getDownloadURL() async {
     try {
-      return await FirebaseStorage.instance
-          .ref()
-          .child('images/$userEmail')
-          .getDownloadURL();
+      return await FirebaseStorage.instance.ref().child('images/$userEmail').getDownloadURL();
     } catch (e) {
       return "";
     }
@@ -50,6 +49,33 @@ class ProfileBloc {
       await FirebaseStorage.instance.ref().child('images/$userEmail').delete();
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future deleteUser() async {
+    const storage = FlutterSecureStorage();
+    String pass = await storage.read(key: AppConstants.biometricP) ?? "";
+    final User? user;
+    try {
+      user = (await _auth.signInWithEmailAndPassword(
+        email: userEmail,
+        password: pass,
+      ))
+          .user;
+
+      if (user != null) {
+        deleteAccountStatus.value = DeleteLoading.loading;
+        user.delete();
+        await profile.doc(userEmail).delete();
+        await storage.deleteAll();
+
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      print("--" + error.toString());
+      return false;
     }
   }
 
