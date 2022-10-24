@@ -240,6 +240,7 @@
   "preferredtreatmentsessions3" : "4:00PM-6:00PM",
   "preferredtreatmentsessions4" : "6:00PM-8:00PM",
   "preferredevaluationsession" : "Which day/days you are preferred for your evaluation session:",
-  "otherfield" : "Write Here"
+  "otherfield" : "Write Here",
+  "deleteaccount" : "Delete Account"
 
 }

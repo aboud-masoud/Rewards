@@ -48,7 +48,7 @@ class MyAppState extends State<MyApp> {
             navigatorKey: appKey,
             theme: ThemeData(
               primarySwatch: Colors.blue,
-            ),  
+            ),
             debugShowCheckedModeBanner: false,
             locale: Locale.fromSubtags(languageCode: snapshot.data.toString()),
             localizationsDelegates: const [
