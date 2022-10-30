@@ -8,6 +8,7 @@ import 'package:rewards_app/utils/custom_text.dart';
 import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/global_value.dart';
+import 'package:rewards_app/utils/shared_methods.dart';
 
 class ScoreScreen extends StatelessWidget {
   ScoreScreen({Key? key}) : super(key: key);
@@ -68,6 +69,17 @@ class ScoreScreen extends StatelessWidget {
             ),
           ),
           Expanded(child: Container()),
+          IconButton(
+              onPressed: () {
+                SharedMethods().openUrl(
+                    "https://docs.google.com/document/d/120n4JD4XzX2ag_cJVz4-mcDAQoxh36acqRmQpmrZJjM/edit?usp=sharing");
+              },
+              icon: const Icon(
+                Icons.info,
+                size: 40,
+                color: Color(0xff3a4da7),
+              )),
+          const SizedBox(height: 8),
           CustomText(
             title: AppLocalizations.of(context)!.replaceyourpointswith,
             style: CustomTextStyle().bold(size: 16, color: const Color(0xff3a4da7)),
