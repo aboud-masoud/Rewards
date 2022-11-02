@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rewards_app/app.dart';
-import 'package:rewards_app/screens/mainContainer/appointments/appointments_screen.dart';
 import 'package:rewards_app/screens/mainContainer/score/score_bloc.dart';
 import 'package:rewards_app/shared_widgets/custom_button_widget.dart';
 import 'package:rewards_app/utils/custom_text.dart';
@@ -9,6 +8,7 @@ import 'package:rewards_app/utils/custom_text_style.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:rewards_app/utils/global_value.dart';
 import 'package:rewards_app/utils/shared_methods.dart';
+import 'dart:io' show Platform;
 
 class ScoreScreen extends StatelessWidget {
   ScoreScreen({Key? key}) : super(key: key);
@@ -69,16 +69,18 @@ class ScoreScreen extends StatelessWidget {
             ),
           ),
           Expanded(child: Container()),
-          IconButton(
-              onPressed: () {
-                SharedMethods().openUrl(
-                    "https://docs.google.com/document/d/120n4JD4XzX2ag_cJVz4-mcDAQoxh36acqRmQpmrZJjM/edit?usp=sharing");
-              },
-              icon: const Icon(
-                Icons.info,
-                size: 40,
-                color: Color(0xff3a4da7),
-              )),
+          Platform.isIOS
+              ? IconButton(
+                  onPressed: () {
+                    SharedMethods().openUrl(
+                        "https://docs.google.com/document/d/120n4JD4XzX2ag_cJVz4-mcDAQoxh36acqRmQpmrZJjM/edit?usp=sharing");
+                  },
+                  icon: const Icon(
+                    Icons.info,
+                    size: 40,
+                    color: Color(0xff3a4da7),
+                  ))
+              : Container(),
           const SizedBox(height: 8),
           CustomText(
             title: AppLocalizations.of(context)!.replaceyourpointswith,
